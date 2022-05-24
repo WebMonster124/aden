@@ -15,13 +15,11 @@ const Payment = () => {
     ];
     const [firstName, setFirstName]=useState();
     const [lastName, setLastName]=useState();
-    const [mobileNum, setmobileNum]=useState();
-    const [firstName, setFirstName]=useState();
-    const [firstName, setFirstName]=useState();
-    const [firstName, setFirstName]=useState();
-    const [firstName, setFirstName]=useState();
-    const [firstName, setFirstName]=useState();
-    
+    const [mobileNum, setMobileNum]=useState();
+    const [email, setEmail]=useState();
+    const [contractName, setContractName]=useState();
+    const [aliasSign, setAliasSign]=useState();
+    const [cardNumber,setCardNumber]=useState();
     const handleChange = (e) => {        
         setSelectedOption(e.value)
     }
@@ -99,13 +97,13 @@ const Payment = () => {
                                             <Col md={6}>
                                                 <div className='vehicle'>
                                                     <div className='label'>Passenger Name</div>
-                                                    <div className='name'>Sedan</div>
+                                                    <div className='name'>{firstName}+{lastName}</div>
                                                 </div>
                                             </Col>
                                             <Col md={6}>
                                                 <div className='vehicle'>
                                                     <div className='label'>Mobile Number</div>
-                                                    <div className='name'>123-456-7890</div>
+                                                    <div className='name'>{mobileNum}</div>
                                                 </div>
                                             </Col>
                                         </Row>
@@ -113,13 +111,13 @@ const Payment = () => {
                                             <Col md={6}>
                                                 <div className='vehicle'>
                                                     <div className='label'>Payment Option</div>
-                                                    <div className='name'>Credit Card</div>
+                                                    <div className='name'>{selectedOption}</div>
                                                 </div>
                                             </Col>
                                             <Col md={6}>
                                                 <div className='vehicle'>
                                                     <div className='label'>card number</div>
-                                                    <div className='name'>xxxx xxxx xxxx 9999</div>
+                                                    <div className='name'>{cardNumber}</div>
                                                 </div>
                                             </Col>
                                         </Row>
@@ -194,13 +192,13 @@ const Payment = () => {
                                             <Col md={6}>
                                                 <div className='input-wrapper'>
                                                     <h5>Card Number: </h5>
-                                                    <input type="text" defaultValue="sedan"/>
+                                                    <input type="text" value={cardNumber} onChange={(e)=>setCardNumber(e.target.value)}/>
                                                 </div>
                                             </Col>
                                             <Col md={3}>
                                                 <div className='input-wrapper'>
                                                     <h5>MM/YY: </h5>
-                                                    <input type="text" defaultValue="sedan"/> 
+                                                    <input type="date" defaultValue="sedan"/> 
                                                 </div>                                 
                                             </Col>
                                             <Col md={3}>

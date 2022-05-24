@@ -41,7 +41,7 @@ const Vehicles = () => {
     const car_names=[{value:"GMS_SUV",label:"GMS_SUV"},{value:"Sedan",label:'Sedan'},{value:"Chevrolate",label:"Chevrolate"},{value:"Rolls Royee",label:"Rolls Royee"}];
 
     return (
-       <div>
+       <div className='client-vehicle'>
            <Header />
             <div className="main">            
                 <Container>
