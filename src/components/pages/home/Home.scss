@@ -1,39 +1,48 @@
-.status-board {
-    position: relative;
-    background: #673622;
-    border-radius: 10px;
-    height: 109px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 60px;
+.home{
+    .status-board {
+        position: relative;
+        background: #673622;
+        border-radius: 10px;
+        height: 109px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 60px;
 
-    .where-when, .vehicle, .payment-confirmation {
-        font-family: 'Lato';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 29px;
-        color: #FFFFFF;
-    }
+        .where-when, .vehicle, .payment-confirmation {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 29px;
+            color: #FFFFFF;
+        }
 
-    .where-when-status, .vehicle-status {
-        background: rgba(255, 255, 255, 0.4);
-        border-radius: 50px;
-        width: 15%;
-        height: 5px;
-    }
+        .where-when-status, .vehicle-status {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50px;
+            width: 15%;
+            height: 5px;
+        }
 
-    .where-when-status::after {
-        content: "";
-        background: #FFFFFF;
-        border-radius: 50px;
-        width: 5%;
-        height: 5px;
-        position: absolute;
+        .where-when-status::after {
+            content: "";
+            background: #FFFFFF;
+            border-radius: 50px;
+            width: 7.5%;
+            height: 5px;
+            position: absolute;
+        }
+        .vehicle-status::after{
+            content: "";
+            background: #FFFFFF;
+            border-radius: 50px;
+            width: 0%;
+            height: 5px;
+            position: absolute;
+        }
     }
 }
-
 .location-map {
     height: 450px;   
     border-radius: 10px;

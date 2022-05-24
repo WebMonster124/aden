@@ -13,12 +13,20 @@ const Payment = () => {
         { value: 'strawberry', label: 'Strawberry' },
         { value: 'vanilla', label: 'Vanilla' },
     ];
-
+    const [firstName, setFirstName]=useState();
+    const [lastName, setLastName]=useState();
+    const [mobileNum, setmobileNum]=useState();
+    const [firstName, setFirstName]=useState();
+    const [firstName, setFirstName]=useState();
+    const [firstName, setFirstName]=useState();
+    const [firstName, setFirstName]=useState();
+    const [firstName, setFirstName]=useState();
+    
     const handleChange = (e) => {        
         setSelectedOption(e.value)
     }
     return (
-       <div>
+       <div className='client-payment'>
            <Header />
             <div className="main">            
                 <Container>
@@ -49,37 +57,17 @@ const Payment = () => {
                                         </div>
                                         <div className='pickup'>
                                             <div className='title'>Pickup:</div>
-                                            <Select
-                                                onChange={(e) => handleChange(e)}
-                                                options={options}
-                                                value={"3348 Mulberry Lane, Boynton Beach, United States"}
-                                                isSearchable="true"
-                                                className='w-100'
-                                            />
+                                            <p>As Directed -SD CA</p>
                                         </div>                            
                                         <div className='stop d-flex align-items-center justify-content-between'>
                                             <div className='stop-location w-100'>
                                                 <div className='title'>Stop1:</div>
-                                                <Select
-                                                    defaultValue={selectedOption}
-                                                    onChange={(e) => handleChange(e)}
-                                                    options={options}
-                                                    placeholder="Enter location"
-                                                    isSearchable="true"
-                                                    className='w-100'
-                                                />
+                                                <p>Sanata Monica</p>
                                             </div>
                                         </div>                            
                                         <div className='dropoff'>
                                             <div className='title'>Dropoff:</div>
-                                            <Select
-                                                defaultValue={selectedOption}
-                                                onChange={(e) => handleChange(e)}
-                                                options={options}
-                                                placeholder="Enter location"
-                                                isSearchable="true"
-                                                className='w-100'
-                                            />                                
+                                                <p>Sanata Monica</p>                            
                                         </div>
                                         <div className='passenger-board'>
                                             <Row>
@@ -151,13 +139,13 @@ const Payment = () => {
                                             <Col md={6}>
                                                 <div className='input-wrapper'>
                                                     <h5>First Name: </h5>
-                                                    <input type="text" value="sedan"/>
+                                                    <input type="text" value={firstName} onChange={(e)=>setFirstName(e.target.value)}/>
                                                 </div>
                                             </Col>
                                             <Col md={6}>
                                                 <div className='input-wrapper'>
                                                     <h5>Last Name: </h5>
-                                                    <input type="text" value="sedan"/>
+                                                    <input type="text" value={lastName} onChange={(e)=>setLastName(e.target.value)}/>
                                                 </div>
                                             </Col>
                                         </Row>
@@ -165,13 +153,13 @@ const Payment = () => {
                                             <Col md={6}>
                                                 <div className='input-wrapper'>
                                                     <h5>Mobile Num: </h5>
-                                                    <input type="text" value="sedan"/>
+                                                    <input type="text" value={mobileNum} onChange={(e)=>setMobileNum(e.target.value)}/>
                                                 </div>
                                             </Col>
                                             <Col md={6}>
                                                 <div className='input-wrapper'>
                                                     <h5>Email: </h5>
-                                                    <input type="text" value="sedan"/>
+                                                    <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                                                 </div>
                                             </Col>
                                         </Row>
@@ -179,13 +167,13 @@ const Payment = () => {
                                             <Col md={6}>
                                                 <div className='input-wrapper'>
                                                     <h5>Contract Name: </h5>
-                                                    <input type="text" value="sedan"/>
+                                                    <input type="text" value={contractName} onChange={(e)=>setContractName(e.target.value)}/>
                                                 </div>
                                             </Col>
                                             <Col md={6}>
                                                 <div className='input-wrapper'>
                                                     <h5>Alias/Name sign:: </h5>
-                                                    <input type="text" value="sedan"/>
+                                                    <input type="text" value={aliasSign} onChange={(e)=>setAliasSign(e.target.value)}/>
                                                 </div>                                   
                                             </Col>
                                         </Row>
@@ -193,9 +181,9 @@ const Payment = () => {
                                         <Row>
                                             <Col md={12}>
                                                 <div className='vehicle-type'>
-                                                    <div className='title'>Vehicle type:</div>
+                                                    <div className='title'>Payment type:</div>
                                                     <Select
-                                                        defaultValue={selectedOption}
+                                                        value={selectedOption}
                                                         onChange={(e) => handleChange(e)}
                                                         options={options}                                            
                                                         isSearchable="true"
@@ -206,19 +194,19 @@ const Payment = () => {
                                             <Col md={6}>
                                                 <div className='input-wrapper'>
                                                     <h5>Card Number: </h5>
-                                                    <input type="text" value="sedan"/>
+                                                    <input type="text" defaultValue="sedan"/>
                                                 </div>
                                             </Col>
                                             <Col md={3}>
                                                 <div className='input-wrapper'>
                                                     <h5>MM/YY: </h5>
-                                                    <input type="text" value="sedan"/> 
+                                                    <input type="text" defaultValue="sedan"/> 
                                                 </div>                                 
                                             </Col>
                                             <Col md={3}>
                                                 <div className='input-wrapper'>
                                                     <h5>CVV: </h5>
-                                                    <input type="text" value="sedan"/>
+                                                    <input type="text" defaultValue="sedan"/>
                                                 </div>                                
                                             </Col>
                                         </Row>
@@ -226,13 +214,13 @@ const Payment = () => {
                                             <Col md={6}>
                                                 <div className='input-wrapper'>
                                                     <h5>Card holder Name: </h5>
-                                                    <input type="text" value="sedan"/>
+                                                    <input type="text" defaultValue="sedan"/>
                                                 </div>                                     
                                             </Col>
                                             <Col md={6}>
                                                 <div className='input-wrapper'>
                                                     <h5>Card Billing postal Code: </h5>
-                                                    <input type="text" value="sedan"/>
+                                                    <input type="text" defaultValue="sedan"/>
                                                 </div>                                       
                                             </Col>
                                         </Row>
@@ -241,7 +229,7 @@ const Payment = () => {
                                             <Col md={12}>
                                                 <div className='input-wrapper'>
                                                     <h5>Instruction: </h5>
-                                                    <input type="text" value="sedan"/>
+                                                    <input type="text" defaultValue="sedan"/>
                                                 </div>                                         
                                             </Col>
                                         </Row>
