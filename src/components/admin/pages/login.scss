@@ -1,0 +1,148 @@
+.login-right{
+    background: url("../../../images/Private\ City\ Tour_Slider\ 2\ 1.png");
+    background-size: cover;
+    .overlay{
+        background-color: rgba(244, 115, 14, 0.6);
+        height:600px;
+    }
+}
+.login-left{
+    width: 60%;
+    height: 600px;
+    margin: auto;
+    .img-wrapper{
+        margin-top: 50px;
+        text-align: center;
+    }
+    .login-form{
+        margin-top: 50px;
+    }
+    .login-button{
+        width: 100%;
+        border-radius: 3px;
+        background-color: rgba(244, 115, 14, 0.6);
+        text-align: center;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        padding: 3px;
+        h3{
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            /* identical to box height */
+
+
+            color: #FFFFFF;
+        }
+    }
+    h3{
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 48px;
+        color: #F4730E;
+        margin-bottom: 0px;
+    }
+    h5{
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        /* identical to box height, or 133% */
+
+
+        color: rgba(0, 0, 0, 0.6);
+    }
+    .form-group{
+        margin-top:50px;
+   
+    }
+    .remember{
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        text-decoration-line: underline;
+        margin-bottom: 50px;
+        color: #F4730E;
+        a{
+            text-decoration: none;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            color: #F4730E;
+        }
+    }
+    .checkbox{
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+
+        color: #F4730E;
+    }
+    .form{
+        background: #F2F2F2;
+        border-radius: 5px;
+        padding-top: 5px;
+        margin-bottom: 10px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        :before{
+            opacity: 0.4;
+        }
+        label{
+            padding-left: 10px;
+            padding-right: 10px;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 19px;
+
+            color: #000000;
+        }
+        input{
+            border:none;
+            outline: none;
+            background-color: transparent !important;
+        }
+    }
+}
+
+/*checkbox*/
+label input {
+    display: none; /* Hide the default checkbox */
+  }
+  
+  /* Style the artificial checkbox */
+  label span {
+    height: 12px;
+    width: 12px;
+    border: 1px solid grey;
+    display: inline-block;
+    position: relative;
+    margin-right:5px;
+    border-radius: 2px;
+  }
+  
+  /* Style its checked state...with a ticked icon */
+  [type=checkbox]:checked + span:before {
+    content: '\2714';
+    font-size: 12px;
+    position: absolute;
+    top: -5px;
+    left: 1px;
+  }

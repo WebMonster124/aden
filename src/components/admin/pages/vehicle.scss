@@ -1,0 +1,121 @@
+table.vehicle{
+    td{
+        padding: 5px 10px;
+        &:nth-child(4){
+            width: 10%;
+        }
+    }
+    h6.delete{
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 22px;
+        /* identical to box height */
+        cursor:pointer;
+
+        color: #000000;
+    }
+    
+}
+@media (min-width: 576px){
+    .modal-dialog{
+        max-width: 767px !important;
+        min-height: 536px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.modal-body{
+    padding: 0px !important;
+}
+
+.modal{
+    width: 80%;
+    &-left{
+        padding: 50px 20px;
+
+        border-right: 1px solid #ECE3E0;;
+        h5{
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 38px;
+            margin-bottom: 20px;
+            color: #000000;
+            text-transform: capitalize;
+        }
+        h6{
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 22px;
+            /* identical to box height */
+
+
+            color: #F4730E;
+            text-align: center;
+            padding: 3px;
+            border: 1px solid #F4730E;
+            border-radius: 12px;
+        }
+        button.btn-close{
+            position: absolute;
+        }
+        .modal-left__thumb{
+            margin-top: 25px;
+        }
+    }
+    &-right{
+        padding: 24px;
+        padding-right: 20px;
+       .input-wrapper{
+           margin-bottom: 12px;
+           background: #F2F2F2;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+           h5{
+               display: inline;
+               margin-top: 8px;
+               margin-left: 10px;
+               font-family: 'Lato';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                width: 30%;
+                line-height: 19px;
+                opacity: 1;
+                color: #000000;
+           }
+           input{
+               border:0;
+               background-color: transparent;
+               display: inline;
+               width: 70%;
+               
+           }
+           
+       } 
+       h6.update{
+        margin-top: 30px;
+        }
+    }
+}
+h6.update{
+    cursor:pointer;
+    background: #F4730E;
+    padding:5px 10px;
+    border-radius: 12px;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+    text-align: center;
+    color: #FFFFFF;
+}

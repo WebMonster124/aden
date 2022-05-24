@@ -1,0 +1,21 @@
+.payment-board{
+    .input-wrapper{
+        margin-left: 0px;
+        input{
+            width: 80%;
+        }
+    }
+    .vehicle-type{
+        margin-bottom: 10px;
+        padding-left: 10px;
+        width: 40%;
+    }
+}
+.client-dashboard{
+    .dashboard{
+        background: unset;
+        .content-panel{
+            box-shadow: 0 3px 10px rgba(0, 0, 23, 0.2);
+        }
+    }
+}

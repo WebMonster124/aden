@@ -1,0 +1,638 @@
+.status-board {
+    position: relative;
+    background: #673622;
+    border-radius: 10px;
+    height: 109px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 60px;
+
+    .where-when, .vehicle, .payment-confirmation {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+        color: #FFFFFF;
+    }
+
+    .where-when-status, .vehicle-status {
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 50px;
+        width: 15%;
+        height: 5px;
+    }
+
+    .where-when-status::after {
+        content: "";
+        background: #FFFFFF;
+        border-radius: 50px;
+        width: 5%;
+        height: 5px;
+        position: absolute;
+    }
+}
+
+.location-map {
+    height: 450px;   
+    border-radius: 10px;
+    margin-top: 40px;
+
+    img {
+        width: 100%;
+    }
+}
+.passenger-control-btn {
+    width: 100%;
+    .passenger-control {
+        background: #FFFFFF;
+        box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
+        border-radius: 10px;
+        padding: 40px;
+
+        .passenger, .childrens, .bags {
+            margin-bottom: 32px;
+            .label {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 19px;
+                color: #000000;
+            }
+
+            .body {
+                height: 60px;
+                background: #F2F2F2;
+                border-radius: 5px;
+                padding: 6px 6px 6px 30px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 14px;
+
+                .count {
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 19px;
+                    color: #000000;
+                }
+
+                .btns {
+                    .minus {
+                        border: 1px solid #673622;
+                        border-radius: 3px;
+                        cursor: pointer;
+                        i {
+                            color: #673622;
+                        }
+                    }
+
+                    .plus {
+                        background: #673622;
+                        border: 1px solid #673622;
+                        border-radius: 3px;
+                        margin-left: 6px;
+                        cursor: pointer;
+                        i {
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .select-vehicle {
+        margin-top: 40px;
+        display: block;
+        width: 100%;
+        height: 50px; 
+        background: #F4730E;
+        border-radius: 12px;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 55px;
+        text-align: center;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+}  
+.control-board {
+    
+    gap: 40px;
+    justify-content: space-between;
+    position: relative;
+    bottom: 170px;
+    padding-left: 40px;
+    padding-right: 40px;
+    
+    .location-control { 
+        width: 100%;       
+        background: #FFFFFF;
+        box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
+        border-radius: 10px;
+        padding: 50px 40px;
+
+        .control-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #EEE7E4;
+            padding-bottom: 27px;
+
+            ul.nav {
+                .nav-item {
+                    position: relative;
+                    margin-right: 50px;
+    
+                   .nav-link {
+                        font-family: 'Lato';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 18px;
+                        line-height: 22px;
+                        color: #000000;
+                        opacity: 0.6;
+                    }
+    
+                    .nav-link.active {                
+                        font-family: 'Lato';
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 18px;
+                        line-height: 22px;
+                        color: #000000;
+                        opacity: 1;
+                    }
+    
+                    .nav-link.active::after {
+                        content: "";
+                        position: absolute;
+                        background: #000000;
+                        height: 1px;
+                        width: 70%;
+                        bottom: 0;
+                        left: 14px;
+                        margin: 0 auto;
+                        opacity: 0.6;
+                    }
+                }
+            }
+            
+            .control-btns {
+                border: 1px solid #000000;
+                border-radius: 5px;
+                padding: 4px;
+
+                div.nav {
+                    .nav-item {
+                        .nav-link {
+                            background-color: white;
+                            color: #000000;
+
+                            i {
+                                margin-right: 12px;
+                            }
+                        }                       
+                    }
+                    .nav-link.active {                                                
+                        background: #000000;
+                        border-radius: 3px;
+                        color: white;
+                    }
+                }
+            }
+        }
+
+        
+    }
+
+    
+}
+
+.modal-dialog {
+    max-width: 1320px !important;
+}
+
+.control-body {
+    margin-top: 32px;
+    padding-left: 60px;
+
+    .pickup {
+         position: relative;
+         display: flex;
+         align-items: center;
+         background: #F2F2F2;                
+         border-radius: 5px;
+         height: 60px;
+         padding-left: 24px;
+         padding-right: 24px;
+
+         .title {
+             font-family: 'Lato';
+             font-style: normal;
+             font-weight: 700;
+             font-size: 16px;
+             line-height: 19px;
+
+             color: #000000;
+         }
+
+         .check {
+             cursor: pointer;
+         }
+
+        .css-1hb7zxy-IndicatorsContainer {
+            display: none;
+        }
+
+        .css-1s2u09g-control {
+            border: none; 
+            background: #F2F2F2;                   
+        }
+        
+        .css-1pahdxg-control {
+            box-shadow: none;
+            border: none;
+            background: #F2F2F2; 
+        }
+     }
+
+     .pickup::before {
+         content: "";
+         position: absolute;
+         border: 1px solid #e7e1e1;
+         left: -34px;
+         top: 18px;
+         width: 25px;
+         height: 40px;
+         border-top-left-radius: 30px;
+         border-bottom: none;
+         border-top-right-radius: 30px;
+     }
+
+     .pickup::after {
+         position: absolute;
+         content: ' ';
+         width: 8px;
+         height: 8px;
+         overflow: hidden;
+         //background: #673622;
+         left: -25px;
+         margin: 14px 20px 0 0;
+         border: 1px solid #FFFFFF;
+         box-shadow: 0 0 0 3px #673622;
+         -webkit-border-radius: 100%;
+         -moz-border-radius: 100%;
+         -ms-border-radius: 100%;
+         -o-border-radius: 100%;
+         border-radius: 100%;
+         top: 12px;
+     }
+
+     .stop {
+         margin-top: 18px;
+         position: relative;
+
+         .stop-location {
+             position: relative;
+             display: flex;
+             align-items: center;
+             background: #F2F2F2;                
+             border-radius: 5px;
+             height: 60px;
+             padding-left: 24px;
+             padding-right: 24px;
+
+             .title {
+                 font-family: 'Lato';
+                 font-style: normal;
+                 font-weight: 700;
+                 font-size: 16px;
+                 line-height: 19px;
+
+                 color: #000000;
+             }
+
+             .check {
+                 cursor: pointer;
+             }
+
+             .css-1hb7zxy-IndicatorsContainer {
+                 display: none;
+             }
+
+             .css-1s2u09g-control {
+                 border: none; 
+                 background: #F2F2F2;                   
+             }
+             
+             .css-1pahdxg-control {
+                 box-shadow: none;
+                 border: none;
+                 background: #F2F2F2; 
+             }
+         }
+
+         .trash {
+             margin-left: 20px;
+             padding-right: 10px;
+             cursor: pointer;
+         }
+     }
+
+     .stop::after {
+         position: absolute;
+         content: ' ';
+         width: 8px;
+         height: 8px;
+         overflow: hidden;
+         background: #673622;
+         left: -25px;
+         margin: 14px 20px 0 0;
+         border: 1px solid #FFFFFF;
+         box-shadow: 0 0 0 3px #673622;
+         -webkit-border-radius: 100%;
+         -moz-border-radius: 100%;
+         -ms-border-radius: 100%;
+         -o-border-radius: 100%;
+         border-radius: 100%;
+         top: 12px;
+     }
+
+     .dropoff {
+         position: relative;
+         display: flex;
+         align-items: center;
+         background: #F2F2F2;                
+         border-radius: 5px;
+         height: 60px;
+         padding-left: 24px;
+         padding-right: 24px;
+         margin-top: 18px;
+
+         .title {
+             font-family: 'Lato';
+             font-style: normal;
+             font-weight: 700;
+             font-size: 16px;
+             line-height: 19px;
+
+             color: #000000;
+         }
+
+         .check {
+             cursor: pointer;
+         }
+
+        .css-1hb7zxy-IndicatorsContainer {
+            display: none;
+        }
+
+        .css-1s2u09g-control {
+            border: none; 
+            background: #F2F2F2;                   
+        }
+        
+        .css-1pahdxg-control {
+            box-shadow: none;
+            border: none;
+            background: #F2F2F2; 
+        }
+     }
+
+     .dropoff::before {
+         content: "";
+         position: absolute;
+         border: 1px solid #e7e1e1;
+         left: -34px;
+         top: 18px;
+         width: 25px;
+         height: 40px;
+         border-bottom-left-radius: 30px;
+         border-top: none;
+         border-bottom-right-radius: 30px;
+     }
+
+     .dropoff::after {
+         position: absolute;
+         content: ' ';
+         width: 8px;
+         height: 8px;
+         overflow: hidden;
+         //background: #673622;
+         left: -25px;
+         margin: 14px 20px 0 0;
+         border: 1px solid #FFFFFF;
+         box-shadow: 0 0 0 3px #673622;
+         -webkit-border-radius: 100%;
+         -moz-border-radius: 100%;
+         -ms-border-radius: 100%;
+         -o-border-radius: 100%;
+         border-radius: 100%;
+         top: 12px;
+     }
+
+     .field-wrap {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         margin-top: 32px;
+
+         .ride-now {
+             display: flex;
+             gap: 24px;
+             align-items: center;
+             font-family: 'Lato';
+             font-style: normal;
+             font-weight: 700;
+             font-size: 14px;
+             line-height: 17px;
+             color: #673622;
+
+             .react-toggle-track {
+                 height: 30px !important;
+                 background-color: rgba(120, 120, 128, 0.32);                       
+             }
+
+             .react-toggle--checked .react-toggle-track {
+                 background-color: #000000;
+             }
+
+             .react-toggle--checked .react-toggle-thumb {
+                 border-color: #EEE7E4;
+             }
+
+             .react-toggle-thumb {
+                 width: 28px !important;
+                 height: 28px !important;
+             }
+
+             .react-toggle--checked .react-toggle-thumb {
+                 left: 21px !important;
+             }
+         }
+
+         .add-stop {
+             font-family: 'Lato';
+             font-style: normal;
+             font-weight: 700;
+             font-size: 14px;
+             line-height: 17px;
+             text-decoration-line: underline;
+             color: #673622;
+             cursor: pointer;
+
+             i {
+                 margin-right: 10px;
+             }
+         }
+     }
+
+     .date-time {
+         display: flex;
+         align-items: center;
+         justify-content: space-evenly;
+         gap: 16px;
+
+         .date, .time {
+             display: flex;
+             align-items: center;
+             background: #F2F2F2;                
+             border-radius: 5px;
+             height: 60px;
+             padding-left: 24px;
+             padding-right: 24px;
+             margin-top: 18px;
+
+             .title {
+                 font-family: 'Lato';
+                 font-style: normal;
+                 font-weight: 700;
+                 font-size: 16px;
+                 line-height: 19px;
+                 color: #000000;
+             }
+
+             .react-datepicker-wrapper {
+                 width: auto !important;
+
+                 input {
+                     border: none !important;
+                     background-color: #F2F2F2 !important;
+                     padding-left: 12px;
+                 }
+
+                 input:focus {
+                     border: none !important;
+                     background-color: red;                           
+                 }                    
+             }
+
+             i {
+                 cursor: pointer;
+             }
+         }
+     }
+ }
+.modal-body {
+    padding: 0 !important;
+    display: flex;
+    width: 100%;
+    .header-wrap {        
+        padding: 60px 50px;
+        border-right: 1px solid #ECE3E0;
+        width: 100%;
+        height: 100%;
+        .title {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 38px;
+            color: #000000;            
+        }
+        .description {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 24px;
+            color: #000000;
+            margin-top: 24px;
+            h6{
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 24px;
+                /* or 133% */
+
+
+                color: rgb(0, 0, 0);
+                span{
+                    color: rgba(0, 0, 0, 0.6);
+                }
+            }
+        }
+
+        .btns {
+            margin-top: 80px;
+            display:flex;
+            .confirm {                
+                width: 300px;
+                height: 50px;                
+                background: #F4730E;
+                border-radius: 12px;
+                border: none;
+                color: white;
+                font-size: 18px;
+            }
+            .edit {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 22px;
+                color: #F4730E;
+                border: none;
+                margin-left: 24px;
+                background-color: white;
+            }
+        }
+    }
+
+    .content-wrap {
+        padding: 60px 40px;
+        width: 100%;
+        .street, .city, .state, .postalcode, .country {    
+            width: 100%;                  
+            height: 60px; 
+            background: #F2F2F2;           
+            border-radius: 5px;
+            padding: 20px 26px;
+            margin-bottom: 14px;
+
+            .label {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 19px;
+                color: #000000;
+                margin-right: 10px;
+            }
+
+            input {
+                border: none !important;
+                background: #F2F2F2;
+            }
+        }
+    }
+}

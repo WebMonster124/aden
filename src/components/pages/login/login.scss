@@ -1,0 +1,28 @@
+.client-login{
+    .img-wrapper{
+        text-align: left !important;
+    }
+    .login-right{
+        background: url("../../../images/login.png");
+        background-size: cover;
+        height: 600px;
+    }
+}
+.tologin{
+    text-align: center;
+    margin-top: 50px;
+    *{
+        text-decoration: underline;
+    }
+    h6{
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        color:#673622;
+        span{
+            color:#F4730E
+        }
+    }
+}

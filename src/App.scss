@@ -1,0 +1,24 @@
+@import "custom";
+
+body {
+  background: #FFFFFF;
+}
+
+.header {
+  text-align: center;
+}
+
+p {
+  margin-bottom: 0.5rem;
+}
+
+span {
+  &.dangerText {
+    color: #dc3545;
+  }
+
+  &.infoText {
+    color: #17a2b8;
+    font-weight: bold;
+  }
+}
