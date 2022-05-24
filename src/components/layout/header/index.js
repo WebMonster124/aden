@@ -45,10 +45,10 @@ return (
                     </div>
                 </div>:
                 <Nav className='align-items-center'>
-                     <NavLink to="/home"  className="nav-link" >
+                     <NavLink to="/home"  className="nav-link get-started" >
                         Get Started
                     </NavLink>
-                    <NavLink  to="/login"  className="nav-link" onClick={()=>setLoginStatus(true)}>
+                    <NavLink  to="/login"  className="nav-link login" onClick={()=>setLoginStatus(true)}>
                         Login
                     </NavLink>
                 </Nav>}
