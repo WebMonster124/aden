@@ -42,7 +42,7 @@ const Vehicles = () => {
                         <div className='vehicle-status'></div>
                         <div className='payment-confirmation'>Payment & Confirmation</div>
                     </div>
-                    <div className='main-wrap'>
+                    <div className='main-wrap vehicle-wrap'>
                         <Row>
                             <Col md = {5}>
                                 <div className='journey-vehicle'>
@@ -126,7 +126,7 @@ const Vehicles = () => {
                                 <div className='vehicles'>
                                     <div className='header-wrap'>
                                         <div className='d-flex justify-content-between align-items-center'>
-                                            <div className='title'>Vehicles</div>
+                                            <div className='wrap-title'>Vehicles</div>
                                             <div className='filters' onClick={()=>{setFilterShow(true)}}>Filters
                                                 <img src={Filters} alt="filters" />
                                             </div>

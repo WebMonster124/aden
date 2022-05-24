@@ -25,9 +25,9 @@ return (
                     </NavLink>
                 </Nav>
                 <Nav className='align-items-center'>
-                    <Nav.Link href='#home' className="logo">
+                    <NavLink to='/admin/dashboard' className="logo">
                         <img src={Logo} alt="logo" />
-                    </Nav.Link>
+                    </NavLink>
                 </Nav>
                 {login_status?
                 <div className='dropdown'>

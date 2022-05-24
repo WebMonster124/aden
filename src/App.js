@@ -33,7 +33,7 @@ export const App = () => (
              
 
           <Route path="/admin/login" element={<Login/>} exact={true} />
-          <Route path="/admin/" element={<Dashboard/>} exact={true} >
+          <Route path="/admin" element={<Dashboard/>} exact={true} >
               <Route path='/admin/vehicle' element={<Vehicle/>}/>
           </Route>
           <Route path="/admin/dashboard" element={<Dashboard/>} exact={true} />
