@@ -13,6 +13,12 @@ import { NavLink,Link } from 'react-router-dom';
 
 const Notification = () => {
     const [notification, setNotification] = useState(Notifications);
+    const close_click= (val) =>{
+        let tempArr = Array.from(notification);
+        tempArr.splice(tempArr.indexOf(val), 1);
+        setNotification(tempArr);
+    
+    }
     return (
         <div className='dashboard'>
             <div className='sidebar'>
@@ -154,7 +160,7 @@ const Notification = () => {
                         {
                             notification.map((val, key) => {
                             return (
-                                <div className='notification-item' key={key}>
+                                <div className='notification-item' key={key} onClick={()=>close_click(val)}>
                                     <div className='notification-item__content'>
                                         <h5 className='noti-title'>
                                             {val.title}
