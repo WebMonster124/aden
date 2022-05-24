@@ -6,7 +6,6 @@ import {
 } from 'react-bootstrap';
 import Notifications from './notification_data.js'
 import { Header } from '../../layout/header';
-import { NavLink,Link } from 'react-router-dom';
 
 const Notification = () => {
     const [notification, setNotification] = useState(Notifications);

@@ -23,7 +23,7 @@ const Book_rider = () => {
         <div className='dashboard'>
             <div className='sidebar'>
                 <div className='logo'>
-                    <img src={logo}></img>
+                    <img src={logo} alt="img"></img>
                 </div>
                 <div className='menu'>
                         <ul>
@@ -269,7 +269,7 @@ const Book_rider = () => {
                               <h6>add image</h6>
                               <div className='modal-left__thumb' style={{display:'flex',justifyContent:'center'}}>
                                 <div>
-                                    <img src='/images/Ellipse 212.png'/>   
+                                    <img src='/images/Ellipse 212.png' alt="img"/>   
                                     <CloseButton/>
                                 </div>            
                               </div>

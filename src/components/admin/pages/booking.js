@@ -345,7 +345,7 @@ const Booking = () => {
                                                             <td>
                                                                 <div className='driver-meta'>
                                                                     <div className='img-container'>
-                                                                        <img src={driver_img}></img>
+                                                                        <img src={driver_img} alt="img"></img>
                                                                     </div>
                                                                     <h5>Jordy Astaws</h5>
                                                                     <h6>reassign</h6>
@@ -374,7 +374,7 @@ const Booking = () => {
                               <h5>{modaltitle}</h5>
                               <h6>add image</h6>
                               <div className='modal-left__thumb'>
-                                <img src='/images/177-1779544_2018-gmc-yukon-denali-luxury-suv-ultimate-black 5.png'/>   
+                                <img src='/images/177-1779544_2018-gmc-yukon-denali-luxury-suv-ultimate-black 5.png' alt="img"/>   
                                 <CloseButton/>            
                               </div>
                           </div>                        

@@ -132,8 +132,6 @@ const Dashboard = () => {
                 legendOffset: 32
             }}
             axisLeft={null}
-            enableGridY={false}
-            enableLabel={false}
             labelSkipWidth={14}
             labelSkipHeight={12}
             labelTextColor={{

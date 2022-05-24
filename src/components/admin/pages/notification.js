@@ -13,7 +13,6 @@ import { NavLink,Link } from 'react-router-dom';
 
 const Notification = () => {
     const [notification, setNotification] = useState(Notifications);
-
     return (
         <div className='dashboard'>
             <div className='sidebar'>

@@ -2,14 +2,11 @@ import React, {useState} from 'react';
 import {     
     Container,Row, Col
 } from 'react-bootstrap';
-import DatePicker from "react-datepicker";
 import { Header } from '../../layout/header';
 import './payment.scss';
 
 import Select from 'react-select';
-import { Link } from 'react-router-dom';
 const Payment = () => {    
-    const [startDate, setStartDate] = useState(new Date());
     const [selectedOption, setSelectedOption] = useState(null);
     const options = [
         { value: 'chocolate', label: 'Chocolate' },

@@ -2,16 +2,13 @@ import React, {useState} from 'react';
 import {     
     Container,Row, Col
 } from 'react-bootstrap';
-import DatePicker from "react-datepicker";
 import { Header } from '../../layout/header';
 import './history.scss';
 import Filters from '../../../images/Vector.png';
 import Select from 'react-select';
-import { Link } from 'react-router-dom';
 import  history_data  from './history_data.js'
 import rider_status from './rider_status_data.js'
 const History = () => {    
-    const [startDate, setStartDate] = useState(new Date());
     const [selectedOption, setSelectedOption] = useState(null);
     const [selectedId,setSelectedId] = useState(0)
     const options = [
@@ -39,7 +36,7 @@ const History = () => {
                             {
                                 history_data.map((data,key)=>{
                                     return(
-                                        <div className={ selectedId == key ? 'history-content__wrapper control-body selected' : 'history-content__wrapper control-body'}key={key}>
+                                        <div className={ selectedId === key ? 'history-content__wrapper control-body selected' : 'history-content__wrapper control-body'}key={key}>
                                             <div className='pickup'>
                                                 <div className='title'>Pickup:</div>
                                                 <p>3348 Mulberry Lane, United States</p>
@@ -192,7 +189,7 @@ const History = () => {
                                         {rider_status.map((value,key)=>{
                                             if (value.unread)
                                             return(
-                                                <div className={key == 0 ? "rider-status first":'rider-status'} key={key}>
+                                                <div className={key === 0 ? "rider-status first":'rider-status'} key={key}>
                                                     <h5>{value.name}</h5>
                                                     <h6>{value.content}</h6>
                                                 </div>)
