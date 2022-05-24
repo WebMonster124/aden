@@ -12,7 +12,7 @@ import './dashboard.scss';
 import './book_rider.scss';
 import { NavLink,Link} from 'react-router-dom';
 import { MDBSwitch } from 'mdb-react-ui-kit';
-const Book_rider = () => {        
+const BookRider = () => {        
     const [key, setKey] = useState('airport');
     const [modalshow, setModalshow] = useState(false);
     const [modaltitle, setModaltitle] = useState("add new driver");
@@ -303,4 +303,4 @@ const Book_rider = () => {
     )    
 };
 
-export { Book_rider };
+export { BookRider };
