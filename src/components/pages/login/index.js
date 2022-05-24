@@ -39,7 +39,9 @@ const Login = () => {
                                 <Link to={{pathname:'/'}} style={{textDecoration:'none'}}>Forgot Password?</Link>
                             </div>
                             <div className='login-button'>
-                                <h3>Login</h3>
+                                <Link to={{pathname:'/home'}}>
+                                    <h3>Login</h3>
+                                </Link>
                             </div>
                         </div>
                     </div>

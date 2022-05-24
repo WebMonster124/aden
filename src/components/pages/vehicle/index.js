@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import DatePicker from "react-datepicker";
@@ -31,8 +31,7 @@ const Vehicles = () => {
         setSelectedOption(e.value);
     }
     const appy_sort = (vehicle_data) => {
-        debugger
-        let temp = vehicle_data.filter((val)=>val.Name == selectedOption);
+        let temp = vehicle_data.filter((val)=>val.Name === selectedOption);
         temp.sort()
         if (selectedSortOption)
             temp.reverse()

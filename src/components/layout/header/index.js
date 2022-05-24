@@ -4,13 +4,15 @@ import {
     Navbar, 
     Nav, 
 } from 'react-bootstrap';
-
+import { useDispatch, useSelector } from 'react-redux'
 import Logo from '../../../images/logo.png';
 import {Link,NavLink} from 'react-router-dom';
 import './Header.scss';
-
+import  {fetchUserLogin}  from '../../../redux/actions/UserstateActions';
 const Header = () => {
-    const [login_status, setLoginStatus]=useState(false)
+    const login_status = useSelector(state => state.userState.login_status); 
+    const dispatch = useDispatch();
+    console.log(login_status);
 return (
     <div className="header">
         <Navbar bg="white" variant="white" className='py-3'>
@@ -30,7 +32,7 @@ return (
                     </NavLink>
                 </Nav>
                 {login_status?
-                <div className='dropdown'>
+                <div className='dropdown icon-group'>
                     <div className='nav-item'>
                         <div className='svg-container'>
                             <Link to="/notification">
@@ -39,8 +41,8 @@ return (
                         </div>
                     </div>
                     <div className='nav-item'>
-                        <div className='user-container'>
-                            <i className='fa fa-user'></i>
+                        <div className='user-container' style={{cursor:"pointer"}}>
+                            <i className='fa fa-user' onClick={()=>dispatch(fetchUserLogin(false))}></i>
                         </div>
                     </div>
                 </div>:
@@ -48,7 +50,7 @@ return (
                      <NavLink to="/home"  className="nav-link get-started" >
                         Get Started
                     </NavLink>
-                    <NavLink  to="/login"  className="nav-link login" onClick={()=>setLoginStatus(true)}>
+                    <NavLink  to="/login"  className="nav-link login" onClick={()=>dispatch(fetchUserLogin(true))}>
                         Login
                     </NavLink>
                 </Nav>}
