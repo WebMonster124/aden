@@ -33,7 +33,7 @@ return (
                 <div className='dropdown'>
                     <div className='nav-item'>
                         <div className='svg-container'>
-                            <Link to="/admin/notification">
+                            <Link to="/notification">
                                 <i className='fa fa-bell'></i>
                             </Link>
                         </div>
