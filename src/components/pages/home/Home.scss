@@ -138,14 +138,42 @@
         box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
         border-radius: 10px;
         padding: 50px 40px;
-
+        position: relative;
+        ul.address li button{
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+            color: #000000;
+            opacity: 1;
+            margin-right: 5px;
+            border: 0;
+            padding-bottom: 20px;
+            &.active{
+                border-bottom: 1px solid rgba(0,0,0,0.6);
+                font-weight: 700;
+            }
+        }
+        ul.address{
+            margin-top: 5px;
+            @media only screen and (max-width: 992px) {
+                flex-direction: column;
+                }
+            li{
+               
+            }
+            &.nav.nav-tabs{
+                border-bottom: 1px solid #EEE7E4;
+            }
+        }
         .control-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #EEE7E4;
-            padding-bottom: 27px;
-
+            position: absolute;
+            right: 40px;
             ul.nav {
                 .nav-item {
                     position: relative;
@@ -191,21 +219,22 @@
                 padding: 4px;
 
                 div.nav {
-                    .nav-item {
-                        .nav-link {
-                            background-color: white;
-                            color: #000000;
-
-                            i {
-                                margin-right: 12px;
-                            }
-                        }                       
-                    }
+                    .nav-link {
+                        background-color: white;
+                        color: #000000;
+                        margin-bottom: 0;
+                        i {
+                            margin-right: 12px;
+                        }
+                    }                       
                     .nav-link.active {                                                
                         background: #000000;
                         border-radius: 3px;
                         color: white;
                     }
+                    @media only screen and (max-width: 992px) {
+                        flex-direction: column;
+                      }
                 }
             }
         }
@@ -519,15 +548,16 @@
                  line-height: 19px;
                  color: #000000;
              }
-
+             input {
+                border: none !important;
+                background-color: #F2F2F2 !important;
+                padding-left: 12px;
+                outline: 0;
+            }
              .react-datepicker-wrapper {
                  width: auto !important;
 
-                 input {
-                     border: none !important;
-                     background-color: #F2F2F2 !important;
-                     padding-left: 12px;
-                 }
+                 
 
                  input:focus {
                      border: none !important;
@@ -632,6 +662,8 @@
             input {
                 border: none !important;
                 background: #F2F2F2;
+                outline: 0;
+                box-shadow: none;
             }
         }
     }
