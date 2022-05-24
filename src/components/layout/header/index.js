@@ -10,7 +10,6 @@ import {Link,NavLink} from 'react-router-dom';
 import './Header.scss';
 
 const Header = () => {
-    const [bookactive, setBookactive]=useState(true);
     const [login_status, setLoginStatus]=useState(false)
 return (
     <div className="header">
@@ -46,8 +45,12 @@ return (
                     </div>
                 </div>:
                 <Nav className='align-items-center'>
-                    <Nav.Link as={Link} to="/home" onClick={()=>setBookactive(true)} className="get-started">Get Started</Nav.Link>
-                    <Nav.Link as={Link} to="/login" onClick={()=>setBookactive(true)} className="login">Login</Nav.Link>
+                     <NavLink to="/home"  className="nav-link" >
+                        Get Started
+                    </NavLink>
+                    <NavLink  to="/login"  className="nav-link" onClick={()=>setLoginStatus(true)}>
+                        Login
+                    </NavLink>
                 </Nav>}
             </Container>
         </Navbar> 

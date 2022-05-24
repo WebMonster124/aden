@@ -16,10 +16,10 @@ const History = () => {
         { value: 'strawberry', label: 'Strawberry' },
         { value: 'vanilla', label: 'Vanilla' },
     ];
-    const [filtershow, setFilterShow] =useState(false);
     const handleChange = (e) => {        
         setSelectedOption(e.value)
     }
+    
     return (
        <div className='history-board'>
            <Header />
@@ -28,7 +28,7 @@ const History = () => {
                    <div className='history'>
                        <div className='history-header'>
                             <p>booking</p>
-                            <div className='filters' onClick={()=>{setFilterShow(true)}}>Filters
+                            <div className='filters'>Filters
                                     <img src={Filters} alt="filters" />
                             </div>
                        </div>
@@ -36,7 +36,7 @@ const History = () => {
                             {
                                 history_data.map((data,key)=>{
                                     return(
-                                        <div className={ selectedId === key ? 'history-content__wrapper control-body selected' : 'history-content__wrapper control-body'}key={key}>
+                                        <div className={ selectedId === key ? 'history-content__wrapper control-body selected' : 'history-content__wrapper control-body'} onClick={()=>setSelectedId(key)} key={key}>
                                             <div className='pickup'>
                                                 <div className='title'>Pickup:</div>
                                                 <p>3348 Mulberry Lane, United States</p>

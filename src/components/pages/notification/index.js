@@ -9,8 +9,12 @@ import { Header } from '../../layout/header';
 
 const Notification = () => {
     const [notification, setNotification] = useState(Notifications);
-    const close_click= (key) =>{
-        setNotification(Notification);
+    console.log(notification,'notificatio')
+    const close_click= (val) =>{
+        let tempArr = Array.from(notification);
+        tempArr.splice(tempArr.indexOf(val), 1);
+        setNotification(tempArr);
+    
     }
     return (
         <div className='client-dashboard'>
@@ -40,7 +44,7 @@ const Notification = () => {
                                             </h5>
                                         </div>
                                         <div className='notification-item__close'>
-                                            <CloseButton onClick={close_click(key)}/>
+                                            <CloseButton onClick={()=>close_click(val)}/>
                                         </div>
                                     </div>
                                 )
