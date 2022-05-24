@@ -7,11 +7,12 @@ import {
     CloseButton,
     Modal 
 } from 'react-bootstrap';
-import logo from '../../../images/Group.png';
+
 import './dashboard.scss';
 import './book_rider.scss';
-import { NavLink,Link} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { MDBSwitch } from 'mdb-react-ui-kit';
+import Sidebar from './sidebar';
 const BookRider = () => {        
     const [key, setKey] = useState('airport');
     const [modalshow, setModalshow] = useState(false);
@@ -21,112 +22,7 @@ const BookRider = () => {
     
     return (
         <div className='dashboard'>
-            <div className='sidebar'>
-                <div className='logo'>
-                    <img src={logo} alt="img"></img>
-                </div>
-                <div className='menu'>
-                        <ul>
-                            <li>
-                                <div className='bhhAF'>
-                                    
-                                    <NavLink to="/admin/dashboard" activeClassName="active" 
-                                              style={({ isActive }) =>
-                                              isActive
-                                                ? {
-                                                    color: '#FBFDFE',
-                                                    padding:'10px 10px',
-                                                    backgroundColor: '#F4730E',
-                                                    borderRadius:'12px'
-                                                  }
-                                                : { }
-                                            }
-                                            >
-                                        <i className='fa-th-large fa side-icon'></i>
-                                        <span className='item-content'>dashboard
-                                        </span>
-                                    </NavLink>
-                                </div>
-                            </li>
-                            <li>
-                                <div className='bhhAF'>
-                                    <NavLink to="/admin/vehicle" activeClassName="active" 
-                                              style={({ isActive }) =>
-                                              isActive
-                                                ? {
-                                                    color: '#FBFDFE',
-                                                    padding:'10px 10px',
-                                                    backgroundColor: '#F4730E',
-                                                    borderRadius:'12px'
-                                                  }
-                                                : { }
-                                            }
-                                            >
-                                        <i className='fa-car fa side-icon'></i>
-                                        <span className='item-content'>Vehicle</span>
-                                    </NavLink>
-                                </div>
-                            </li>
-                            <li>
-                                <div className='bhhAF'>
-                                    <NavLink to="/admin/booking" activeClassName="active" 
-                                              style={({ isActive }) =>
-                                              isActive
-                                                ? {
-                                                    color: '#FBFDFE',
-                                                    padding:'10px 10px',
-                                                    backgroundColor: '#F4730E',
-                                                    borderRadius:'12px'
-                                                  }
-                                                : { }
-                                            }
-                                            >
-                                        <i className='fa-sticky-note fa side-icon'></i>
-                                        <span className='item-content'>Booking</span>
-                                    </NavLink>
-                                </div>
-                            </li>
-                            <li>
-                                <div className='bhhAF'>
-                                    <NavLink to="/admin/driver" activeClassName="active" 
-                                                style={({ isActive }) =>
-                                                isActive
-                                                    ? {
-                                                        color: '#FBFDFE',
-                                                        padding:'10px 10px',
-                                                        backgroundColor: '#F4730E',
-                                                        borderRadius:'12px'
-                                                    }
-                                                    : { }
-                                                }
-                                                >            
-                                        <i className='fa-users fa side-icon'></i>
-                                        <span className='item-content'>Drivers</span>
-                                    </NavLink>
-                                </div>
-                            </li>
-                            <li>
-                                <div className='bhhAF'>
-                                    <NavLink to="/admin/book_ride" activeClassName="active" 
-                                              style={({ isActive }) =>
-                                              isActive
-                                                ? {
-                                                    color: '#FBFDFE',
-                                                    padding:'10px 10px',
-                                                    backgroundColor: '#F4730E',
-                                                    borderRadius:'12px'
-                                                  }
-                                                : { }
-                                            }
-                                            >
-                                        <i className='fa-car-rear fa side-icon'></i>
-                                        <span className='item-content'>Book a ride</span>
-                                    </NavLink>
-                                </div>
-                            </li>
-                        </ul>
-                </div>
-            </div>
+            <Sidebar/>
             <div className='content'>
                 <div className='content-panel'>
                     <div className='content-panel__heading'>
