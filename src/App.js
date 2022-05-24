@@ -21,11 +21,11 @@ import { Driver } from './components/admin/pages/driver'
 import { Notification as ClientNotification } from './components/pages/notification'
 export const App = () => (
     <Provider store={createAppStore()}> 
-        <Routes>        
+        <Routes>     
           <Route path='/home' element={<Home />} exact={true} />
           <Route path='/vehicles' element={<Vehicles />} exact={true} />
           <Route path='/payment' element={<Payment />} exact={true} />
-          <Route path="/" element={<Navigate replace to="/home" />} />
+          <Route path="/*" element={<Navigate replace to="/home" />} />
           <Route path= "/notification" element ={<ClientNotification/>} exact={true}/>
           <Route path= "/history" element ={<History/>} exact={true}/>
           <Route path= "/register" element ={<Register/>} exact={true}/>
@@ -33,12 +33,14 @@ export const App = () => (
              
 
           <Route path="/admin/login" element={<Login/>} exact={true} />
+          <Route path="/admin/" element={<Dashboard/>} exact={true} >
+              <Route path='/admin/vehicle' element={<Vehicle/>}/>
+          </Route>
           <Route path="/admin/dashboard" element={<Dashboard/>} exact={true} />
           <Route path="/admin/notification" element={<Notification/>} exact={true} />
-          <Route path="/admin/vehicle" element={<Vehicle/>} exact={true} />
           <Route path="/admin/booking" element={<Booking/>} exact={true} />
           <Route path="/admin/book_ride" element={<BookRider/>} exact={true} />
-          <Route path="/admin/driver" element={<Driver/>} exact={true} />        
+          <Route path="/admin/driver" element={<Driver/>} exact={true} />  
         </Routes>      
     </Provider>
 );

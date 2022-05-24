@@ -29,6 +29,10 @@ const Home = () => {
     const [stopNum, setStopNum] = useState([{id: Randomstring.generate(10)}]);
     const [modalShow, setModalShow] = useState(false);
     const [editModalshow,setEditModalshow] = useState(false);
+    const [passenger, setPassenger] = useState(3);
+    const [children, setChildren] = useState(3);
+    const [bag, setBag] = useState(3);
+    
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
         { value: 'strawberry', label: 'Strawberry' },
@@ -312,10 +316,10 @@ const Home = () => {
                                     <div className='passenger'>
                                         <div className='label'>Passengers</div>
                                         <div className='body'>
-                                            <span className='count'>3</span>
+                                            <span className='count'>{passenger}</span>
                                             <div className='btns'>
-                                                <button type='button' className='minus'><i className='fa fa-minus'></i></button>
-                                                <button type='button' className='plus'><i className='fa fa-plus'></i></button>
+                                                <button type='button' className='minus' onClick={()=>{setPassenger(passenger-1)}} ><i className='fa fa-minus'></i></button>
+                                                <button type='button' className='plus' onClick={()=>{setPassenger(passenger+1)}} ><i className='fa fa-plus'></i></button>
                                             </div>
                                         
                                         </div>
@@ -323,10 +327,10 @@ const Home = () => {
                                     <div className='childrens'>
                                         <div className='label'>Childrens</div>
                                         <div className='body'>
-                                            <span className='count'>3</span>
+                                            <span className='count'>{children}</span>
                                             <div className='btns'>
-                                                <button type='button' className='minus'><i className='fa fa-minus'></i></button>
-                                                <button type='button' className='plus'><i className='fa fa-plus'></i></button>
+                                                <button type='button' className='minus' onClick={()=>{setChildren(children-1)}}><i className='fa fa-minus'></i></button>
+                                                <button type='button' className='plus' onClick={()=>{setChildren(children+1)}}><i className='fa fa-plus'></i></button>
                                             </div>
                                         
                                         </div>
@@ -334,10 +338,10 @@ const Home = () => {
                                     <div className='bags'>
                                         <div className='label'>Bags</div>
                                         <div className='body'>
-                                            <span className='count'>3</span>
+                                            <span className='count'>{ bag}</span>
                                             <div className='btns'>
-                                                <button type='button' className='minus'><i className='fa fa-minus'></i></button>
-                                                <button type='button' className='plus'><i className='fa fa-plus'></i></button>
+                                                <button type='button' className='minus' onClick={()=>{setBag(bag-1)}}><i className='fa fa-minus'></i></button>
+                                                <button type='button' className='plus' onClick={()=>{setBag(bag+1)}}><i className='fa fa-plus'></i></button>
                                             </div>
                                         
                                         </div>
