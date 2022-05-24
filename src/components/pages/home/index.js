@@ -225,7 +225,7 @@ const Home = () => {
                                         <div className='control-btns'>
                                             <Nav defaultActiveKey="/#" as="div">
                                                 
-                                                    <h5 className={methodkey == "transfer"? 'nav-link active':'nav-link'} onClick={()=>{setMethodKey("transfer")}}</Nav>)><i className="fa fa-location-dot"></i>Transfer</h5>
+                                                    <h5 className={methodkey == "transfer"? 'nav-link active':'nav-link'} onClick={()=>{setMethodKey("transfer")}}><i className="fa fa-location-dot"></i>Transfer</h5>
                                                 
                                                 
                                                     <h5 className={methodkey == "hourly"? 'nav-link active':'nav-link'} onClick={()=>{setMethodKey("hourly")}}><i className="fa fa-clock"></i>Hourly</h5>
