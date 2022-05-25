@@ -590,6 +590,8 @@
        background: #F2F2F2; 
    }
 }
-input[type="time"]::-webkit-calendar-picker-indicator {
-    display: none;
-  }
+.client-vehicle{
+    input[type="time"]::-webkit-calendar-picker-indicator {
+        display: none;
+      }
+}

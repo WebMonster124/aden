@@ -16,8 +16,8 @@ const Header = () => {
 return (
     <div className="header">
         <Navbar bg="white" variant="white" className='py-3'>
-            <Container>               
-                <Nav className='align-items-center'>
+            <Container className="navbar-container">               
+                <Nav className='align-items-center' style={{gridArea:'tab'}}>
                     <NavLink to="/home"  className="nav-link" >
                         Book a ride
                     </NavLink>
@@ -26,13 +26,13 @@ return (
                         Booking History
                     </NavLink>
                 </Nav>
-                <Nav className='align-items-center'>
+                <Nav className='align-items-center' style={{gridArea:'logo'}}>
                     <NavLink to='/admin/dashboard' className="logo">
                         <img src={Logo} alt="logo" />
                     </NavLink>
                 </Nav>
                 {login_status?
-                <div className='dropdown icon-group'>
+                <div className='dropdown icon-group'  style={{gridArea:'button'}}>
                     <div className='nav-item'>
                         <div className='svg-container'>
                             <Link to="/notification">
@@ -46,7 +46,7 @@ return (
                         </div>
                     </div>
                 </div>:
-                <Nav className='align-items-center'>
+                <Nav className='align-items-center ' style={{gridArea:'button'}}>
                      <NavLink to="/home"  className="nav-link get-started" >
                         Get Started
                     </NavLink>

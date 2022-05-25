@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Toggle from 'react-toggle';
 import "react-toggle/style.css";
@@ -36,6 +35,7 @@ const Home = () => {
     const [bag, setBag] = useState(3);
     const [key, setKey] = useState('address');
     const [methodkey, setMethodKey] = useState('transfer');
+    const [startTime, setStartTime] = useState();
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
         { value: 'strawberry', label: 'Strawberry' },
@@ -210,7 +210,7 @@ const Home = () => {
                     <div className='status-board'>
                         <div className='where-when'>Where and When</div>
                         <div className='where-when-status'></div>
-                        <div className='vehicle'>Vehicle Selection</div>
+                        <div className='vehicle-select'>Vehicle Selection</div>
                         <div className='vehicle-status'></div>
                         <div className='payment-confirmation'>Payment & Confirmation</div>
                     </div>
@@ -300,12 +300,11 @@ const Home = () => {
                                                     <div className='date-time'>
                                                         <div className='date'>
                                                             <div className='title'>Pickup date:</div>
-                                                            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-                                                            <i className="fa fa-calendar-days px-2"></i>
+                                                            <input type="date" value={startDate} onChange={(date) => setStartDate(date)} />
                                                         </div>
                                                         <div className='time'>
                                                             <div className='title'>Pickup time:</div>
-                                                            <input type="time" value={startDate} onChange={(date) => setStartDate(date)} />
+                                                            <input type="time" value={startTime} onChange={(date) => setStartTime(date)} />
                                                         </div>
                                                     </div>
                                                     : ""}

@@ -8,14 +8,27 @@
         justify-content: space-around;
         align-items: center;
         margin-top: 60px;
-
-        .where-when, .vehicle, .payment-confirmation {
+        padding:10px;
+        .where-when{
+            @media screen and (max-width:475px){
+                border-bottom: 3px solid white;
+            }
+        }
+        .where-when, .vehicle-select, .payment-confirmation {
             font-family: 'Lato';
             font-style: normal;
             font-weight: 700;
             font-size: 24px;
             line-height: 29px;
+            position: relative;
             color: #FFFFFF;
+            text-align: center;
+            @media only screen and (max-width:992px){
+                font-size: 18px;
+            }
+            @media screen and (max-width:475px){
+                font-size: 14px;
+            }
         }
 
         .where-when-status, .vehicle-status {
@@ -23,15 +36,23 @@
             border-radius: 50px;
             width: 15%;
             height: 5px;
+            position: relative;
+            @media only screen and (max-width:992px){
+                flex-direction: column;
+            }
+            @media screen and (max-width:475px){
+                width: 0%;
+            }
         }
 
         .where-when-status::after {
             content: "";
             background: #FFFFFF;
             border-radius: 50px;
-            width: 7.5%;
+            width: 50%;
             height: 5px;
             position: absolute;
+            
         }
         .vehicle-status::after{
             content: "";
@@ -140,7 +161,9 @@
     bottom: 170px;
     padding-left: 40px;
     padding-right: 40px;
-    
+    @media screen and (max-width:1200px) {
+        padding:0px;
+    }
     .location-control { 
         width: 100%;       
         background: #FFFFFF;
@@ -148,6 +171,12 @@
         border-radius: 10px;
         padding: 50px 40px;
         position: relative;
+        @media screen and (max-width:992px){
+            padding: 25px 20px;
+        }
+        @media screen and (max-width:475px){
+            padding:10px 5px;
+        }
         ul.address li button{
             font-family: 'Lato';
             font-style: normal;
@@ -159,6 +188,10 @@
             margin-right: 5px;
             border: 0;
             padding-bottom: 20px;
+            @media screen and (max-width:1200px){
+                padding: 10px 5px;
+                margin-right: 0px;
+            }
             &.active{
                 border-bottom: 1px solid rgba(0,0,0,0.6);
                 font-weight: 700;
@@ -183,6 +216,12 @@
             border-bottom: 1px solid #EEE7E4;
             position: absolute;
             right: 40px;
+            @media screen and (max-width:992px){
+                right:20px
+            }
+            @media screen and (max-width:475px){
+                right: 10px;
+            }
             ul.nav {
                 .nav-item {
                     position: relative;
@@ -235,6 +274,9 @@
                         i {
                             margin-right: 12px;
                         }
+                        @media screen and (max-width:1200px){
+                            font-size: 14px;
+                        }
                     }                       
                     .nav-link.active {                                                
                         background: #000000;
@@ -244,6 +286,7 @@
                     @media only screen and (max-width: 992px) {
                         flex-direction: column;
                       }
+                    
                 }
             }
         }
@@ -261,7 +304,9 @@
 .control-body {
     margin-top: 32px;
     padding-left: 60px;
-
+    @media screen and (max-width:772px){
+        padding-left: 25px;
+    }
     .pickup {
          position: relative;
          display: flex;
@@ -271,7 +316,10 @@
          height: 60px;
          padding-left: 24px;
          padding-right: 24px;
-
+         @media screen and (max-width:992px){
+            padding-left: 12px;
+            padding-right: 12px;
+         }
          .title {
              font-family: 'Lato';
              font-style: normal;
@@ -313,6 +361,9 @@
          border-top-left-radius: 30px;
          border-bottom: none;
          border-top-right-radius: 30px;
+         @media screen and (max-width:992px){
+            left:-27px;
+        }
      }
 
      .pickup::after {
@@ -332,6 +383,9 @@
          -o-border-radius: 100%;
          border-radius: 100%;
          top: 12px;
+         @media screen and (max-width:992px){
+            left:-18px;
+        }
      }
 
      .stop {
@@ -347,7 +401,10 @@
              height: 60px;
              padding-left: 24px;
              padding-right: 24px;
-
+             @media screen and (max-width:992px){
+                padding-left: 12px;
+                padding-right: 12px;
+             }
              .title {
                  font-family: 'Lato';
                  font-style: normal;
@@ -382,6 +439,12 @@
              margin-left: 20px;
              padding-right: 10px;
              cursor: pointer;
+             @media screen and (max-width:992px){
+                 margin-left: 10px;
+             }
+             @media screen and (max-width:475px){
+                margin-left: 0px;
+            }
          }
      }
 
@@ -402,6 +465,9 @@
          -o-border-radius: 100%;
          border-radius: 100%;
          top: 12px;
+         @media screen and (max-width:992px){
+            left:-18px;
+        }
      }
 
      .dropoff {
@@ -414,7 +480,10 @@
          padding-left: 24px;
          padding-right: 24px;
          margin-top: 18px;
-
+         @media screen and (max-width:992px){
+            padding-left: 12px;
+            padding-right: 12px;
+         }
          .title {
              font-family: 'Lato';
              font-style: normal;
@@ -456,6 +525,9 @@
          border-bottom-left-radius: 30px;
          border-top: none;
          border-bottom-right-radius: 30px;
+         @media screen and (max-width:992px){
+            left:-27px;
+        }
      }
 
      .dropoff::after {
@@ -475,6 +547,9 @@
          -o-border-radius: 100%;
          border-radius: 100%;
          top: 12px;
+         @media screen and (max-width:992px){
+            left:-18px;
+        }
      }
 
      .field-wrap {
@@ -493,10 +568,15 @@
              font-size: 14px;
              line-height: 17px;
              color: #673622;
-
+             @media screen and (max-width:600px){
+                gap:5px;   
+             }
              .react-toggle-track {
                  height: 30px !important;
-                 background-color: rgba(120, 120, 128, 0.32);                       
+                 background-color: rgba(120, 120, 128, 0.32);
+                 @media screen and (max-width:992px){
+                    height:23px !important;
+                }                       
              }
 
              .react-toggle--checked .react-toggle-track {
@@ -510,10 +590,17 @@
              .react-toggle-thumb {
                  width: 28px !important;
                  height: 28px !important;
+                 @media screen and (max-width:992px){
+                    width: 21px !important;
+                    height: 21px !important;
+                }
              }
 
              .react-toggle--checked .react-toggle-thumb {
                  left: 21px !important;
+                 @media screen and (max-width:992px){
+                    left:28px !important;
+                }
              }
          }
 
@@ -538,7 +625,9 @@
          align-items: center;
          justify-content: space-evenly;
          gap: 16px;
-
+         @media screen and (max-width:992px){
+           display: block;
+        }
          .date, .time {
              display: flex;
              align-items: center;
@@ -562,6 +651,9 @@
                 background-color: #F2F2F2 !important;
                 padding-left: 12px;
                 outline: 0;
+                @media screen and (max-width:1200px){
+                    width: 100%;
+                }
             }
              .react-datepicker-wrapper {
                  width: auto !important;
