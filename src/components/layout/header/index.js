@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     Container,
     Navbar, 
@@ -8,11 +8,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import Logo from '../../../images/logo.png';
 import {Link,NavLink} from 'react-router-dom';
 import './Header.scss';
+import {logout} from '../../../auth'
 import  {fetchUserLogin}  from '../../../redux/actions/UserstateActions';
 const Header = () => {
     const login_status = useSelector(state => state.userState.login_status); 
     const dispatch = useDispatch();
     console.log(login_status);
+    const logout_click = () => {
+        dispatch(fetchUserLogin(false));
+        logout();
+    }
 return (
     <div className="header">
         <Navbar bg="white" variant="white" className='py-3'>
@@ -42,7 +47,7 @@ return (
                     </div>
                     <div className='nav-item'>
                         <div className='user-container' style={{cursor:"pointer"}}>
-                            <i className='fa fa-user' onClick={()=>dispatch(fetchUserLogin(false))}></i>
+                            <i className='fa fa-user' onClick={()=>logout_click()}></i>
                         </div>
                     </div>
                 </div>:

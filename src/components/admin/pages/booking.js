@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {
     Row,
     Col,
@@ -9,11 +9,14 @@ import {
     CloseButton
 } from 'react-bootstrap';
 import './dashboard.scss';
+import axios from 'axios';
 import './booking.scss'
 import driver_img from "../../../images/Ellipse 212.png"
 import table_data from './table_data.js';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
 import Sidebar from './sidebar.js'
+import { select_booking } from '../../../redux/actions/BookingstateActions';
 const Booking = () => {    
     const [searchKey,setSearchKey] = useState();    
     const [modalshow, setModalshow] = useState(false);
@@ -21,6 +24,8 @@ const Booking = () => {
     const handleModalShow = () => {setModalshow(true);setModaltitle('add new vehicle');}
     const handleModalClose = () => setModalshow(false);    
     const [key, setKey] = useState('booking');
+    const dispatch = useDispatch(); 
+    const [bookings, setBookings] = useState([]);
     const options = [
         {
             value:0,label:'accepted'
@@ -36,6 +41,16 @@ const Booking = () => {
     const handleSearchChange = (e) => {
         setSearchKey(e.value)
     }
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/booking/get`)
+        .then((res)=>{
+            dispatch(select_booking(res.data));
+            setBookings(res.data)
+
+
+        })
+    },[])
+    console.log(bookings)
     return (
         <div className='dashboard'>
             <Sidebar/>
@@ -86,33 +101,39 @@ const Booking = () => {
                                             >
                                             <Tab eventKey="booking" title="Booking">
                                                 <table>
-                                                    <tr>
-                                                        <th>Trip Number</th>
-                                                        <th>Pickups</th>
-                                                        <th>Drop Off</th>
-                                                        <th>Passenger Name</th>
-                                                        <th>Passenger Number</th>
-                                                        <th>Passengers</th>
-                                                        <th>Date & time</th>
-                                                        <th>bags</th>
-                                                        <th>Vehicle</th>
-                                                    </tr>
-                                                    {
-                                                    table_data.map((val, key) => {
-                                                    return (
-                                                        <tr key={key}>
-                                                            <td>{val.number}</td>
-                                                            <td>{val.pickup}</td>
-                                                            <td>{val.drop_off}</td>
-                                                            <td>{val.name}</td>
-                                                            <td>{val.p_number}</td>
-                                                            <td>{val.passengers}</td>
-                                                            <td>{val.d_time}</td>
-                                                            <td>{val.bags}</td>
-                                                            <td>{val.vehicle}</td>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Trip Number</th>
+                                                            <th>Pickups</th>
+                                                            <th>Drop Off</th>
+                                                            <th>Passenger Name</th>
+                                                            <th>Passenger Number</th>
+                                                            <th>Passengers</th>
+                                                            <th>Date & time</th>
+                                                            <th>bags</th>
+                                                            <th>Vehicle</th>
                                                         </tr>
-                                                    )
-                                                    })}
+                                                    </thead>
+                                                    <tbody>
+                                                        {
+                                                            bookings.map((val, key) => {
+                                                                console.log(val)
+                                                                console.log(val.passenger_infos)
+                                                        return (
+                                                            <tr key={key}>
+                                                                <td>{val.id}</td>
+                                                                <td>{val.pickup_location}</td>
+                                                                <td>{val.dropoff_location}</td>
+                                                                <td>{val.users[0].FIRST_NAME}+{val.users[0].LAST_NAME}</td>
+                                                                <td>{val.passenger_infos[0].ID }</td>
+                                                                <td>{val.passenger}</td>
+                                                                <td>{val.pickup_time}</td>
+                                                                <td>{val.bags}</td>
+                                                                <td>{val.vehicles[0].name}</td>
+                                                            </tr>
+                                                        )
+                                                        })}
+                                                    </tbody>
                                                 </table>
                                             </Tab>
                                             <Tab eventKey="booking_status" title="Booking_status">
@@ -128,16 +149,16 @@ const Booking = () => {
                                                         <th>status</th>
                                                     </tr>
                                                     {
-                                                    table_data.map((val, key) => {
+                                                    bookings.map((val, key) => {
                                                     return (
                                                         <tr key={key}>
-                                                            <td>{val.number}</td>
-                                                            <td>{val.pickup}</td>
-                                                            <td>{val.drop_off}</td>
-                                                            <td>{val.name}</td>
-                                                            <td>{val.p_number}</td>
-                                                            <td>{val.passengers}</td>
-                                                            <td>{val.d_time}</td>
+                                                            <td>{val.id}</td>
+                                                            <td>{val.pickup_location}</td>
+                                                            <td>{val.dropoff_location}</td>
+                                                            <td>{val.passenger_infos[0].FIRST_NAME}+{val.passenger_infos[0].LAST_NAME} </td>
+                                                            <td>{val.passenger_infos[0].ID}</td>
+                                                            <td>{val.passenger}</td>
+                                                            <td>{val.pickup_time}</td>
                                                             <td><Form.Select defaultValue={val.status} className={'name'+val.status}>
                                                             {
                                                                 options.map((option, index) => {
@@ -165,17 +186,17 @@ const Booking = () => {
                                                         <th>Cancel Ride</th>
                                                     </tr>
                                                     {
-                                                    table_data.map((val, key) => {
+                                                    bookings.map((val, key) => {
                                                     return (
                                                         <tr key={key}>
-                                                            <td>{val.number}</td>
-                                                            <td>{val.pickup}</td>
-                                                            <td>{val.drop_off}</td>
-                                                            <td>{val.name}</td>
-                                                            <td>{val.p_number}</td>
-                                                            <td>{val.passengers}</td>
-                                                            <td>{val.d_time}</td>
-                                                            <td>{val.cancel_status === 1 ? <h6 className='cancelling'>cancel ride</h6>:<h6 className='canceled'>canceled ride</h6>}
+                                                            <td>{val.ID}</td>
+                                                            <td>{val.pickup_location}</td>
+                                                            <td>{val.dropoff_location}</td>
+                                                            <td>{val.users[0].FIRTST_NAME}+{val.users[0].LAST_NAME}</td>
+                                                            <td>{val.passenger_infos[0].ID}</td>
+                                                            <td>{val.passenger}</td>
+                                                            <td>{val.pickup_time}</td>
+                                                            <td>{val.booking_status === 1 ? <h6 className='cancelling'>cancel ride</h6>:<h6 className='canceled'>canceled ride</h6>}
                                                             </td>
                                                             
                                                         </tr>
@@ -196,17 +217,17 @@ const Booking = () => {
                                                         <th>Fix the price</th>
                                                     </tr>
                                                     {
-                                                    table_data.map((val, key) => {
+                                                    bookings.map((val, key) => {
                                                     return (
                                                         <tr key={key}>
-                                                            <td>{val.number}</td>
-                                                            <td>{val.pickup}</td>
-                                                            <td>{val.drop_off}</td>
-                                                            <td>{val.name}</td>
-                                                            <td>{val.p_number}</td>
-                                                            <td>{val.passengers}</td>
-                                                            <td>{val.d_time}</td>
-                                                            <td><div className='table-price'><input defaultValue={val.price}></input></div>
+                                                            <td>{val.ID}</td>
+                                                            <td>{val.pickup_location}</td>
+                                                            <td>{val.dropoff_location}</td>
+                                                            <td>{val.users[0].FIRTST_NAME}+{val.users[0].LAST_NAME}</td>
+                                                            <td>{val.passenger_infos[0].ID}</td>
+                                                            <td>{val.passenger}</td>
+                                                            <td>{val.pickup_time}</td>
+                                                            <td><div className='table-price'><input defaultValue={val.vehicles[0].rate}></input></div>
                                                             </td>
                                                             
                                                         </tr>
@@ -227,23 +248,23 @@ const Booking = () => {
                                                         <th>Driver</th>
                                                     </tr>
                                                     {
-                                                    table_data.map((val, key) => {
+                                                    bookings.map((val, key) => {
                                                     return (
                                                         <tr key={key}>
-                                                            <td>{val.number}</td>
-                                                            <td>{val.pickup}</td>
-                                                            <td>{val.drop_off}</td>
-                                                            <td>{val.name}</td>
-                                                            <td>{val.p_number}</td>
-                                                            <td>{val.passengers}</td>
-                                                            <td>{val.d_time}</td>
+                                                            <td>{val.ID}</td>
+                                                            <td>{val.pickup_location}</td>
+                                                            <td>{val.dropoff_location}</td>
+                                                            <td>{val.users[0].FIRTST_NAME}+{val.users[0].LAST_NAME}</td>
+                                                            <td>{val.passenger_infos[0].ID}</td>
+                                                            <td>{val.passenger}</td>
+                                                            <td>{val.pickup_time}</td>
                                                             <td>
                                                                 <div className='driver-meta'>
                                                                     <div className='img-container'>
                                                                         <img src={driver_img} alt="img"></img>
                                                                     </div>
-                                                                    <h5>Jordy Astaws</h5>
-                                                                    <h6>reassign</h6>
+                                                                    <h5>{val.users[0].FIRST_NAME} {val.users[0].LAST_NAME}</h5>
+                                                                    <h6>reassign</h6>   
                                                                 </div>
                                                             </td>
                                                             

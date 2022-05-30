@@ -1,0 +1,40 @@
+
+export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
+export const SELECT_NOTIFICATION = 'SELECT_NOTIFICATION';
+export const TEMP_NOTIFICATION = 'TEMP_NOTIFICATION';
+export const UPDATE_NOTIFICATION = 'UPDATE_NOTIFICATION';
+export const DELETE_NOTIFICATION = 'DELETE_NOTIFICATION';
+
+export function AddBooking(notification) {
+    return {
+        type: ADD_NOTIFICATION,
+        payload: notification
+    }
+};
+export function select_notification(notification){
+        return {
+            type:SELECT_NOTIFICATION,
+            payload:notification
+        }  
+   
+}
+export function update_notification(notification){
+    return {
+        type:UPDATE_NOTIFICATION,
+        payload:notification
+    }  
+
+}
+export function delete_notification(notification){
+    return {
+        type:DELETE_NOTIFICATION,
+        payload:notification
+    }  
+
+}
+export function save_temp_notification(notification){
+    return{
+        type:TEMP_NOTIFICATION,
+        payload:notification
+    }
+}

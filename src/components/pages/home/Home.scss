@@ -1,4 +1,101 @@
 .home{
+    .modal-body {
+        padding: 0 !important;
+        display: flex;
+        width: 100%;
+        .header-wrap {        
+            padding: 60px 50px;
+            border-right: 1px solid #ECE3E0;
+            width: 100%;
+            height: 100%;
+            .title {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 32px;
+                line-height: 38px;
+                color: #000000;            
+            }
+            .description {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 24px;
+                color: #000000;
+                margin-top: 24px;
+                h6{
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 24px;
+                    /* or 133% */
+    
+    
+                    color: rgb(0, 0, 0);
+                    span{
+                        color: rgba(0, 0, 0, 0.6);
+                    }
+                }
+            }
+    
+            .btns {
+                margin-top: 80px;
+                display:flex;
+                .confirm {                
+                    width: 300px;
+                    height: 50px;                
+                    background: #F4730E;
+                    border-radius: 12px;
+                    border: none;
+                    color: white;
+                    font-size: 18px;
+                }
+                .edit {
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 18px;
+                    line-height: 22px;
+                    color: #F4730E;
+                    border: none;
+                    margin-left: 24px;
+                    background-color: white;
+                }
+            }
+        }
+    
+        .content-wrap {
+            padding: 60px 40px;
+            width: 100%;
+            .street, .city, .state, .postalcode, .country {    
+                width: 100%;                  
+                height: 60px; 
+                background: #F2F2F2;           
+                border-radius: 5px;
+                padding: 20px 26px;
+                margin-bottom: 14px;
+    
+                .label {
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 19px;
+                    color: #000000;
+                    margin-right: 10px;
+                }
+    
+                input {
+                    border: none !important;
+                    background: #F2F2F2;
+                    outline: 0;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
     .status-board {
         position: relative;
         background: #673622;
@@ -672,100 +769,4 @@
          }
      }
  }
-.modal-body {
-    padding: 0 !important;
-    display: flex;
-    width: 100%;
-    .header-wrap {        
-        padding: 60px 50px;
-        border-right: 1px solid #ECE3E0;
-        width: 100%;
-        height: 100%;
-        .title {
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 32px;
-            line-height: 38px;
-            color: #000000;            
-        }
-        .description {
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 18px;
-            line-height: 24px;
-            color: #000000;
-            margin-top: 24px;
-            h6{
-                font-family: 'Lato';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 18px;
-                line-height: 24px;
-                /* or 133% */
 
-
-                color: rgb(0, 0, 0);
-                span{
-                    color: rgba(0, 0, 0, 0.6);
-                }
-            }
-        }
-
-        .btns {
-            margin-top: 80px;
-            display:flex;
-            .confirm {                
-                width: 300px;
-                height: 50px;                
-                background: #F4730E;
-                border-radius: 12px;
-                border: none;
-                color: white;
-                font-size: 18px;
-            }
-            .edit {
-                font-family: 'Lato';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 18px;
-                line-height: 22px;
-                color: #F4730E;
-                border: none;
-                margin-left: 24px;
-                background-color: white;
-            }
-        }
-    }
-
-    .content-wrap {
-        padding: 60px 40px;
-        width: 100%;
-        .street, .city, .state, .postalcode, .country {    
-            width: 100%;                  
-            height: 60px; 
-            background: #F2F2F2;           
-            border-radius: 5px;
-            padding: 20px 26px;
-            margin-bottom: 14px;
-
-            .label {
-                font-family: 'Lato';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 16px;
-                line-height: 19px;
-                color: #000000;
-                margin-right: 10px;
-            }
-
-            input {
-                border: none !important;
-                background: #F2F2F2;
-                outline: 0;
-                box-shadow: none;
-            }
-        }
-    }
-}

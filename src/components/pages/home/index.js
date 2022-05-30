@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import "react-datepicker/dist/react-datepicker.css";
@@ -22,29 +22,30 @@ import Map from '../../../images/map.png';
 import LocationCheck from '../../../images/location-check.png';
 import Trash from '../../../images/trash.png';
 import './Home.scss';
-
+import { useDispatch, useSelector } from 'react-redux'
+import  {select_booking,save_temp_booking}  from '../../../redux/actions/BookingstateActions';
+import axios from 'axios';
 const Home = () => {
-    const [selectedOption, setSelectedOption] = useState(null);
-    const [startDate, setStartDate] = useState(new Date());
-    const [isSwitchOn, setIsSwitchOn] = useState(false);
+    const temp = useSelector(state => state.bookingState.temp_booking);
+    const [selectedOption, setSelectedOption] = useState(temp.pick_location);
+    const [startDate, setStartDate] = useState(temp.pick_date? temp.pick_date : new Date());
+    const [isSwitchOn, setIsSwitchOn] = useState(temp.isSwitchOn);
     const [stopNum, setStopNum] = useState([{ id: Randomstring.generate(10) }]);
     const [modalShow, setModalShow] = useState(false);
     const [editModalshow, setEditModalshow] = useState(false);
-    const [passenger, setPassenger] = useState(3);
-    const [children, setChildren] = useState(3);
-    const [bag, setBag] = useState(3);
+    const [passenger, setPassenger] = useState( temp.passenger? temp.passenger:3);
+    const [children, setChildren] = useState(temp.children?temp.children:3);
+    const [bag, setBag] = useState(temp.bag? temp.bag:3);
     const [key, setKey] = useState('address');
     const [methodkey, setMethodKey] = useState('transfer');
-    const [startTime, setStartTime] = useState();
+    const [startTime, setStartTime] = useState(temp.pick_time);
+    const [dropoff,setDropoff] =useState(temp.dropoff_location);
+    const [stop,setStop]=useState(temp.stop);
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
         { value: 'strawberry', label: 'Strawberry' },
         { value: 'vanilla', label: 'Vanilla' },
     ];
-
-    const handleChange = (e) => {
-        setSelectedOption(e.value)
-    }
 
     const switch_onChange_handle = () => {
         setIsSwitchOn(!isSwitchOn);
@@ -196,7 +197,32 @@ const Home = () => {
             </Modal>
         );
     }
-
+    const booking = useSelector(state => state.bookingState); 
+    const login_status = useSelector(state =>state.userState.login_status)
+    const dispatch = useDispatch();
+    const select_vehicle = (() => {
+        let temp_booking={}
+        temp_booking.pick_date = startDate;
+        temp_booking.pick_time = startTime;
+        temp_booking.pick_location = selectedOption;
+        temp_booking.passenger =  passenger;
+        temp_booking.children = children;
+        temp_booking.bag = bag;
+        temp_booking.dropoff_location = dropoff;
+        temp_booking.stop = stop
+        temp_booking.isSwitchOn = isSwitchOn;
+        dispatch(save_temp_booking(temp_booking))
+    })
+    useEffect(()=>{
+        
+        if (login_status){
+            axios.get(`${process.env.REACT_APP_API_BASE_URL}/booking/get`)
+            .then((res)=>{
+                dispatch(select_booking(res.data));
+            })
+            
+        }},[login_status]);
+    console.log(booking)
     return (
         <div className='home'>
             <Header />
@@ -247,9 +273,9 @@ const Home = () => {
                                             <div className='control-body'>
                                                 <div className='pickup'>
                                                     <div className='title'>Pickup:</div>
-                                                    <Select
-                                                        defaultValue={selectedOption}
-                                                        onChange={(e) => handleChange(e)}
+                                                    <input
+                                                        value={selectedOption}
+                                                        onChange={(e) => setSelectedOption(e.target.value)}
                                                         options={options}
                                                         placeholder="Enter location"
                                                         isSearchable="true"
@@ -261,9 +287,9 @@ const Home = () => {
                                                     <div className='stop d-flex align-items-center justify-content-between' key={item.id}>
                                                         <div className='stop-location w-100'>
                                                             <div className='title'>Stop{index + 1}:</div>
-                                                            <Select
-                                                                defaultValue={selectedOption}
-                                                                onChange={(e) => handleChange(e)}
+                                                            <input
+                                                                value={stop}
+                                                                onChange={(e) => setStop(e.target.value)}
                                                                 options={options}
                                                                 placeholder="Enter location"
                                                                 isSearchable="true"
@@ -276,10 +302,11 @@ const Home = () => {
                                                 ))}
                                                 <div className='dropoff'>
                                                     <div className='title'>Dropoff:</div>
-                                                    <Select
-                                                        defaultValue={selectedOption}
-                                                        onChange={(e) => handleChange(e)}
+                                                    <input
+                                                        value={dropoff}
+                                                        onChange={(e) => setDropoff(e.target.value)}
                                                         options={options}
+                                                        border = 'none'
                                                         placeholder="Enter location"
                                                         isSearchable="true"
                                                         className='w-100'
@@ -300,11 +327,11 @@ const Home = () => {
                                                     <div className='date-time'>
                                                         <div className='date'>
                                                             <div className='title'>Pickup date:</div>
-                                                            <input type="date" value={startDate} onChange={(date) => setStartDate(date)} />
+                                                            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                                                         </div>
                                                         <div className='time'>
                                                             <div className='title'>Pickup time:</div>
-                                                            <input type="time" value={startTime} onChange={(date) => setStartTime(date)} />
+                                                            <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
                                                         </div>
                                                     </div>
                                                     : ""}
@@ -336,7 +363,7 @@ const Home = () => {
                                             </div>
                                         </div>
                                         <div className='childrens'>
-                                            <div className='label'>Childrens</div>
+                                            <div className='label' onClick={select_vehicle}>Childrens</div>
                                             <div className='body'>
                                                 <span className='count'>{children}</span>
                                                 <div className='btns'>
@@ -358,7 +385,7 @@ const Home = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <Link to='/vehicles' className='select-vehicle'>Select Vehicle</Link>
+                                    <Link to='/vehicles' className='select-vehicle' onClick ={select_vehicle} >Select Vehicle</Link>
                                 </div>
                             </Col>
                         </Row>

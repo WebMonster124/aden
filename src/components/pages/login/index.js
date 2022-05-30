@@ -1,13 +1,32 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React,{useState} from 'react';
+import { Link, Navigate} from 'react-router-dom';
 import {
     Row,
     Col,
 } from 'react-bootstrap';
 import logo from '../../../images/logo.png';
 import './login.scss'
+import axios from 'axios';
+import {login} from '../../../auth';
+require('dotenv').config()
+import  {fetchUserLogin}  from '../../../redux/actions/UserstateActions';
+import { useDispatch, useSelector } from 'react-redux'
 const Login = () => {  
-
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const login_status = useSelector(state => state.userState.login_status); 
+    const dispatch = useDispatch();
+    const login_clicked = () =>{
+        axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/signin`,{EMAIL:email,PASSWORD:password})
+        .then((res)=>{
+            if (res.status == 200){
+                console.log(res.data    )
+                dispatch(fetchUserLogin(true))
+                login(res.data);
+            }
+            <Navigate to="/home" />
+        })  
+    }
     return (
         <Row style={{marginTop:'100px'}} className="client-login">
             <Col md = {6}>
@@ -23,11 +42,11 @@ const Login = () => {
                         <div className='form-group'>
                             <div className='form'>
                                 <label>Email Id:</label>
-                                <input type="text" placeholder='lorem Ipsum'></input>
+                                <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)}></input>
                             </div>
                             <div className='form'>
                                 <label>Password:</label>
-                                <input type="password"></input>
+                                <input type="password" value={password} onChange= {(e)=>setPassword(e.target.value)}></input>
                             </div>
                             <div className="remember">
                                 {/* <Form.Check type="checkbox" className='checkbox' label="Remember me" /> */}
@@ -39,7 +58,7 @@ const Login = () => {
                                 <Link to={{pathname:'/'}} style={{textDecoration:'none'}}>Forgot Password?</Link>
                             </div>
                             <div className='login-button'>
-                                <Link to={{pathname:'/home'}}>
+                                <Link to={{pathname:'/home'}} onClick={login_clicked}>
                                     <h3>Login</h3>
                                 </Link>
                             </div>

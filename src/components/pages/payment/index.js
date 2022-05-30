@@ -6,8 +6,14 @@ import { Header } from '../../layout/header';
 import './payment.scss';
 
 import Select from 'react-select';
+import { useDispatch, useSelector } from 'react-redux'
+import  {select_vehicle}  from '../../../redux/actions/VehiclestateActions';
+import axios from 'axios';
+import  {save_temp_booking}  from '../../../redux/actions/BookingstateActions';
+import { Link } from 'react-router-dom';
 const Payment = () => {    
     const [selectedOption, setSelectedOption] = useState(null);
+    const temp = useSelector(state => state.bookingState.temp_booking);
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
         { value: 'strawberry', label: 'Strawberry' },
@@ -55,43 +61,43 @@ const Payment = () => {
                                         </div>
                                         <div className='pickup'>
                                             <div className='title'>Pickup:</div>
-                                            <p>As Directed -SD CA</p>
+                                            <p>{temp.pick_location}</p>
                                         </div>                            
                                         <div className='stop d-flex align-items-center justify-content-between'>
                                             <div className='stop-location w-100'>
                                                 <div className='title'>Stop1:</div>
-                                                <p>Sanata Monica</p>
+                                                <p>{temp.stop}</p>
                                             </div>
                                         </div>                            
                                         <div className='dropoff'>
                                             <div className='title'>Dropoff:</div>
-                                                <p>Sanata Monica</p>                            
+                                                <p>{temp.dropoff_location}</p>                            
                                         </div>
                                         <div className='passenger-board'>
                                             <Row>
                                                 <Col md={4}>
                                                     <div className='passenger'>
                                                         <div className='label'>Passenger</div>
-                                                        <div className='count'>3</div>
+                                                        <div className='count'>{temp.passenger}</div>
                                                     </div>
                                                 </Col>
                                                 <Col md={4}>
                                                     <div className='childrens'>
                                                         <div className='label'>Childrens</div>
-                                                        <div className='count'>3</div>
+                                                        <div className='count'>{temp.children}</div>
                                                     </div>
                                                 </Col>
                                                 <Col md={4}>
                                                     <div className='bags'>
                                                         <div className='label'>Bags</div>
-                                                        <div className='count'>3</div>
+                                                        <div className='count'>{temp.bag}</div>
                                                     </div>
                                                 </Col>
                                             </Row>
                                         </div>
                                         <div className='vehicle'>
                                             <div className='label'>Vehicle</div>
-                                            <div className='name'>Sedan</div>
+                                            <div className='name'>{temp.vehicle.name}</div>
                                         </div>
                                         <Row>
                                             <Col md={6}>
@@ -123,7 +129,11 @@ const Payment = () => {
                                         </Row>
                                         <div className='estimated-fair'>
                                             <div className='label'>Estimated Fair</div>
-                                            <div className='cost'>USD $120</div>
+                                            <div className='cost'>{temp.vehicle.rate}</div>
+                                        </div>
+                                        <div className='btns'>
+                                            <div className="back"><Link to='/home'>Go Back</Link></div>
+                                            <div className="payment" ><Link to='/payment' onClick={()=>clickPayment(temp)}>book a ride</Link></div>                        
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +142,7 @@ const Payment = () => {
                                 <div className='passenger-control-btn'>
                                     
                                     <div className='passenger-control'>
-                                        <div className='header-text'>Journey</div>
+                                        <div className='header-text'>Passenger Info</div>
                                         <Row>
                                             <Col md={6}>
                                                 <div className='input-wrapper'>

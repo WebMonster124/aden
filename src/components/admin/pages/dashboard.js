@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {
     Row,
     Col,
@@ -13,13 +13,17 @@ import driver_data from './driver_data.js';
 import table_data from './table_data.js';
 import { Link} from 'react-router-dom';
 import Sidebar from './sidebar';
-
+import { useDispatch, useSelector } from 'react-redux' 
+import axios from 'axios';
+import { select_booking } from '../../../redux/actions/BookingstateActions';
 const Dashboard = () => {    
     const [searchKey,setSearchKey] = useState();   
     
     const handleSearchChange = (e) => {
         setSearchKey(e.value)
     }
+    const [booking, setBooking] = useState([]);
+    const dispatch = useDispatch();
     const options = [
         { value: '2022', label: 'this year' },
         { value: 'strawberry', label: 'last year' }
@@ -172,7 +176,14 @@ const Dashboard = () => {
             barAriaLabel={function(e){return e.id+": "+e.formattedValue+" in country: "+e.indexValue}}
         />
     )
-
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/booking/get`)
+        .then((res)=>{
+            dispatch(select_booking(res.data));
+            setBooking(res.data)
+            console.log(res.data)
+        })
+    },[])
     return (
         <div className='dashboard'>
             <Sidebar/>
@@ -268,17 +279,17 @@ const Dashboard = () => {
                                                     <th>Vehicle</th>
                                                 </tr>
                                                 {
-                                                table_data.map((val, key) => {
+                                                booking.map((val, key) => {
                                                 return (
                                                     <tr key={key}>
-                                                        <td>{val.number}</td>
-                                                        <td>{val.pickup}</td>
-                                                        <td>{val.drop_off}</td>
-                                                        <td>{val.name}</td>
-                                                        <td>{val.p_number}</td>
+                                                        <td>#{val.id}</td>
+                                                        <td>{val.pickup_location}</td>
+                                                        <td>{val.dropoff_location}</td>
+                                                        <td>{val.users[0].FIRST_NAME} {val.users[0].LAST_NAME}</td>
+                                                        <td>{val.users[0].CONTACT_PHONE}</td>
                                                         <td>{val.passengers}</td>
-                                                        <td>{val.d_time}</td>
-                                                        <td>{val.vehicle}</td>
+                                                        <td>{val.pickup_date}</td>
+                                                        <td>{val.vehicles[0].name}</td>
                                                     </tr>
                                                 )
                                                 })}

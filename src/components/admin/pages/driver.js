@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {
     Row,
     Col,   
@@ -6,9 +6,11 @@ import {
     CloseButton
 } from 'react-bootstrap';
 import './driver.scss';
-import drivers from './drivers_info.js';
 import { Link } from 'react-router-dom';
 import Sidebar from './sidebar';
+import { useDispatch, useSelector } from 'react-redux' 
+import axios from 'axios';
+import { fetchdrivers } from '../../../redux/actions/UserstateActions';
 
 const Driver = () => {   
     const [searchKey,setSearchKey] = useState();   
@@ -20,12 +22,62 @@ const Driver = () => {
     const nexthandleModalShow = () => {console.log('sdfs');handleModalClose();setNextModalshow(true);setModaltitle('Recomendation & Submission');}
     const handleModalClose = () => setModalshow(false);
     const nexthandleModalClose = () => setNextModalshow(false);
-    const handleUpdateModal = () => {setModalshow(true);setModaltitle('update new vehicle');} 
-   
-    const handleSearchChange = (e) => {
-        setSearchKey(e.value)
+    const [modalID, setModalID] = useState();
+    const next = (id) => {
+        if (modaltitle == "add new driver")
+        {
+            nexthandleModalShow()
+        }
+        else{
+            let data = {
+                FIRST_NAME:modalFirstName,
+                LAST_NAME:modalLastName,
+                ID:modalID,
+                MOBILE_PHONE:modalMobileNumber
+            }
+
+            axios.post(`${process.env.REACT_APP_API_BASE_URL}/driver/update`,data)
+            .then((res)=>{
+                dispatch(fetchdrivers(res.data));
+                setDrivers(res.data)
+            })
+            handleModalClose();
+        } 
     }
-    
+    const handleUpdateModal = (val) => {
+        setModalshow(true);
+        setModaltitle('update driver');
+        setModalFirstName(val.FIRST_NAME);
+        setModalLastName(val.LAST_NAME);
+        setModalMobileNumber(val.MOBILE_PHONE);
+        setModalID(val.ID)
+    } 
+    const [modalFirstName,setModalFirstName] =useState();
+    const [modalLastName,setModalLastName] =useState();
+    const [modalMobileNumber,setModalMobileNumber] =useState();
+    const [drivers,setDrivers] = useState(null);
+    const add_new_driver = () => {
+        handleModalClose();
+        let temp={}
+        temp.FIRST_NAME=modalFirstName;
+        temp.LAST_NAME=modalLastName;
+        temp.MOBILE_PHONE = modalMobileNumber;
+        axios.post(`${process.env.REACT_APP_API_BASE_URL}/driver/add`,data)
+            .then((res)=>{
+                dispatch(fetchdrivers(res.data));
+                setDrivers(res.data)
+            })       
+    }
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        if(!drivers){
+            axios.get(`${process.env.REACT_APP_API_BASE_URL}/driver/get`)
+            .then((res)=>{
+                dispatch(fetchdrivers(res.data));
+                setDrivers(res.data)
+            })
+        }
+    },[])
     return (
         <div className='dashboard'>
             <Sidebar/>
@@ -39,7 +91,7 @@ const Driver = () => {
                         <div className='dropdown'>
                             <div className='nav-item'>
                                 <div className='search'>
-                                    <input type="text" value={searchKey} onChange={handleSearchChange} placeholder="search.."/>
+                                    <input type="text" value={searchKey} onChange={(e)=>setSearchKey(e.target.value)} placeholder="search.."/>
                                     <i className='fa fa-search'></i>
                                 </div>
                             </div>
@@ -84,15 +136,15 @@ const Driver = () => {
                                                 <th></th>
                                             </tr>
                                             {
-                                            drivers.map((val, key) => {
+                                            drivers?.map((val, key) => {
                                             return (
                                                 <tr key={key}>
                                                     <td><img src={val.pic} alt="image44"></img></td>
-                                                    <td>{val.name}</td>
-                                                    <td>{val.number}</td>
+                                                    <td>{val.FIRST_NAME} {val.LAST_NAME}</td>
+                                                    <td>{val.MOBILE_PHONE}</td>
                                                     <td><h6 className={val.availability}>{val.availability}</h6></td>
                                                     <td><h6 className='delete'>delete</h6></td>
-                                                            <td><h6 className='update' onClick={handleUpdateModal}>update</h6></td>
+                                                    <td><h6 className='update' onClick={()=>handleUpdateModal(val)}>update</h6></td>
                                                 </tr>
                                             )
                                             })}
@@ -168,27 +220,28 @@ United States</h6>
                            <div className='modal-right'>
                                <div className='input-wrapper'>
                                    <h5>First Name</h5>
-                                   <input type="text" value="GMC SUV"></input>                 
+                                   <input type="text" value={modalFirstName} onChange={(e)=>setModalFirstName(e.target.value)}></input>
+                                                    
                                </div>
                                <div className='input-wrapper'>
                                     <h5>Last Name</h5>
-                                    <input type="text" value="$120"></input>
+                                    <input type="text" value={modalLastName} onChange={(e)=>setModalLastName(e.target.value)}></input>
                                </div>
                                <div className='input-wrapper'>
                                     <h5>Phone Numberr</h5>
-                                    <input type="text" value="8"></input>
+                                    <input type="text" value={modalMobileNumber} onChange={(e)=>setModalMobileNumber(e.target.value)}></input>
                                </div>
                                <div className='input-wrapper'>
                                     <h5>Location</h5>
-                                    <input type="text" value="5"></input>
+                                    <input type="text" value='@120'></input>
                                </div>
-                               <h6 className='update' onClick={nexthandleModalShow}>Next</h6>
+                               <h6 className='update' onClick={next}>{modaltitle === "add new driver" ? 'Next' : 'UPDATE'}</h6>
                            </div>
                        </Col>
                    </Row>
                 </Modal.Body>
             </Modal>
-            <Modal className="modal" show={nextmodalshow} dialogClassName="modal-100w" onHide={nexthandleModalClose}>
+            <Modal className="modal" style={{display:'block'}} show={nextmodalshow} dialogClassName="modal-100w" onHide={nexthandleModalClose}>
                 <Modal.Body style={{paddingBottom:'50px'}}>
                     <Row>
                         <Col md={12}>
@@ -234,7 +287,7 @@ United States</h6>
                    </Row>
                    <Row>
                        <Col md={12} style={{width:'80%',margin:'auto', maginBottom:'50px',marginTop:'50px'}}>
-                            <h6 className='update' style={{marginBottom:'50px', marginTop:'50px'}} onClick={nexthandleModalClose}>Add driver</h6>
+                            <h6 className='update' style={{marginBottom:'50px', marginTop:'50px'}} onClick={add_new_driver}>Add driver</h6>
                        </Col>
                    </Row>
                 </Modal.Body>

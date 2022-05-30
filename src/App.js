@@ -18,7 +18,13 @@ import { Vehicle } from './components/admin/pages/vehicle'
 import { Booking } from './components/admin/pages/booking'
 import { BookRider } from './components/admin/pages/book_rider'
 import { Driver } from './components/admin/pages/driver'
+import {getBearer} from './auth';
 import { Notification as ClientNotification } from './components/pages/notification'
+import axios from 'axios'
+
+import PrivateRoute from './PrivateRoute';
+axios.defaults.headers.common['x-access-token'] = getBearer();
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 export const App = () => (
     <Provider store={createAppStore()}> 
         <Routes>     
