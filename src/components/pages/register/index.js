@@ -23,7 +23,6 @@ const Register = () => {
              setErrors(response.data.message);
              
             <Navigate to="/login"/>
-            debugger
         })
         .catch( error => {
             console.log(error)

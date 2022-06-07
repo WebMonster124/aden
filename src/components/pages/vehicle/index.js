@@ -16,27 +16,30 @@ import { useDispatch, useSelector } from 'react-redux'
 import  {select_vehicle}  from '../../../redux/actions/VehiclestateActions';
 import axios from 'axios';
 import  {save_temp_booking}  from '../../../redux/actions/BookingstateActions';
+import Status_board from '../../layout/Status_board';
 const Vehicles = () => {    
     const temp = useSelector(state => state.bookingState.temp_booking);
-    const [startDate, setStartDate] = useState(new Date());
-    const [time, setTime] = useState(new Date().toLocaleTimeString())
+    const [startDate, setStartDate] = useState(temp.pick_date? temp.pick_date :"");
+    const [time, setTime] = useState(temp.pick_time?temp.pick_time:"")
     const [selectFilterOption, setSelectFilterOption] = useState(null);
     const [selectedSortOption, setSelectedSortOption] = useState(null);
     const [selectedCar, setSelectedCar] = useState(0);
     const [filtershow,setFilterShow] =  useState(false);
-    const [selectedOption, setSelectedOption] = useState(temp.pick_location);
-    const [dropoff,setDropoff] =useState(temp.dropoff_location);
-    const [passenger, setPassenger] = useState( temp.passenger? temp.passenger:3);
-    const [children, setChildren] = useState(temp.children?temp.children:3);
-    const [bag, setBag] = useState(temp.bag? temp.bag:3);
-    const [stop,setStop]=useState(temp.stop);
+    const [selectedOption] = useState(temp.pick_location);
+    const [dropoff] =useState(temp.dropoff_location);
+    const [passenger] = useState( temp.passenger? temp.passenger:3);
+    const [children] = useState(temp.children?temp.children:3);
+    const [bag] = useState(temp.bag? temp.bag:3);
+    const [stop]=useState(temp.stop?temp.stop:[]);
     const dispatch = useDispatch();
+    const [carNames,setCarNames] = useState([]);
     const sort_options = [
         {value:0,label:'DES'},
         {value:1,label:'ASC'}
     ]
     const appy_sort = (vehicle_data) => {
-        let temp = vehicle_data.filter((val)=>val.Name === selectedOption);
+        debugger
+        let temp = vehicle_data.filter((val)=>val.name === selectFilterOption.label);
         temp.sort()
         if (selectedSortOption)
             temp.reverse()
@@ -46,12 +49,22 @@ const Vehicles = () => {
         axios.get(`${process.env.REACT_APP_API_BASE_URL}/vehicle/get`)
         .then((res)=>{
             dispatch(select_vehicle(res.data));
-            setVehicles(res.data)
+            setVehicles(res.data);
+            let temp=[];
+            res.data ? res.data.map((val)=>{
+                debugger
+                temp.push({label:val.name,value:val.id})
+            }):""
+            setCarNames(temp);
         })
+
     },[])
+    useEffect(()=>{
+        console.log(carNames)
+    },[carNames])
     const vehicle_data = useSelector(state => state.vehicleState.vehicle);
     const [vehicles,setVehicles] = useState(vehicle_data)
-    const car_names=[{value:"GMS_SUV",label:"GMS_SUV"},{value:"Sedan",label:'Sedan'},{value:"Chevrolate",label:"Chevrolate"},{value:"Rolls Royee",label:"Rolls Royee"}];
+    
     const clickPayment=((tm)=>{
         
         console.log('@@@@@',selectedCar)
@@ -63,75 +76,10 @@ const Vehicles = () => {
            <Header />
             <div className="main">            
                 <Container>
-                    <div className='status-board'>
-                        <div className='where-when'>Where and When</div>
-                        <div className='where-when-status'></div>
-                        <div className='vehicle'>Vehicle Selection</div>
-                        <div className='vehicle-status'></div>
-                        <div className='payment-confirmation'>Payment & Confirmation</div>
-                    </div>
+                    <Status_board/>
                     <div className='main-wrap vehicle-wrap'>
                         <Row>
-                            <Col md = {5}>
-                                <div className='journey-vehicle'>
-                                    <div className='journey'>
-                                        <div className='header-wrap d-flex'>
-                                            <div className='header-text'>Journey</div>
-                                            <div className='date-time-wrapper'>
-                                                <div className='date d-flex align-items-center'>
-                                                    <i className="fa fa-calendar-days px-2"></i>
-                                                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)}/>
-                                                </div>
-                                                <div className='time d-flex align-items-center'>
-                                                    <i className="fa fa-clock px-2"></i>
-                                                    <input type="time" value={time} onChange={(time) => setTime(time)}/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='pickup'>
-                                            <div className='title'>Pickup:</div>
-                                            <p>{selectedOption}</p>
-                                        </div>                            
-                                        <div className='stop d-flex align-items-center justify-content-between'>
-                                            <div className='stop-location w-100'>
-                                                <div className='title'>Stop1:</div>
-                                                <p>{stop}</p>
-                                            </div>
-                                        </div>                            
-                                        <div className='dropoff'>
-                                            <div className='title'>Dropoff:</div>
-                                                <p>{dropoff}</p>                            
-                                        </div>
-                                        <div className='passenger-board'>
-                                            <div className='passenger'>
-                                                <div className='label'>Passenger</div>
-                                                <div className='count'>{passenger}</div>
-                                            </div>
-                                            <div className='childrens'>
-                                                <div className='label'>Childrens</div>
-                                                <div className='count'>{children}</div>
-                                            </div>
-                                            <div className='bags'>
-                                                <div className='label'>Bags</div>
-                                                <div className='count'>{bag}</div>
-                                            </div>
-                                        </div>
-                                        <div className='vehicle'>
-                                            <div className='label'>Vehicle</div>
-                                            <div className='name'>{selectedCar.name}</div>
-                                        </div>
-                                        <div className='estimated-fair'>
-                                            <div className='label' >Estimated Fair</div>
-                                            <div className='cost'>{selectedCar.rate}</div>
-                                        </div>
-                                    </div>
-                                    <div className='btns'>
-                                        <div className="back"><Link to='/home'>Go Back</Link></div>
-                                        <div className="payment" ><Link to='/payment' onClick={()=>clickPayment(temp)}>Continue to Payment</Link></div>                        
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col md = {7}>
+                        <Col md = {6}>
                                 <div className='vehicles'>
                                     <div className='header-wrap'>
                                         <div className='d-flex justify-content-between align-items-center'>
@@ -146,8 +94,8 @@ const Vehicles = () => {
                                                 <div className='title'>Vehicle type:</div>
                                                 <Select
                                                     defaultValue={selectFilterOption}
-                                                    onChange={(e) => setSelectFilterOption(e.target.value)}
-                                                    options={car_names}                                            
+                                                    onChange={(e) => setSelectFilterOption(e)}
+                                                    options={carNames}                                            
                                                     isSearchable="true"
                                                     className='w-100'
                                                 />
@@ -187,6 +135,70 @@ const Vehicles = () => {
                                     })}                           
                                 </div>
                             </Col>
+                            <Col md = {6}>
+                                <div className='journey-vehicle'>
+                                    <div className='journey'>
+                                        <div className='header-wrap d-flex'>
+                                            <div className='header-text'>Journey</div>
+                                            <div className='date-time-wrapper'>
+                                                <div className='date d-flex align-items-center'>
+                                                    <i className="fa fa-calendar-days px-2"></i>
+                                                    <p>{startDate}</p>
+                                                </div>
+                                                <div className='time d-flex align-items-center'>
+                                                    <i className="fa fa-clock px-2"></i>
+                                                    <p>{time}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='pickup'>
+                                            <div className='title'>Pickup:</div>
+                                            <p>{selectedOption}</p>
+                                        </div> 
+                                        {stop.map((val,index)=>{
+                                            return(
+                                                <div className='stop d-flex align-items-center justify-content-between'>
+                                                    <div className='stop-location w-100'>
+                                                        <div className='title'>Stop{index+1}:</div>
+                                                        <p>{val}</p>
+                                                    </div>
+                                                </div> 
+                                            )
+                                        })}                           
+                                        <div className='dropoff'>
+                                            <div className='title'>Dropoff:</div>
+                                                <p>{dropoff}</p>                            
+                                        </div>
+                                        <div className='passenger-board'>
+                                            <div className='passenger'>
+                                                <div className='label'>Passenger</div>
+                                                <div className='count'>{passenger}</div>
+                                            </div>
+                                            <div className='childrens'>
+                                                <div className='label'>Childrens</div>
+                                                <div className='count'>{children}</div>
+                                            </div>
+                                            <div className='bags'>
+                                                <div className='label'>Bags</div>
+                                                <div className='count'>{bag}</div>
+                                            </div>
+                                        </div>
+                                        <div className='vehicle'>
+                                            <div className='label'>Vehicle</div>
+                                            <div className='name'>{selectedCar.name}</div>
+                                        </div>
+                                        <div className='estimated-fair'>
+                                            <div className='label' >Estimated Fair</div>
+                                            <div className='cost'>{selectedCar.rate}</div>
+                                        </div>
+                                    </div>
+                                    <div className='btns'>
+                                        <div className="back"><Link to='/home'>Go Back</Link></div>
+                                        <div className="payment" ><Link to='/payment' onClick={()=>clickPayment(temp)}>Continue to Payment</Link></div>                        
+                                    </div>
+                                </div>
+                            </Col>
+                            
                         </Row> 
                     </div>                                     
                 </Container>    

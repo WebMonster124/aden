@@ -18,7 +18,6 @@ const Notification = () => {
         
     }
     useEffect(()=>{
-        debugger
         axios.get(`${process.env.REACT_APP_API_BASE_URL}/notification/get`)
         .then((res)=>{
             dispatch(select_notification(res.data));

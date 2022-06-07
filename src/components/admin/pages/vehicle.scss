@@ -18,7 +18,7 @@ table.vehicle{
     }
     
 }
-@media (min-width: 576px){
+@media (max-width: 576px){
     .modal-dialog{
         max-width: 767px !important;
         min-height: 536px !important;

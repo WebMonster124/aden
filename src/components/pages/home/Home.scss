@@ -1,163 +1,128 @@
+.container{
+    @media screen and (min-width:1400px){
+        max-width:1540px  !important;
+    }
+}
+input{
+    border:0;
+    background-color: transparent;
+    height: 100%;
+    outline: 0;
+    margin-left:15px ;
+}
+.btdJgk{
+    text-align: unset !important;
+    input{
+        width:100%;
+    }
+}
 .home{
-    .modal-body {
-        padding: 0 !important;
-        display: flex;
+    *{
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 22px;
+    }
+}
+.modal-body {
+    padding: 0 !important;
+    width: 100%;
+    .header-wrap {        
+        padding: 80px 100px;
+        border-right: 1px solid #ECE3E0;
         width: 100%;
-        .header-wrap {        
-            padding: 60px 50px;
-            border-right: 1px solid #ECE3E0;
-            width: 100%;
-            height: 100%;
-            .title {
-                font-family: 'Lato';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 32px;
-                line-height: 38px;
-                color: #000000;            
-            }
-            .description {
+        height: 100%;
+        .title {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 38px;
+            color: #000000;            
+        }
+        .description {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 24px;
+            color: #000000;
+            margin-top: 24px;
+            h6{
                 font-family: 'Lato';
                 font-style: normal;
                 font-weight: 400;
                 font-size: 18px;
                 line-height: 24px;
-                color: #000000;
-                margin-top: 24px;
-                h6{
-                    font-family: 'Lato';
-                    font-style: normal;
-                    font-weight: 400;
-                    font-size: 18px;
-                    line-height: 24px;
-                    /* or 133% */
-    
-    
-                    color: rgb(0, 0, 0);
-                    span{
-                        color: rgba(0, 0, 0, 0.6);
-                    }
-                }
-            }
-    
-            .btns {
-                margin-top: 80px;
-                display:flex;
-                .confirm {                
-                    width: 300px;
-                    height: 50px;                
-                    background: #F4730E;
-                    border-radius: 12px;
-                    border: none;
-                    color: white;
-                    font-size: 18px;
-                }
-                .edit {
-                    font-family: 'Lato';
-                    font-style: normal;
-                    font-weight: 700;
-                    font-size: 18px;
-                    line-height: 22px;
-                    color: #F4730E;
-                    border: none;
-                    margin-left: 24px;
-                    background-color: white;
+                /* or 133% */
+
+
+                color: rgb(0, 0, 0);
+                span{
+                    color: rgba(0, 0, 0, 0.6);
                 }
             }
         }
-    
-        .content-wrap {
-            padding: 60px 40px;
-            width: 100%;
-            .street, .city, .state, .postalcode, .country {    
-                width: 100%;                  
-                height: 60px; 
-                background: #F2F2F2;           
-                border-radius: 5px;
-                padding: 20px 26px;
-                margin-bottom: 14px;
-    
-                .label {
-                    font-family: 'Lato';
-                    font-style: normal;
-                    font-weight: 700;
-                    font-size: 16px;
-                    line-height: 19px;
-                    color: #000000;
-                    margin-right: 10px;
-                }
-    
-                input {
-                    border: none !important;
-                    background: #F2F2F2;
-                    outline: 0;
-                    box-shadow: none;
-                }
+
+        .btns {
+            margin-top: 80px;
+            display:flex;
+            justify-content: space-between;
+            .confirm {                
+                width: 300px;
+                height: 50px;                
+                background: #F4730E;
+                border-radius: 12px;
+                border: none;
+                color: white;
+                font-size: 18px;
+            }
+            h6.update{
+                padding:14px 81px;
+            }
+            .edit {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 22px;
+                color: #F4730E;
+                border: none;
+                margin-left: 24px;
+                background-color: white;
             }
         }
     }
-    .status-board {
-        position: relative;
-        background: #673622;
-        border-radius: 10px;
-        height: 109px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        margin-top: 60px;
-        padding:10px;
-        .where-when{
-            @media screen and (max-width:475px){
-                border-bottom: 3px solid white;
-            }
-        }
-        .where-when, .vehicle-select, .payment-confirmation {
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 24px;
-            line-height: 29px;
-            position: relative;
-            color: #FFFFFF;
-            text-align: center;
-            @media only screen and (max-width:992px){
-                font-size: 18px;
-            }
-            @media screen and (max-width:475px){
-                font-size: 14px;
-            }
-        }
 
-        .where-when-status, .vehicle-status {
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 50px;
-            width: 15%;
-            height: 5px;
-            position: relative;
-            @media only screen and (max-width:992px){
-                flex-direction: column;
-            }
-            @media screen and (max-width:475px){
-                width: 0%;
-            }
-        }
+    .content-wrap {
+        padding: 60px 40px;
+        width: 100%;
+        .street, .city, .state, .postalcode, .country {    
+            width: 100%;                  
+            height: 60px; 
+            background: #F2F2F2;           
+            border-radius: 5px;
+            padding: 20px 26px;
+            margin-bottom: 14px;
 
-        .where-when-status::after {
-            content: "";
-            background: #FFFFFF;
-            border-radius: 50px;
-            width: 50%;
-            height: 5px;
-            position: absolute;
-            
-        }
-        .vehicle-status::after{
-            content: "";
-            background: #FFFFFF;
-            border-radius: 50px;
-            width: 0%;
-            height: 5px;
-            position: absolute;
+            .label {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 19px;
+                color: #000000;
+                margin-right: 10px;
+            }
+
+            input {
+                width: 100%;
+                border: none !important;
+                background: #F2F2F2;
+                outline: 0;
+                box-shadow: none;
+            }
         }
     }
 }
@@ -170,6 +135,8 @@
         width: 100%;
     }
 }
+
+
 .passenger-control-btn {
     width: 100%;
     .passenger-control {
@@ -207,8 +174,12 @@
                     line-height: 19px;
                     color: #000000;
                 }
-
                 .btns {
+                    height: 100%;
+                    button{
+                        height: 100%;
+                        padding: 0px 11px;
+                    }
                     .minus {
                         border: 1px solid #673622;
                         border-radius: 3px;
@@ -251,13 +222,11 @@
     }
 }  
 .control-board {
-    
     gap: 40px;
     justify-content: space-between;
     position: relative;
-    bottom: 170px;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-top:40px;
+   
     @media screen and (max-width:1200px) {
         padding:0px;
     }
@@ -274,50 +243,30 @@
         @media screen and (max-width:475px){
             padding:10px 5px;
         }
-        ul.address li button{
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 18px;
-            line-height: 22px;
-            color: #000000;
-            opacity: 1;
-            margin-right: 5px;
-            border: 0;
-            padding-bottom: 20px;
-            @media screen and (max-width:1200px){
-                padding: 10px 5px;
-                margin-right: 0px;
-            }
-            &.active{
-                border-bottom: 1px solid rgba(0,0,0,0.6);
-                font-weight: 700;
-            }
-        }
-        ul.address{
-            margin-top: 5px;
-            @media only screen and (max-width: 992px) {
-                flex-direction: column;
-                }
-            li{
-               
-            }
-            &.nav.nav-tabs{
-                border-bottom: 1px solid #EEE7E4;
-            }
+        h5.active{
+            background-color: black;
+            color: white;
         }
         .control-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-bottom:30px;
             border-bottom: 1px solid #EEE7E4;
-            position: absolute;
-            right: 40px;
             @media screen and (max-width:992px){
                 right:20px
             }
             @media screen and (max-width:475px){
                 right: 10px;
+            }
+            .pickup-method{
+                display: flex;
+                h5{
+                    border: 1px solid;
+                    padding:12px 13px;
+                    margin-bottom: 0px;
+                    margin-right: 14px;
+                }
             }
             ul.nav {
                 .nav-item {
@@ -395,7 +344,7 @@
 }
 
 .modal-dialog {
-    max-width: 1320px !important;
+    max-width: 1290px !important;
 }
 
 .control-body {
@@ -404,6 +353,7 @@
     @media screen and (max-width:772px){
         padding-left: 25px;
     }
+    
     .pickup {
          position: relative;
          display: flex;
@@ -770,3 +720,28 @@
      }
  }
 
+.home{
+    .hour-min-input{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        .hour-input{
+            border:1px solid rgba(0, 0, 0, 0.6);
+            display:flex;
+            margin-right:10px;
+            h5{
+                padding:10px 15px;
+                background-color: #F2F2F2;
+                height: 100%;
+                margin-bottom: 0px;
+            }
+            input{
+                border:none !important;
+                width: 200px;
+                padding:10px 15px;
+            }
+        }
+        
+
+    }
+}

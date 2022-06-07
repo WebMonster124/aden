@@ -1,0 +1,103 @@
+.status-board {
+    position: relative;
+    background: #673622;
+    border-radius: 10px;
+    height: 109px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 60px;
+    padding:10px;
+    .where-when, .vehicle-select, .payment-confirmation{
+        *{
+            opacity: 0.6;
+        }
+        >div{
+            display: flex;
+            justify-content: center;
+        }
+        h5{
+            color: #673622;
+            background-color: white;
+            padding: 2px;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 19px;
+            
+            color: #673622;
+            
+        }
+    }
+    .where-when, .vehicle-select, .payment-confirmation {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+        position: relative;
+        color: #FFFFFF;
+        text-align: center;
+        @media only screen and (max-width:992px){
+            font-size: 18px;
+        }
+        @media screen and (max-width:475px){
+            font-size: 14px;
+        }
+    }
+
+    .where-when-status, .vehicle-status {
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 50px;
+        width: 15%;
+        height: 5px;
+        position: relative;
+        @media only screen and (max-width:992px){
+            flex-direction: column;
+        }
+        @media screen and (max-width:475px){
+            width: 0%;
+        }
+    }
+
+    .where-when-status::after {
+        content: "";
+        background: #FFFFFF;
+        border-radius: 50px;
+        width: 50%;
+        height: 5px;
+        position: absolute;
+        
+    }
+    .vehicle-status::after{
+        content: "";
+        background: #FFFFFF;
+        border-radius: 50px;
+        width: 0%;
+        height: 5px;
+        position: absolute;
+    }
+}
+.home{
+    .where-when{
+        *{
+            opacity: 1;
+        }
+    }
+}
+.client-vehicle{
+    .where-when{
+        *{
+            opacity: 1;
+        }
+    }
+    .vehicle-select{
+        *{
+            opacity: 1;
+        }
+    }
+}
