@@ -5,7 +5,6 @@ import Toggle from 'react-toggle';
 import "react-toggle/style.css";
 import Randomstring from "randomstring";
 import GoogleMapReact from 'google-map-react';
-import Marker from './Marker';
 import {
     Nav,
     Container,
@@ -14,6 +13,7 @@ import {
     Row,
     Col
 } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next'
 
 import { Header } from '../../layout/header';
 import AutoComplete from './Autocomplete';
@@ -34,22 +34,17 @@ const Home = () => {
     const [modalShow, setModalShow] = useState(false);
     const [passenger, setPassenger] = useState( temp.passenger? temp.passenger:3);
     const [children, setChildren] = useState(temp.children?temp.children:3);
-    const [bag, setBag] = useState(temp.bag? temp.bag:3);
+    const [bag, setBag] = useState(temp.bags? temp.bags:3);
     const [key, setKey] = useState('address');
-    const [methodkey, setMethodKey] = useState('transfer');
+    const [methodkey, setMethodKey] = useState(1);
     const [startTime, setStartTime] = useState(temp.pick_time);
     const [dropoff,setDropoff] =useState(temp.dropoff_location);
-   // const [stop,setStop]=useState(temp.stop?temp.stop:[]);
     const [stop,setStop]=useState([]);
     const [mapInstance, setMapInstance] =  useState();
     const [mapApi,setMapApi] =useState();
     const [dropoffAddress,setDropoffAddress]=useState();
     const [pickupAddress,setPickupAddress]=useState();
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
-    ];
+    const { t } = useTranslation(); 
     const _onClick = (value) => {
         // setLat(value.lat)
         // setLng(value.lng)
@@ -169,16 +164,13 @@ const Home = () => {
 
     }
   
-    const [geoCoder,setGeoCoder]=useState();
     const [center,setCenter]=useState([]);
-    const [address,setAddress]=useState();
     const [draggable,setDraggable]=useState(true);
     const [pickuplat,setPickupLat]=useState();
     const [dropofflat,setDropoffLat] = useState();
     const [pickuplng,setPickupLng]=useState();
     const [dropofflng,setDropoffLng]=useState();
     const [stopplace,setStopPlace] = useState([]);
-    const [place,setPlaces]=useState();
     const [zoom,setZoom]=useState();
     const [mapApiLoaded,setMapapitLoaded] = useState(false)
     
@@ -205,12 +197,16 @@ const Home = () => {
     const dispatch = useDispatch();
     const select_vehicle = (() => {
         let temp_booking={}
-        temp_booking.pick_date = startDate;
-        temp_booking.pick_time = startTime;
+        temp_booking.pickup_date = startDate;
+        temp_booking.pickup_time = startTime;
         temp_booking.pick_location = selectedOption;
         temp_booking.passenger =  passenger;
         temp_booking.children = children;
-        temp_booking.bag = bag;
+        temp_booking.bags = bag;
+        temp_booking.trip_duration_hour = hours;
+        temp_booking.trip_duration_min = mins;
+        temp_booking.key = key;
+        temp_booking.booking_type_id=methodkey;
         temp_booking.dropoff_location = dropoff;
         temp_booking.stop = stop
         temp_booking.isSwitchOn = isSwitchOn;
@@ -227,6 +223,17 @@ const Home = () => {
     useEffect(()=>{
         setCurrentLocation();
     },[])
+    const postNotification = (() => {
+        let data={};
+        console.log('clicked')
+        data.data="test notification"
+        data.is_read = 0;
+        axios.post(`${process.env.REACT_APP_API_BASE_URL}/notification/create`,data)
+        .then((res)=>
+        {
+            console.log(res)
+        })
+    })
     useEffect(()=>{
         
         if (login_status){
@@ -243,66 +250,81 @@ const Home = () => {
                 <Container>
                     
                     <Status_board/>
-                    <Row>
-                        <Col md={6}>
+                    <div className='home-row'>
                             <div className='control-board'>
                                 <div className='location-control'>
                                     <div className='control-header'>
                                         <div className='pickup-method'>
-                                            <h5 className={key == 'address'? "active":''} onClick={()=>{setKey("address")}}>Address</h5>
-                                            <h5 className={key == 'airport'? "active":''} onClick={()=>{setKey("airport")}}>Airport</h5>
-                                            <h5 className={key == 'landmark'? "active":''} onClick={()=>{setKey("landmark")}}>Landmark</h5>
+                                            <h5 className={key == 'address'? "active":''} onClick={()=>{setKey("address")}}><img src={key == 'address'? "/images/mark/black-location-tick.png":"/images/mark/location-tick.png"} alt="location_tick" width="17.25px" height="20px"/>{t('Address')}</h5>
+                                            <h5 className={key == 'airport'? "active":''} onClick={()=>{setKey("airport")}}><img src={key == 'airport'? "/images/mark/black-airplane.png":"/images/mark/white-airplane.png"} alt="airplane" width="20.25px" height="20.6px"/>{t('Airport')}</h5>
+                                            <h5 className={key == 'landmark'? "active":''} onClick={()=>{setKey("landmark")}}><img src={key == 'landmark'? "/images/mark/routing-2.png":"/images/mark/routing-2.png"} alt="airplane" width="24px" height="24px"/>{t('Landmark')}</h5>
                                         </div>
                                         <div className='control-btns'>
                                             <Nav defaultActiveKey="/#" as="div">
-                                                    <h5 className={methodkey === "transfer"? 'nav-link active':'nav-link'} onClick={()=>{setMethodKey("transfer")}}><i className="fa fa-location-dot"></i>Transfer</h5>                                              
-                                                    <h5 className={methodkey === "hourly"? 'nav-link active':'nav-link'} onClick={()=>{setMethodKey("hourly")}}><i className="fa fa-clock"></i>Hourly</h5>
+                                                    <h5 className={methodkey === 1 ? 'nav-link active':'nav-link'} onClick={()=>{setMethodKey(1)}}><i className="fa fa-location-dot"></i>{t('Transfer')}</h5>                                              
+                                                    <h5 className={methodkey === 2 ? 'nav-link active':'nav-link'} onClick={()=>{setMethodKey(2)}}><i className="fa fa-clock"></i>{t('Hourly')}</h5>
                                             </Nav>
                                         </div>
                                     </div>
                                     <div className='control-body'>
                                         <div className='pickup'>
-                                            <div className='title'>Pickup:</div>
+                                            <div className='title'>{t('Pickup')}:</div>
                                             {mapApi?<AutoComplete map={mapInstance} mapApi={mapApi} setValue={setSelectedOption} addplace={addPickupPlace} type={'pickup'}/>:''}
                                             <div className='check' onClick={() => setModalShow(true)} ><img src={LocationCheck} alt="location-check" /></div>
                                         </div>
-                                        {stopNum.map((item, index) => (
+                                        { key === 'address'?
+                                         stopNum.map((item, index) => (
                                             <div className='stop d-flex align-items-center justify-content-between' key={item.id}>
                                                 <div className='stop-location w-100'>
-                                                    <div className='title'>Stop{index + 1}:</div>
+                                                    <div className='title'>{t('Stop')}{index + 1}:</div>
                                                     {mapApi?<AutoComplete map={mapInstance} mapApi={mapApi} value={stop} setValue={setStop} addplace={addStopPlace} id={index} type={'stop'}/>:''}
-                                                    <div className='check' onClick={() => setModalShow(true)} > <img src={LocationCheck} alt="location-check" /> </div>
+                                                    <div className='check'><img src={LocationCheck} alt="location-check" /></div>
                                                 </div>
                                                 
                                                 <div className='trash' onClick={() => deleteStop(item.id)}><img src={Trash} alt="trash" /></div>
                                             </div>
-                                        ))}
+                                        )):''}
+                                        {
+                                            key === 'airport'?
+                                            <div className='d-flex airport'>
+                                                <div className= "input-wrapper">
+                                                    <input type="text" placeholder='Select airline'></input>
+                                                </div>
+                                                <div className= "input-wrapper">
+                                                    <input type="number" placeholder='Flight number'></input>
+                                                </div>
+                                                <div className= "input-wrapper">
+                                                    <input type="time" placeholder='arrival time'></input>
+                                                </div>
+                                            </div>:''
+                                        }
                                         <div className='dropoff'>
-                                            <div className='title'>Dropoff:</div>
+                                            <div className='title'>{t('dropoff')}:</div>
                                              {mapApi?<AutoComplete map={mapInstance} mapApi={mapApi} setValue={setDropoff} addplace={addDropoffPlace} type={'dropoff'}/>:''}
                                             <div className='check'><img src={LocationCheck} alt="location-check" /></div>
                                         </div>
                                         <div className='field-wrap'>
-                                            <div className='ride-now'>RIDE NOW
+                                            <div className='ride-now'>{t('RIDE_NOW')}
                                                 <Toggle
                                                     defaultChecked={isSwitchOn}
                                                     icons={false}
                                                     onChange={() => switch_onChange_handle()}
                                                 />
                                             </div>
-                                            <div className='add-stop' onClick={() => addStop()}><i className="fa fa-plus"></i>Add Stop</div>
+                                            <div className='add-stop' onClick={() => addStop()}><i className="fa fa-plus"></i>{t('Add_Stop')}</div>
                                         </div>
+                                            {!isSwitchOn?
                                             <div className='date-time'>
                                                 <div className='date'>
-                                                    <div className='title'>Pickup date:</div>
+                                                    <div className='title'>{t('Pickup_date')}:</div>
                                                     <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                                                 </div>
                                                 <div className='time'>
-                                                    <div className='title'>Pickup time:</div>
+                                                    <div className='title'>{t('Pickup_time')}:</div>
                                                     <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
                                                 </div>
-                                            </div>
-                                            {isSwitchOn ?
+                                            </div>:''}
+                                            {methodkey === 2 ?
                                                 <div className="hour-min-input">
                                                     <div className='hour-input'>
                                                         <h5 onClick={()=>{ parseInt(hours) > 0 ? setHours(hours-1):setHours(0)}}>-</h5>
@@ -323,7 +345,7 @@ const Home = () => {
                                         <Row>
                                             <Col md={4}>
                                                 <div className='passenger'>
-                                            <div className='label'>Passengers</div>
+                                            <div className='label'>{t('Passengers')}</div>
                                             <div className='body'>
                                                 <span className='count'>{passenger}</span>
                                                 <div className='btns'>
@@ -336,7 +358,7 @@ const Home = () => {
                                             </Col>
                                             <Col md={4}>
                                                 <div className='childrens'>
-                                            <div className='label' onClick={select_vehicle}>Childrens</div>
+                                            <div className='label' onClick={select_vehicle}>{t('Children')}</div>
                                             <div className='body'>
                                                 <span className='count'>{children}</span>
                                                 <div className='btns'>
@@ -348,7 +370,7 @@ const Home = () => {
                                             </Col>
                                             <Col md="4">
                                                 <div className='bags'>
-                                            <div className='label'>Bags</div>
+                                            <div className='label'>{t('Bags')}</div>
                                             <div className='body'>
                                                 <span className='count'>{bag}</span>
                                                 <div className='btns'>
@@ -361,12 +383,10 @@ const Home = () => {
                                             </Col>
                                         </Row>
                                     </div>
-                                    <Link to='/vehicles' className='select-vehicle' onClick ={select_vehicle} >Select Vehicle</Link>
+                                    <Link to='/vehicles' className='select-vehicle' onClick ={select_vehicle} >{t('Select_Vehicle')}</Link>
                                 </div>
                                 
                             </div>
-                        </Col>
-                        <Col md={6}>
                             <div className='location-map'>
                                 <GoogleMapReact
                                     center={center? center:[0,0]}
@@ -393,10 +413,9 @@ const Home = () => {
                                     yesIWantToUseGoogleMapApiInternals
                                     onGoogleApiLoaded={({ map, maps }) => apiHasLoaded(map, maps)}
                                 >
-                                    </GoogleMapReact>
+                                </GoogleMapReact>
                             </div>
-                        </Col>
-                    </Row>
+                    </div>
                 </Container>
             </div>
         </div>

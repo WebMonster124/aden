@@ -4,7 +4,7 @@ export const SELECT_NOTIFICATION = 'SELECT_NOTIFICATION';
 export const TEMP_NOTIFICATION = 'TEMP_NOTIFICATION';
 export const UPDATE_NOTIFICATION = 'UPDATE_NOTIFICATION';
 export const DELETE_NOTIFICATION = 'DELETE_NOTIFICATION';
-
+export const NEW_NOTIFICATION = 'NEW_NOTIFICATION';
 export function AddBooking(notification) {
     return {
         type: ADD_NOTIFICATION,
@@ -17,6 +17,12 @@ export function select_notification(notification){
             payload:notification
         }  
    
+}
+export function new_notification(notification){
+    return {
+        type:NEW_NOTIFICATION,
+        payload:notification
+    }
 }
 export function update_notification(notification){
     return {

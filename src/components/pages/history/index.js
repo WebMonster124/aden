@@ -1,217 +1,237 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {     
     Container,Row, Col
 } from 'react-bootstrap';
 import { Header } from '../../layout/header';
 import './history.scss';
 import Filters from '../../../images/Vector.png';
-import Select from 'react-select';
-import  history_data  from './history_data.js'
+import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 import rider_status from './rider_status_data.js'
+import axios from 'axios';
+import Map from './Map';
+const googleMapsApiKey = "AIzaSyAygoWDQ-IvoehtL-nJ0qVcHnUkVLsN6Ps";
 const History = () => {    
-    const [selectedOption, setSelectedOption] = useState(null);
     const [selectedId,setSelectedId] = useState(0)
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
-    ];
-    const handleChange = (e) => {        
-        setSelectedOption(e.value)
-    }
-    
+    const [ historyData, setHistoryData]=useState([])
+    const [ selectedHistory, setSelectedHistory]= useState({vehicles:[],passenger_infos:[],users:[]})
+    const [ places,setPlaces ] =useState([]);
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/booking/get`)
+        .then((res)=>{
+            setHistoryData(res.data)
+        })
+    },[])   
+    useEffect(()=>{
+        setSelectedHistory(historyData[selectedId])
+        console.log(historyData);
+    },[selectedId,historyData])
+    useEffect(()=>{
+        console.log(selectedHistory)
+        let temp_array=[];
+        if (selectedHistory && selectedHistory.pickup_location){
+            geocodeByAddress(selectedHistory.pickup_location)
+            .then(results => getLatLng(results[0]))
+            .then(({ lat, lng }) =>{
+                
+                temp_array.push({latitude:lat, longitude:lng})
+                
+            });
+            geocodeByAddress(selectedHistory.dropoff_location)
+            .then(results => getLatLng(results[0]))
+            .then(({ lat, lng }) =>{
+                temp_array.push({latitude:lat, longitude:lng})
+                console.log(temp_array)
+                setPlaces(temp_array)
+                
+                }
+        );
+                
+        }
+    },[selectedHistory])
+    useEffect(()=>{
+        setPlaces([])
+    },[selectedHistory])
     return (
        <div className='history-board'>
            <Header />
-           <Row>
-               <Col md={3}>
-                   <div className='history'>
-                       <div className='history-header'>
-                            <p>booking</p>
-                            <div className='filters'>Filters
-                                    <img src={Filters} alt="filters" />
-                            </div>
-                       </div>
-                       <div className='history-content'>
-                            {
-                                history_data.map((data,key)=>{
-                                    return(
-                                        <div className={ selectedId === key ? 'history-content__wrapper control-body selected' : 'history-content__wrapper control-body'} onClick={()=>setSelectedId(key)} key={key}>
-                                            <div className='pickup'>
-                                                <div className='title'>Pickup:</div>
-                                                <p>3348 Mulberry Lane, United States</p>
-                                            </div>                            
-                                            <div className='stop d-flex align-items-center justify-content-between'>
-                                                <div className='stop-location w-100'>
-                                                    <div className='title'>Stop1:</div>
-                                                    <p>Victoria Park, United States</p>
-                                                </div>
-                                            </div>
-                                            <div className='date-time-info'>
-                                                <div className='date d-flex align-items-center'>
-                                                    <i className="fa fa-calendar-days px-2"></i>
-                                                    <h6>05/22/2022</h6>
-                                                </div>
-                                                <div className='time d-flex align-items-center'>
-                                                    <i className="fa fa-clock px-2"></i>
-                                                    <h6>09:30 AM</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
-                       </div>
-                   </div>
-
-               </Col>
-               <Col md={9}>
-                    <div className="main">            
-                <Container>
-                    <div className='main-wrap payment-board'>
-                        <Row>
-                            <Col md={5}>
-                                <div className='journey-vehicle'>
-                                    <div className='journey'>
-                                        <div className='header-wrap d-flex justify-content-between'>
-                                            <div className='header-text'>Journey</div>
-                                            <div style={{display:'inline-flex', marginLeft:'-25px'}}>
-                                                <div className='date d-flex align-items-center'>
-                                                    <i className="fa fa-calendar-days px-2"></i>
-                                                    <h6>05/22/2022</h6>
-                                                </div>
-                                                <div className='time d-flex align-items-center'>
-                                                    <i className="fa fa-clock px-2"></i>
-                                                    <h6>09:30 AM</h6>
-                                                </div>
-                                            </div>
-                                        </div>
+           <div class='custom-row'>
+                <div className='history'>
+                    <div className='history-header'>
+                        <p>bookings</p>
+                        <div className='filters'>
+                            <h6>Filters</h6>
+                            <i className='fa fa-filter'></i>
+                        </div>
+                    </div>
+                    <div className='history-content'>
+                        {
+                            historyData.map((data,key)=>{
+                                return(
+                                    <div className={ selectedId === key ? 'history-content__wrapper control-body selected' : 'history-content__wrapper control-body'} onClick={()=>setSelectedId(key)} key={key}>
                                         <div className='pickup'>
                                             <div className='title'>Pickup:</div>
-                                            <Select
-                                                onChange={(e) => handleChange(e)}
-                                                options={options}
-                                                value={"3348 Mulberry Lane, Boynton Beach, United States"}
-                                                isSearchable="true"
-                                                className='w-100'
-                                            />
+                                            <p>{data.pickup_location}</p>
                                         </div>                            
                                         <div className='stop d-flex align-items-center justify-content-between'>
-                                            <div className='stop-location w-100'>
-                                                <div className='title'>Stop1:</div>
-                                                <Select
-                                                    defaultValue={selectedOption}
-                                                    onChange={(e) => handleChange(e)}
-                                                    options={options}
-                                                    placeholder="Enter location"
-                                                    isSearchable="true"
-                                                    className='w-100'
-                                                />
+                                            <div className='stop-location'>
+                                                <div className='title'>Dropoff:</div>
+                                                <p>{data.dropoff_location}</p>
                                             </div>
-                                        </div>                            
-                                        <div className='dropoff'>
-                                            <div className='title'>Dropoff:</div>
-                                            <Select
-                                                defaultValue={selectedOption}
-                                                onChange={(e) => handleChange(e)}
-                                                options={options}
-                                                placeholder="Enter location"
-                                                isSearchable="true"
-                                                className='w-100'
-                                            />                                
                                         </div>
-                                        <div className='passenger-board'>
-                                            <Row>
-                                                <Col md={4}>
-                                                    <div className='passenger'>
-                                                        <div className='label'>Passenger</div>
-                                                        <div className='count'>3</div>
-                                                    </div>
-                                                </Col>
-                                                <Col md={4}>
-                                                    <div className='childrens'>
-                                                        <div className='label'>Childrens</div>
-                                                        <div className='count'>3</div>
-                                                    </div>
-                                                </Col>
-                                                <Col md={4}>
-                                                    <div className='bags'>
-                                                        <div className='label'>Bags</div>
-                                                        <div className='count'>3</div>
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                        </div>
-                                        <div className='vehicle'>
-                                            <div className='label'>Vehicle</div>
-                                            <div className='name'>Sedan</div>
-                                        </div>
-                                        <Row>
-                                            <Col md={6}>
-                                                <div className='vehicle'>
-                                                    <div className='label'>Passenger Name</div>
-                                                    <div className='name'>Sedan</div>
-                                                </div>
-                                            </Col>
-                                            <Col md={6}>
-                                                <div className='vehicle'>
-                                                    <div className='label'>Mobile Number</div>
-                                                    <div className='name'>123-456-7890</div>
-                                                </div>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={6}>
-                                                <div className='vehicle'>
-                                                    <div className='label'>Payment Option</div>
-                                                    <div className='name'>Credit Card</div>
-                                                </div>
-                                            </Col>
-                                            <Col md={6}>
-                                                <div className='vehicle'>
-                                                    <div className='label'>card number</div>
-                                                    <div className='name'>xxxx xxxx xxxx 9999</div>
-                                                </div>
-                                            </Col>
-                                        </Row>
-                                        <div className='estimated-fair'>
-                                            <div className='label'>Estimated Fair</div>
-                                            <div className='cost'>USD $120</div>
+                                        <div className='date-time-info'>
+                                            <div className='date d-flex justify-content-between'>
+                                                <i className="fa fa-calendar-days px-2"></i>
+                                                <h6>{data.pickup_date ? data.pickup_date.substring(0,10):''}</h6>
+                                            </div>
+                                            <div className='time d-flex justify-content-between'>
+                                                <i className="fa fa-clock px-2"></i>
+                                                <h6>{data.pickup_time}</h6>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </Col>
-                            <Col md={7}>
-                                <div className='passenger-control-btn'>
-                                    
-                                    <div className='passenger-control'>
-                                        <div className='header-text'>Rider Status</div>
-                                        {rider_status.map((value,key)=>{
-                                            if (value.unread)
-                                            return(
-                                                <div className={key === 0 ? "rider-status first":'rider-status'} key={key}>
-                                                    <h5>{value.name}</h5>
-                                                    <h6>{value.content}</h6>
-                                                </div>)
-                                            else
-                                            return(
-                                                <div  key={key} className="rider-status unread">
-                                                    <h5>{value.name}</h5>
-                                                    <h6>{value.content}</h6>
+                                )
+                            })
+                        }
+                    </div>
+                </div>   
+                <div className="main">
+                    <div className='main-location-map'>
+                        {places[0] && places[1]?
+                        <Map
+                            googleMapURL={
+                                'https://maps.googleapis.com/maps/api/js?key=' +
+                                googleMapsApiKey +
+                                '&libraries=geometry,drawing,places'
+                            }
+                            markers={places}
+                            loadingElement={<div style={{height: `100%`}}/>}
+                            containerElement={ <div style={{height: "450px",width:'100%'}}/>}
+                            mapElement={ <div style={{height: `100%`}}/>}
+                            defaultZoom={ 11}
+                        />:''}
+                    </div>            
+                        <div className='main-wrap payment-board'>
+                            <div className='journey-vehicle'>
+                                {selectedHistory && selectedHistory.vehicles[0]?
+                                <div className='journey'>
+                                    <div className='header-wrap d-flex justify-content-between'>
+                                        <div className='header-text'>Journey</div>
+                                        <div className='date-time-wrapper'>
+                                            <div className='date d-flex align-items-center'>
+                                                <i className="fa fa-calendar-days px-2"></i>
+                                                <h6>{selectedHistory.pickup_date?selectedHistory.pickup_date.substring(0,10):''}</h6>
+                                            </div>
+                                            <div className='time d-flex align-items-center'>
+                                                <i className="fa fa-clock px-2"></i>
+                                                <h6>{selectedHistory.pickup_time}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='pickup'>
+                                        <div className='title'>Pickup:</div>
+                                        <p>{selectedHistory.pickup_location}</p>
+                                    </div>
+                                    {selectedHistory.stops ? selectedHistory.stops.map((val,key)=>{
+                                        return(
+                                        <div className='stop pickup align-items-center justify-content-between' key={key}>
+                                                <div className='title'>Stop{key+1}:</div>
+                                                <p>{val.address}</p>
+                                        </div>)  
+                                    }):''}                            
+                                                            
+                                    <div className='dropoff'>
+                                        <div className='title'>Dropoff:</div>
+                                        <p>{selectedHistory.dropoff_location}</p>                                
+                                    </div>
+                                    <div className='passenger-board'>
+                                        <Row>
+                                            <Col md={4}>
+                                                <div className='passenger'>
+                                                    <div className='label'>Passenger</div>
+                                                    <div className='count'>{selectedHistory.passenger}</div>
                                                 </div>
-                                            )
-                                            }
-                                            )
+                                            </Col>
+                                            <Col md={4}>
+                                                <div className='childrens'>
+                                                    <div className='label'>Childrens</div>
+                                                    <div className='count'>{selectedHistory.children}</div>
+                                                </div>
+                                            </Col>
+                                            <Col md={4}>
+                                                <div className='bags'>
+                                                    <div className='label'>Bags</div>
+                                                    <div className='count'>{selectedHistory.bags}</div>
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                    </div>
+                                    <div className='vehicle'>
+                                        <div className='label'>Vehicle</div>
+                                        <div className='name'>{selectedHistory.vehicles[0].name}</div>
+                                    </div>
+                                    <Row>
+                                        <Col md={6}>
+                                            <div className='vehicle'>
+                                                <div className='label'>Passenger Name</div>
+                                                <div className='name'>{selectedHistory.passenger_infos[0].first_name ? selectedHistory.passenger_infos[0].first_name+' '+selectedHistory.passenger_infos[0].last_name:''}</div>
+                                            </div>
+                                        </Col>
+                                        <Col md={6}>
+                                            <div className='vehicle'>
+                                                <div className='label'>Mobile Number</div>
+                                                <div className='name'>{selectedHistory.passenger_infos[0].mobile_phone}</div>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={6}>
+                                            <div className='vehicle'>
+                                                <div className='label'>Payment Option</div>
+                                                <div className='name'>{selectedHistory.Payment_details[0].payment_method_id === '1' ? 'paypal':'credit card'}</div>
+                                            </div>
+                                        </Col>
+                                        <Col md={6}>
+                                            <div className='vehicle'>
+                                                <div className='label'>card number</div>
+                                                <div className='name'>{selectedHistory.Payment_details[0].card_number}</div>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                    <div className='dash-line'>
+                                        <img src="/images/Line 109.png" width="100%" alt='dashed line'/>
+                                    </div>
+                                    <div className='estimated-fair'>
+                                        <div className='label'>Estimated Fair</div>
+                                        <div className='cost'>USD $120</div>
+                                    </div>
+                                </div>:''}
+                            </div>
+                            <div className='passenger-control-btn'>
+                                
+                                <div className='passenger-control'>
+                                    <div className='header-text'>Rider Status</div>
+                                    {rider_status.map((value,key)=>{
+                                        if (value.unread)
+                                        return(
+                                            <div className={key === 0 ? "rider-status first":'rider-status'} key={key}>
+                                                <h5>{value.name}</h5>
+                                                <h6>{value.content}</h6>
+                                            </div>)
+                                        else
+                                        return(
+                                            <div  key={key} className="rider-status unread">
+                                                <h5>{value.name}</h5>
+                                                <h6>{value.content}</h6>
+                                            </div>
+                                        )
                                         }
-                                    </div>                                                                
-                                </div>
-                            </Col>
-                        </Row>
-                    </div>
-                </Container>      
-                    </div>
-                </Col>
-            </Row>
+                                        )
+                                    }
+                                </div>                                                                
+                            </div>
+                        </div> 
+                </div>
+            </div>
        </div>
     )    
 };

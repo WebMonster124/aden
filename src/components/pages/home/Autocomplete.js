@@ -50,9 +50,9 @@ class AutoComplete extends Component {
     showEditModal = () => {
         this.setState({editModalshow:true})
     }
-    hideModal = (props) => {
+    hideModal = (data) => {
         
-        this.setState({modaldata:props})
+        this.setState({modaldata:data})
         this.setState({ modalShow: false });
     };
     hideEditModal = () => {
@@ -121,7 +121,7 @@ class AutoComplete extends Component {
                 dropoffLatLng={lat:place.geometry.location.lat(),lng:place.geometry.location.lng()}               
             }
             else {
-                    debugger
+                    
                     value.push(place.formatted_address);
 
                     setValue(value)

@@ -5,10 +5,12 @@ import { UserReducer } from './useReducer'
 import { BookingReducer } from './BookingReducer'
 import { VehicleReducer }  from './vehicleReducer'
 import {NotificationReducer} from './NotificationReducer'
+import { PassengerInfoReducer } from './passengerReducer'
 export const AppReducer = combineReducers({
     zipCodes: FetchZipCodesReducer,
     userState:UserReducer,
     bookingState:BookingReducer,
     vehicleState:VehicleReducer,
-    notification:NotificationReducer
+    notificationState:NotificationReducer,
+    passengerState:PassengerInfoReducer
 });

@@ -1,5 +1,5 @@
 import {
-    ADD_NOTIFICATION,SELECT_NOTIFICATION,TEMP_NOTIFICATION,UPDATE_NOTIFICATION,DELETE_NOTIFICATION
+    NEW_NOTIFICATION, ADD_NOTIFICATION,SELECT_NOTIFICATION,TEMP_NOTIFICATION,UPDATE_NOTIFICATION,DELETE_NOTIFICATION
 } from '../actions/NotificationstateActions';
 
 
@@ -39,6 +39,12 @@ export const NotificationReducer = (state=initialState, action) => {
             return {
                 ...state,
                 temp_notification:action.payload
+            }
+        case NEW_NOTIFICATION:
+            console.log(action.payload)
+            return {
+                ...state,
+                newMessage:action.payload
             }
         default:
             return state;

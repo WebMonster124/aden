@@ -1,14 +1,52 @@
 .book_rider{
-    .mb-3.nav.nav-tabs{
+    .css-1hwfws3{
+        height: 60px;
+    }
+    .react-toggle-track{
+        background: rgba(120, 120, 128, 0.32);
+    }
+    .dropdown{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        .nav-item:first-child{
+            margin-right: 77px;
+        }
+        .nav-item:nth-child(2){
+            margin-right: 53px;
+        }
+    }
+    .nav.nav-tabs{
         border-bottom: 1px solid #EEE7E4;
     }
-    ul.mb-3.nav.nav-tabs li button.active{
+    ul.nav.nav-tabs li button.active{
+        border: 0;
         border-bottom: 1px solid #000000;
+    }
+    ul.nav.nav-tabs li button{
+        padding-bottom: 27px;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 22px;
+        /* identical to box height */
+        border: 0;
+        opacity: 0.6;
+        color: #000000;
+        &.active{
+            opacity: 1;
+        }
+    }
+    .pickup, .dropoff, .stop{
+        display: flex;
+        align-items: center;
+        height: 60px;
+        padding-right: 10px;
     }
     .stop {
         margin-top: 18px;
         position: relative;
-        
+        width: 623px;
+        margin-right: 20px;
         .stop-location {
             position: relative;
             display: flex;
@@ -148,8 +186,6 @@
         background: #F2F2F2;                
         border-radius: 5px;
         height: 60px;
-        padding-left: 24px;
-        padding-right: 24px;
         margin-top: 18px;
 
         .title {
@@ -213,15 +249,30 @@
         border-radius: 100%;
         top: 12px;
     }
+    .css-2b097c-container{
+        width: 100%;
+        .css-yk16xz-control{
+            border: 0;
+            background-color: transparent;
+        }
+        .css-1wy0on6{
+            display: none;
+        }
+    }
     .tab-content{
-        margin-top: 10px;
+        margin-top: 30px;
     }
     .ride-now{
         display: flex;
+        margin-top: 32px;
         justify-content: space-between;
+
         .button{
-            display: inline;
-            margin-left: 50px;
+            display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 50px;
+                margin-bottom: 27px;
             *{
                 display: inline-block;
             }
@@ -256,28 +307,56 @@
                 }
         }
     }
+    .date-time-wrapper{
+        margin-left: 50px;
+        .input-wrapper{
+            width: 100%;
+            margin-left: 0;
+            
+            input{
+                width: 100%;
+                padding-right: 10px;
+            }
+        }
+    }
+    
+}
+.select-vehicle{
+    .input-wrapper{
+        width: 100%;
+        margin-left: 0px;
+        input{
+            width: 100%;
+        }
+    }
+    .card-body{
+        padding-left:40px;
+    }
 }
 .input-wrapper{
     margin-bottom: 12px;
     background: #F2F2F2;
-     border-radius: 5px;
-     display: flex;
-     margin-left: 50px;
-     justify-content: space-between;
+    border-radius: 5px;
+    display: table;
+    margin-left: 50px;
+    padding-right: 10px;
+    align-items: center;
+    white-space: nowrap;
      &.time{
          margin-left: 10px;
-         input{
-             width: unset;
-         }
+         
+     }
+     textarea{
+         width:100%
      }
     h5{
-        display: inline;
-        margin-top: 8px;
-        margin-left: 10px;
+        display: table-cell;
+        padding-left: 24px;
         font-family: 'Lato';
          font-style: normal;
          font-weight: 700;
          font-size: 16px;
+         margin-bottom: 0px;
          line-height: 19px;
          opacity: 1;
          color: #000000;
@@ -285,16 +364,17 @@
     input{
         border:0;
         outline: 0;
+        height: 60px;
         background-color: transparent;
         display: inline;
-        width: 100%;
-        &[type='date']{
-            margin-left: 5px;
+        &[type='date'], &[type='time']{
+            margin-left: 10px;
         }       
     }
     
 } 
 .select-vehicle{
+
     h5{
         font-family: 'Lato';
         font-style: normal;
@@ -304,13 +384,20 @@
 
         color: #000000;
     }
+    h6.update{
+        width:unset
+    }
+    
     .input-wrapper{
         padding: 3px 5px;
         margin-left: 0px;
+        display: flex;
+        margin-bottom: 30px;
         input{
             border: 0;
             margin-left: 10px;
         }
+        
         .button-group{
             display: flex;
             
@@ -326,13 +413,13 @@
                 border-radius: 3px;
                 color:#673622;
                 margin-right:5px;
-                padding:3px 5px;
+                padding: 18px 12px;
             }
             i.fa-plus{
                 background: #673622;
                 border-radius: 3px;
                 color:white;
-                padding:3px 6px;
+                padding: 18px 12px;
             }
         }
     }

@@ -3,7 +3,15 @@
     background: #673622;
     border-radius: 10px;
     margin-left: 20px;
-    margin-top: 62px;
+    margin-top: 60px;
+    height: 100vh;
+    overflow: auto;
+    .filters{
+        display: flex;
+        i{
+            margin-left: 18px;
+        }
+    }
     &-header{
         color: white;
         display: flex;
@@ -24,8 +32,8 @@
         border-top:  1px solid #EEE7E4;
     }
     .control-body{
-        padding: 20px 10px;
-        padding-left: 30px;
+        padding: 32px 10px;
+        padding-left: 42px;
         background-color: #FFFCFB;
         border-radius: 10px;
         .date, .time{
@@ -34,6 +42,20 @@
         .date-time-info{
             margin-left: -25px;
             display: inline-flex;
+            .date, .time{
+                display: table;
+                i{
+                    display: table-cell;
+                }
+            }
+            .date{
+                margin-right: 32px;
+            }
+            h6{
+                margin-left: 8.5px;
+                display: table-cell;
+                margin-right: 32px;
+            }
         }
         &.selected{
             background-color: #DECCC4;
@@ -41,7 +63,7 @@
             &:after{
                 position: absolute;
                 content: '';
-                border-width: 10px 0px 0px 10px;
+                border-width: 20px 0px 0px 20px;
                 right:-5px;
                 top:50%;
                 transform: rotate(45deg);
@@ -51,28 +73,44 @@
             }  
         }
         .pickup:before{
-            border:0,
+            content: "";
+            position: absolute;
+            border: 1px solid #8d6767;
+            left: -24px;
+            top: -6px;
+            width: 25px;
+            height: 30px;
+            border-top-left-radius: 30px;
+            border-bottom: none;
+            border-top-right-radius: 30px
 
         }
         .pickup:after{
             position: absolute;
             content: ' ';
-            width: 5px;
-            height: 5px;
+            width: 8px;
+            height: 8px;
             overflow: hidden;
             left: -15px;
             margin: 16px 20px 0 0;
             border: 1px solid #FFFFFF;
             box-shadow: 0 0 0 3px #673622;
             border-radius: 100%;
-            top: 12px;
+            top: -9px;
         }
         .pickup{
             background-color: transparent;
-            padding-left: 0px;
+            padding-left: 10px;
             padding-right: 0px;
+            display: table;
+            .title{
+                display: table-cell;
+                vertical-align: top;
+                color:#673622
+            }
             P{
                 font-family: 'Lato';
+                display: table-cell;
                 font-style: normal;
                 font-weight: 500;
                 font-size: 16px;
@@ -88,14 +126,48 @@
             }
         }
         .stop::after{
-            width: 5px;
-            height: 5px;
             left:-15px;
+            position: absolute;
+            content: ' ';
+            width: 13px;
+            height: 13px;
+            overflow: hidden;
+            background: #673622;
+            left: -17px;
+            margin: 14px 20px 0 0;
+            border: 1px solid #FFFFFF;
+            box-shadow: 0 0 0 1px #673622;
+            border-radius: 100%;
+            top: -12px;
+        }
+        .stop:before{
+            content: "";
+            position: absolute;
+            border: 1px solid #8d6767;
+            left: -23px;
+            top: 0px;
+            width: 25px;
+            height: 23px;
+            border-bottom-left-radius: 30px;
+            border-top: none;
+            border-bottom-right-radius: 30px;
         }
         .stop{
-            margin-top: 0px;
+            padding-left: 10px;
+            margin-top: 25px;
+            display: table;
+            .stop-location{
+                display: table;
+
+            }
+            .title{
+                display: table-cell;
+                vertical-align: top;
+                color:#673622
+            }
             P{
                 font-family: 'Lato';
+                display: table-cell;
                 font-style: normal;
                 font-weight: 500;
                 font-size: 16px;
@@ -103,8 +175,7 @@
                 line-height: 24px;
                 /* identical to box height, or 150% */
 
-
-                color: #673622;
+                color:rgb(103,54,34)
             }
             .stop-location{
                 padding-right: 0px;
@@ -221,5 +292,28 @@
     }
     h6{
         color: rgba(0,0,0,0.6);
+    }
+}
+.custom-row{
+    display: flex;
+    justify-content: space-between;
+    .history{
+        width: 450px;
+    }
+    .main{
+        width: 1350px;
+        margin-right: 20px;
+        margin-top: 60px;
+        &-wrap{
+            display: flex;
+            justify-content: space-between;
+            .journey-vehicle{
+                width: 622px;
+            }
+            .passenger-control-btn{
+                width: 688px;
+            }
+
+        }
     }
 }

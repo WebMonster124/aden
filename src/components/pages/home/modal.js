@@ -8,6 +8,7 @@ export const MyVerticallyCenteredModal = (props) => {
         <Modal
             show = {props.show}
             onHide = {props.onHide}
+            className='location-modal'
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
@@ -23,14 +24,14 @@ export const MyVerticallyCenteredModal = (props) => {
                                 <div>or edit it as per your preference</div>
                             </div>
                             <div className='btns'>
-                                <h6 className='update' onClick={props.confirm}>Confirm Location</h6>
+                                <h6 className='update' onClick={()=>props.confirm(props.location)}>Confirm Location</h6>
                                 <button type='button' className='edit' onClick={()=>{props.onHide(props.location);props.showeditmodal();}}>Edit Location</button>
                             </div>
                         </div>
                     </Col>
                     <Col md={6}>
                         <div className='content-wrap'>
-                            <div className='street d-flex align-items-center'>
+                            <div className='input-wrapper street d-flex align-items-center'>
                                 <div className='label'>Street:</div>
                                 <FormControl
                                     aria-label="Username"
@@ -39,16 +40,16 @@ export const MyVerticallyCenteredModal = (props) => {
                                     disabled
                                 />
                             </div>
-                            <div className='city d-flex align-items-center'>
+                            <div className='input-wrapper city d-flex align-items-center'>
                                 <div className='label'>City:</div>
                                 <FormControl
                                     aria-label="Username"
                                     aria-describedby="basic-addon1"
-                                    defaultValue={props.location.city ? props.location.short_name : ''}
+                                    defaultValue={props.location.city ? props.location.city.short_name : ''}
                                     disabled
                                 />
                             </div>
-                            <div className='state d-flex align-items-center'>
+                            <div className='input-wrapper state d-flex align-items-center'>
                                 <div className='label'>State:</div>
                                 <FormControl
                                     aria-label="Username"
@@ -56,7 +57,7 @@ export const MyVerticallyCenteredModal = (props) => {
                                     defaultValue={props.location.state ? props.location.state.short_name : ''}
                                 />
                             </div>
-                            <div className='postalcode d-flex align-items-center'>
+                            <div className='input-wrapper postalcode d-flex align-items-center'>
                                 <div className='label'>Postal Code:</div>
                                 <FormControl
                                     aria-label="Username"
@@ -65,7 +66,7 @@ export const MyVerticallyCenteredModal = (props) => {
                                     defaultValue={props.location.postcode?props.location.postcode.short_name:''}
                                 />
                             </div>
-                            <div className='country d-flex align-items-center'>
+                            <div className='input-wrapper country d-flex align-items-center'>
                                 <div className='label'>Country:</div>
                                 <FormControl
                                     aria-label="Username"
@@ -86,19 +87,18 @@ export const MyVerticallyCenteredModal = (props) => {
 //     
 // },[mapApi])
 export const EditModal = (props) => {
-    const [ street, setStreet] = useState(()=>props.data.street);
-    const [ city, setCity] = useState(props.data.city);
-    const [ postcode,setPostCode]=useState(props.data.postcode);
-    const [ country,setCountry] = useState(props.data.country);
-    const [ statename,setStateName]=useState(props.data.state);
+    const [ street, setStreet] = useState();
+    const [ city, setCity] = useState();
+    const [ postcode,setPostCode]=useState();
+    const [ country,setCountry] = useState();
+    const [ statename,setStateName]=useState();
     console.log(props) 
     useEffect(()=>{
-        setStreet(props.data.street)
-        setCity(props.data.city)
+        setStreet(props.data?.street ? props.data.street.short_name:'')
+        setCity(props.data?.city ? props.data.city.short_name:'')
         setPostCode(props.postcode? props.postcode.short_name:'')
-        setCountry(props.data.country)
-        setStateName(props.data.state)
-        console.log(props)
+        setCountry(props.data?.country? props.data.country.short_name:'')
+        setStateName(props.data?.state ? props.data.state.short_name : '')
     },[props.data])
     const confirm = (()=>{
         let data={};
@@ -124,8 +124,7 @@ export const EditModal = (props) => {
                                 Edit Location
                             </div>
                             <div className='description'>
-                                <h6><span>Full address:</span>3348 Mulberry Lane, Boynton Beach,
-                                    33435, United States ,</h6>
+                                <h6><span>Full address:</span>{street+', '+city + statename+', '+postcode+', '+ country}</h6>
                             </div>
                             <div className='btns'>
                                 <h6 className='update' onClick={()=>confirm()}>Confirm Location</h6>
@@ -135,7 +134,7 @@ export const EditModal = (props) => {
                     </Col>
                     <Col md={6}>
                         <div className='content-wrap'>
-                            <div className='street d-flex align-items-center'>
+                            <div className='input-wrapper street d-flex align-items-center'>
                                 <div className='label'>Street:</div>
                                 <input
                                     aria-label="Username"
@@ -144,7 +143,7 @@ export const EditModal = (props) => {
                                     onChange={(e)=>setStreet(e.target.value)}
                                 />
                             </div>
-                            <div className='city d-flex align-items-center'>
+                            <div className='input-wrapper city d-flex align-items-center'>
                                 <div className='label'>City:</div>
                                 <input
                                     aria-label="Username"
@@ -153,7 +152,7 @@ export const EditModal = (props) => {
                                     onChange={(e)=>setCity(e.target.value)}
                                 />
                             </div>
-                            <div className='state d-flex align-items-center'>
+                            <div className='input-wrapper state d-flex align-items-center'>
                                 <div className='label'>State:</div>
                                 <input
                                     aria-label="Username"
@@ -162,7 +161,7 @@ export const EditModal = (props) => {
                                     onChange={(e)=>setStateName(e.target.value)}
                                 />
                             </div>
-                            <div className='postalcode d-flex align-items-center'>
+                            <div className='input-wrapper postalcode d-flex align-items-center'>
                                 <div className='label'>Postal Code:</div>
                                 <input
                                     aria-label="Username"
@@ -171,7 +170,7 @@ export const EditModal = (props) => {
                                     onChange={(e)=>setPostCode(e.target.value)}
                                 />
                             </div>
-                            <div className='country d-flex align-items-center'>
+                            <div className='input-wrapper country d-flex align-items-center'>
                                 <div className='label'>Country:</div>
                                 <input
                                     aria-label="Username"

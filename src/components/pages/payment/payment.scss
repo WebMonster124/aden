@@ -1,15 +1,114 @@
 .payment-board{
+    display: flex;
+    justify-content: space-between;
+    .passenger-control-btn{
+        width: 818px;
+        margin-top: 58px;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
+        border-radius: 10px;
+    }
+    .journey-vehicle{
+        width: 622px;
+        margin-top: 58px;
+        h5.header-text{
+            margin-top: 0px;
+        }
+        .header-wrap{
+            padding-bottom: 0px;
+            .date-time-wrapper{
+                .date, .time{
+                    margin-right: 37px;
+                    h6{
+                        margin-left: 8px;
+                    }
+                }
+            }
+        }
+    }
+    .date-time-wrapper{
+        h6{
+            padding-top: 8px;
+        }
+    }
     .input-wrapper{
         margin-left: 0px;
+        position: relative;
+        width: 100%;
         input{
-            width: 80%;
+            width: 100%;
         }
+        &.instruction{
+            h5{
+                vertical-align: top;
+                padding-top: 8px;
+            }
+            div{
+                width: 100%;
+                display: table-cell;
+            }
+        }
+        div{
+            display: flex;
+            justify-content: center;
+            width: 100%;
+
+        }
+        // input{
+        //     width: 200px;
+        //     &#card_billing_code{
+        //         width: 120px;
+        //     }
+        //     &#card_holder_name{
+        //         width: 120px;
+        //     }
+        // }
     }
     .vehicle-type{
         margin-bottom: 10px;
-        padding-left: 10px;
-        width: 40%;
+        padding-left: 24px;
+        width: 100%;
+        input{
+            // width: 100px;
+        }
     }
+    
+    .MM_YY{
+        display:table;
+        align-items: center;
+        p{
+            margin: 0;
+            display: table-cell;
+            justify-content: center;
+            display: flex;
+            line-height: 1;
+            font-size: 25px;
+        }
+        input{
+            -webkit-appearance: none;
+            width: 30px;
+            display: table-cell;
+        }
+        
+    }
+    div.input-wrapper.instruction{
+        display: table;
+        width: 100%;
+        padding:20px 24px;
+        align-items: flex-start;
+        h5{
+            margin-left: 0px;
+
+        }
+    }
+    textarea{
+        width: 100%;
+        background-color: transparent;
+        border: 0;
+        outline: 0;
+        min-height: 80px;
+    }
+
 }
 .client-dashboard{
     .dashboard{
@@ -20,7 +119,105 @@
     }
 }
 .client-payment{
+    .status-board .where-when-status:after{
+        width: 100%;
+    }
     .status-board .vehicle-status:after{
-        width:15%;
+        width:50%;
     }
 }
+.passenger-control-btn {
+    width: 100%;
+    .passenger-control {
+        background: #FFFFFF;
+        // box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
+        // border-radius: 10px;
+        padding: 0px 40px;
+        .header-text{
+            margin-top: 60px;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #EEE7E4;
+        }
+        .passenger, .childrens, .bags {
+            margin-bottom: 32px;
+            .label {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 19px;
+                color: #000000;
+            }
+
+            .body {
+                height: 60px;
+                background: #F2F2F2;
+                border-radius: 5px;
+                padding: 6px 6px 6px 30px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 14px;
+
+                .count {
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 19px;
+                    color: #000000;
+                }
+                .btns {
+                    height: 100%;
+                    button{
+                        height: 100%;
+                        padding: 0px 10px;
+                    }
+                    .minus {
+                        border: 1px solid #673622;
+                        border-radius: 3px;
+                        cursor: pointer;
+                        i {
+                            color: #673622;
+                            font-size: 14px;
+                        }
+                    }
+
+                    .plus {
+                        background: #673622;
+                        border: 1px solid #673622;
+                        border-radius: 3px;
+                        margin-left: 6px;
+                        cursor: pointer;
+                        i {
+                            color: white;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    .css-1okebmr-indicatorSeparator{
+        width: 0px;
+    }
+    .select-vehicle {
+        margin-top: 40px;
+        display: block;
+        float: right;
+        width: 670px;
+        height: 50px; 
+        background: #F4730E;
+        border-radius: 12px;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 55px;
+        text-align: center;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+}  

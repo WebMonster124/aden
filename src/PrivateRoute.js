@@ -1,16 +1,10 @@
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
-import { isAuthenticated, isVerified } from './auth';
+import { Outlet, Navigate } from 'react-router-dom';
+import { isAuthenticated, isVerified,getAuthUser } from './auth';
 
 
-const PrivateRoute = ({component: Component, ...rest}) => {
-    // console.log(isEmailVerifyPath(rest))
-    return (
-        <Route {...rest} render={props => (
-            isAuthenticated() ? 
-            <Component {...props} />  : <Navigate to="/login" />
-        )} />
-    );
-};
+function PrivateRoute({ children }) {
+    return isAuthenticated() &&  getAuthUser().roles && getAuthUser().roles < 2 ? children : <Navigate replace to="/home" />;
+  }
 
 export default PrivateRoute;

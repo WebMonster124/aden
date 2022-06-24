@@ -11,24 +11,27 @@ import {login} from '../../../auth';
 require('dotenv').config()
 import  {fetchUserLogin}  from '../../../redux/actions/UserstateActions';
 import { useDispatch, useSelector } from 'react-redux'
+import car_logo from '../../../images/Untitled-2.png'
 const Login = () => {  
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const login_status = useSelector(state => state.userState.login_status); 
     const dispatch = useDispatch();
     const login_clicked = () =>{
-        axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/signin`,{EMAIL:email,PASSWORD:password})
+        axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/signin`,{email:email,password:password})
         .then((res)=>{
             if (res.status == 200){
-                console.log(res.data    )
-                dispatch(fetchUserLogin(true))
                 login(res.data);
+                console.log(res.data)
+                
+                dispatch(fetchUserLogin(res.data))
+                
             }
-            <Navigate to="/home" />
+            window.location = '/home'
         })  
     }
     return (
-        <Row style={{marginTop:'100px'}} className="client-login">
+        <Row className="client-login">
             <Col md = {6}>
                 <div className='login-left'>
                     <div className='img-wrapper'>
@@ -37,7 +40,7 @@ const Login = () => {
                     <div className='login-form'>
                         <div className='caption'>
                             <h3>Log in</h3>
-                            <h5>Get in to the pannel by system</h5>
+                            <h5>Get in to the web pannel by login to the system</h5>
                         </div>
                         <div className='form-group'>
                             <div className='form'>
@@ -62,12 +65,16 @@ const Login = () => {
                                     <h3>Login</h3>
                                 </Link>
                             </div>
+                            <div className='tologin'>
+                                    <h6 >New here? <span><Link to="/Register">Register here</Link></span></h6>
+                            </div>
                         </div>
                     </div>
                 </div>
             </Col>
             <Col md = {6}>
                 <div className="login-right">
+                    <img src={car_logo}/>
                 </div>
             </Col>
         </Row>

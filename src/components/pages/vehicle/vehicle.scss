@@ -1,10 +1,10 @@
 .main-wrap.vehicle-wrap {
     gap: 40px;
     margin-top: 60px;
-
-  
+    display: flex;
+    justify-content: space-between;
     .vehicles { 
-        width: 100%;
+        width: 818px;
         background: #FFFFFF;
         box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
         border-radius: 10px;
@@ -29,7 +29,8 @@
                 line-height: 19px;
 
                 color: #000000;
-
+                display: flex;
+                align-items: center;
                 img {
                     padding-left: 15px;
                 }
@@ -78,6 +79,7 @@
                     }
                     button {
                         margin-right: 20px;
+                        height: 35px;
                         background: #673622;
                         border-radius: 3px;
                         border: none;
@@ -116,10 +118,16 @@
             }
         }
     }
+    .control-body{
+        margin-top: 0px;
+    }
 }
 
 .journey-vehicle {    
-    .journey {        
+    width: 622px;
+    padding-left: 0px;
+    
+    .journey {      
         background: #FFFFFF;
         box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
         border-radius: 10px;
@@ -128,6 +136,7 @@
             color: rgba(0, 0, 0, 0.6);
             margin-left: 10px;
             margin-bottom: 0px;
+            padding-left: 10px;
         }
         .header-wrap {
             padding-bottom: 30px;
@@ -147,7 +156,12 @@
                 }
             }
         }
-
+        .pickup, .dropoff, .stop{
+            p{
+                position: absolute;
+                margin-left: 75px;
+            }
+        }
         .pickup {
             position: relative;
             display: flex;
@@ -354,7 +368,7 @@
             width: 8px;
             height: 8px;
             overflow: hidden;
-            //background: #673622;
+            background: #673622;
             left: -25px;
             margin: 14px 20px 0 0;
             border: 1px solid #FFFFFF;
@@ -369,11 +383,15 @@
 
         .passenger-board {
             margin-top: 24px;
+            display: flex;
             justify-content: space-between;
             padding-left: 30px;
 
             .passenger, .childrens, .bags {
                 margin-top: 20px;
+                > div{
+                    margin-right: 70px;
+                }
                 .label {
                     font-family: 'Lato';
                     font-style: normal;
@@ -385,6 +403,7 @@
                 }
                 .count {
                     height: 60px;
+                    width: 121px;
                     margin-top: 14px;
                     background: #F2F2F2;
                     border-radius: 5px;
@@ -416,18 +435,39 @@
                 color: #000000;
                 padding: 20px 30px;
                 margin-top: 14px;
+                height: 60px;
             }
         }
-
+        .dash-line{
+            margin-top: 40px;
+            margin-left: -5px;
+            margin-right: -5px;
+            position: relative;
+            &:before{
+                position: absolute;
+                left:-50px;
+                content: "";
+                width: 30px;
+                height: 28.84px;
+                background-color: rgb(247,247,247);
+                border-radius: 50%;
+            }
+            &:after{
+                position: absolute;
+                right:-50px;
+                content: "";
+                width: 30px;
+                height: 28.84px;
+                background-color: rgb(247,247,247);
+                border-radius: 50%;
+            }
+        }
         .estimated-fair {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding-left: 30px;
             padding-top: 32px;
-            margin-top: 40px;
-            border-top: 1px dashed rgba(0, 0, 0, 0.6);
-
             .label {
                 font-family: 'Lato';
                 font-style: normal;
@@ -493,7 +533,6 @@
     font-size: 32px;
     line-height: 38px;
     color: #000000;
-    margin-top: 50px;
     margin-bottom: 20px;
 }
 .vehicle {  
@@ -524,6 +563,7 @@
 .vehicle-type, .sort-by {
     position: relative;
     display: flex;
+    width: 260px;
     align-items: center;
     background: #F2F2F2;                
     border-radius: 5px;
@@ -554,4 +594,16 @@
     input[type="time"]::-webkit-calendar-picker-indicator {
         display: none;
       }
+}
+.css-1okebmr-indicatorSeparator{
+    width: 0px;
+}
+.css-tlfecz-indicatorContainer{
+    color: #292D32 !important;
+}
+.css-b62m3t-container{
+    width: 142px;
+}
+.css-b62m3t-container{
+    width: 230px;
 }

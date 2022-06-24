@@ -1,11 +1,46 @@
 .client-login{
     .img-wrapper{
         text-align: left !important;
+        margin-top: 0px;
+        img{
+            width: 248px;
+        }
+    }
+    .login-left{
+        padding-top : 120px;
+        padding-left: 180px;
+        width: 100%;
+        
+        .form{
+            justify-content: left;
+            padding: 20px;
+            width: 500px;
+            height: 60px;
+            position: relative;
+        }
+        .login-button{
+            background-color: rgb(244, 115, 14);
+            h3{
+                cursor: pointer;
+            }
+        }
+    }
+    .form__form-group{
+        background: #F2F2F2;
+        border-radius: 5px;
+        padding-top: 5px;
+        margin-bottom: 10px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: left;
+        padding-left: 20px;
     }
     .login-right{
-        background: url("../../../images/login.png");
-        background-size: cover;
-        height: 600px;
+            margin-top: 32px;
+            margin-right: 32px;
+            margin-bottom: 32px;
     }
 }
 .tologin{
@@ -19,10 +54,13 @@
         font-style: normal;
         font-weight: 400;
         font-size: 18px;
+       
         line-height: 22px;
         color:#673622;
         span{
-            color:#F4730E
+            a{
+                color:#F4730E
+            }
         }
     }
 }

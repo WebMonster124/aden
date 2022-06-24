@@ -11,10 +11,13 @@ import axios from 'axios';
 const Notification = () => {
     const dispatch = useDispatch();
     const [notifications, setNotifications] = useState([]);
-    const close_click= (val) =>{
-        let tempArr = Array.from(notifications);
-        tempArr.splice(tempArr.indexOf(val), 1);
-        setNotifications(tempArr);
+    const close_click= (val,id) =>{
+        axios.post(`${process.env.REACT_APP_API_BASE_URL}/notification/update`,{is_read:1,id:id})
+        .then((res)=>{
+            let tempArr = Array.from(notifications);
+            tempArr.splice(tempArr.indexOf(val), 1);
+            setNotifications(tempArr);
+        })
         
     }
     useEffect(()=>{
@@ -25,40 +28,42 @@ const Notification = () => {
             console.log(res.data)
         })
     },[])
+
     return (
         <div className='client-dashboard'>
             <Header />
-            <div className='dashboard'>
-                
-                <div className='content'>
-                    <div className='content-panel'>
-                        <div className='content-panel__content'>    
-                            <Row>
-                                <Col xs={12}>
-                                    <div className="notification">
-                                        <h4>Notifications</h4>
-                                    </div>
-                                </Col>                         
-                            </Row>
-                            {
-                                notifications.map((val, key) => {
-                                return (
-                                    <div className='notification-item' key={key}>
-                                        <div className='notification-item__content'>
-                                            <h5 className='noti-title'>
-                                              {val.notification_types[0].notification_type}
-                                            </h5>
-                                            <h5 className='noti-content'>
-                                                {val.data}
-                                            </h5>
+            <div className='dashboard main'>
+                <div className='container'>
+                    <div className='content'>
+                        <div className='content-panel'>
+                            <div className='content-panel__content'>    
+                                <Row>
+                                    <Col xs={12}>
+                                        <div className="notification">
+                                            <h4>Notifications</h4>
                                         </div>
-                                        <div className='notification-item__close'>
-                                            <CloseButton onClick={()=>close_click(val)}/>
+                                    </Col>                         
+                                </Row>
+                                {
+                                    notifications.map((val, key) => {
+                                    return (
+                                        <div className='notification-item' key={key}>
+                                            <div className='notification-item__content'>
+                                                <h5 className='noti-title'>
+                                                {val.notification_types[0]?val.notification_types[0].notification_type:''}
+                                                </h5>
+                                                <h5 className='noti-content'>
+                                                    {val.data}
+                                                </h5>
+                                            </div>
+                                            <div className='notification-item__close'>
+                                                <CloseButton onClick={()=>close_click(val,val.id)}/>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                                })
-                            } 
+                                    )
+                                    })
+                                } 
+                            </div>
                         </div>
                     </div>
                 </div>

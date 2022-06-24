@@ -1,5 +1,6 @@
 .notification{
-    margin-top: 40px;
+    margin-top: 20px;
+    padding-bottom: 40px;
     &-item{
         padding: 25px 80px;
         margin-left: -20px;
@@ -46,7 +47,7 @@
         font-weight: 700;
         font-size: 32px;
         line-height: 38px;
-
+        padding-left: 20px;
         color: #000000;
     }
 }

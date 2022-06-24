@@ -16,20 +16,70 @@ input{
         width:100%;
     }
 }
+*{
+    div{
+        cursor: default;
+    }
+}
+.main{
+    .container{
+        border-left: 2px solid #ECE3E0;
+        border-right: 2px solid #ECE3E0;
+        max-width: 1560px !important;
+        padding:60px 40px 220px 40px;
+    }
+}
 .home{
     *{
-        font-family: 'Lato';
         font-style: normal;
         font-weight: 700;
         font-size: 18px;
         line-height: 22px;
     }
+    &-row{
+        display: flex;
+        justify-content: space-between;
+    }
+    .sc-bczRLJ{
+        position: absolute;
+        margin-left: 80px;
+        padding-left: 0px;
+    }
 }
 .modal-body {
     padding: 0 !important;
     width: 100%;
+    .btns {
+        margin-top: 80px;
+        display:flex;
+        justify-content: space-between;
+        .confirm {                
+            width: 300px;
+            height: 50px;                
+            background: #F4730E;
+            border-radius: 12px;
+            border: none;
+            color: white;
+            font-size: 18px;
+        }
+        h6.update{
+            padding:14px 81px;
+            width: unset;
+        }
+        .edit {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 22px;
+            color: #F4730E;
+            border: none;
+            margin-left: 24px;
+            background-color: white;
+        }
+    }
     .header-wrap {        
-        padding: 80px 100px;
+        padding: 110px 80px;
         border-right: 1px solid #ECE3E0;
         width: 100%;
         height: 100%;
@@ -49,6 +99,7 @@ input{
             line-height: 24px;
             color: #000000;
             margin-top: 24px;
+            opacity: 0.6;
             h6{
                 font-family: 'Lato';
                 font-style: normal;
@@ -64,40 +115,32 @@ input{
                 }
             }
         }
-
-        .btns {
-            margin-top: 80px;
-            display:flex;
-            justify-content: space-between;
-            .confirm {                
-                width: 300px;
-                height: 50px;                
-                background: #F4730E;
-                border-radius: 12px;
-                border: none;
-                color: white;
-                font-size: 18px;
-            }
-            h6.update{
-                padding:14px 81px;
-            }
-            .edit {
-                font-family: 'Lato';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 18px;
-                line-height: 22px;
-                color: #F4730E;
-                border: none;
-                margin-left: 24px;
-                background-color: white;
-            }
+        .img-wrapper{
+            display: flex;
+            justify-content: center;
+            margin-top: 60px;
+            position: relative;
+        }
+        .i-wrapper{
+            position: absolute;
+            bottom: -10px;
+            padding: 0px 3px;
+            background-color: #F4732A;
         }
     }
 
     .content-wrap {
         padding: 60px 40px;
         width: 100%;
+        .input-wrapper{
+            margin-left: 0px;
+            position: relative;
+            input{
+                position: absolute;
+                margin-left: 125px;
+                width: unset;
+            }
+        }
         .street, .city, .state, .postalcode, .country {    
             width: 100%;                  
             height: 60px; 
@@ -117,7 +160,6 @@ input{
             }
 
             input {
-                width: 100%;
                 border: none !important;
                 background: #F2F2F2;
                 outline: 0;
@@ -126,11 +168,11 @@ input{
         }
     }
 }
-.location-map {
-    height: 450px;   
+.location-map {  
     border-radius: 10px;
-    margin-top: 40px;
-
+    margin-top: 78px;
+    height: 809px;
+    width: 640px;
     img {
         width: 100%;
     }
@@ -141,10 +183,10 @@ input{
     width: 100%;
     .passenger-control {
         background: #FFFFFF;
-        box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
-        border-radius: 10px;
-        padding: 40px;
-
+        // box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
+        // border-radius: 10px;
+        padding-top: 40px;
+        padding-left: 50px;
         .passenger, .childrens, .bags {
             margin-bottom: 32px;
             .label {
@@ -178,7 +220,7 @@ input{
                     height: 100%;
                     button{
                         height: 100%;
-                        padding: 0px 11px;
+                        padding: 0px 10px;
                     }
                     .minus {
                         border: 1px solid #673622;
@@ -186,6 +228,7 @@ input{
                         cursor: pointer;
                         i {
                             color: #673622;
+                            font-size: 14px;
                         }
                     }
 
@@ -197,6 +240,7 @@ input{
                         cursor: pointer;
                         i {
                             color: white;
+                            font-size: 14px;
                         }
                     }
                 }
@@ -207,7 +251,8 @@ input{
     .select-vehicle {
         margin-top: 40px;
         display: block;
-        width: 100%;
+        float: right;
+        width: 670px;
         height: 50px; 
         background: #F4730E;
         border-radius: 12px;
@@ -225,17 +270,17 @@ input{
     gap: 40px;
     justify-content: space-between;
     position: relative;
-    padding-top:40px;
-   
+    margin-top:78px;
+    padding: 40px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07 );
+    border-radius: 10px;
+    width: 800px;
     @media screen and (max-width:1200px) {
         padding:0px;
     }
     .location-control { 
         width: 100%;       
-        background: #FFFFFF;
-        box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
-        border-radius: 10px;
-        padding: 50px 40px;
         position: relative;
         @media screen and (max-width:992px){
             padding: 25px 20px;
@@ -259,6 +304,11 @@ input{
             @media screen and (max-width:475px){
                 right: 10px;
             }
+            img{
+                margin-right: 15px;
+                vertical-align: top;
+            }
+            
             .pickup-method{
                 display: flex;
                 h5{
@@ -266,6 +316,8 @@ input{
                     padding:12px 13px;
                     margin-bottom: 0px;
                     margin-right: 14px;
+                    display: flex;
+                    border-radius: 3px;
                 }
             }
             ul.nav {
@@ -349,11 +401,36 @@ input{
 
 .control-body {
     margin-top: 32px;
-    padding-left: 60px;
+    padding-left: 50px;
     @media screen and (max-width:772px){
         padding-left: 25px;
     }
-    
+    .airport{
+        margin-top: 18px;
+        height: 60px;
+        width: 100%;
+        position: relative;
+        .input-wrapper{
+            width: 206.9px;
+            height: 60px;
+            margin-left: 0px;
+            margin-right: 22.3px;
+            &:last-child{
+                margin-right: 0px;
+            }
+            input{
+                width: 100%;
+                margin-left: 10px;
+                opacity: 0.6;
+            }
+        }
+    }
+    .pickup, .stop, .dropoff{
+       input{
+        width: 100%;
+       
+       }
+    }
     .pickup {
          position: relative;
          display: flex;
@@ -377,9 +454,7 @@ input{
              color: #000000;
          }
 
-         .check {
-             cursor: pointer;
-         }
+         
 
         .css-1hb7zxy-IndicatorsContainer {
             display: none;
@@ -495,7 +570,7 @@ input{
          }
      }
 
-     .stop::after {
+     .stop::after ,.airport::after{
          position: absolute;
          content: ' ';
          width: 8px;
@@ -583,6 +658,7 @@ input{
          width: 8px;
          height: 8px;
          overflow: hidden;
+         background: #673622;
          //background: #673622;
          left: -25px;
          margin: 14px 20px 0 0;
@@ -670,10 +746,16 @@ input{
      .date-time {
          display: flex;
          align-items: center;
-         justify-content: space-evenly;
+         justify-content: space-between;
          gap: 16px;
          @media screen and (max-width:992px){
            display: block;
+        }
+        .date{
+            width: 330px;
+        }
+        .time{
+            width: 323px;
         }
          .date, .time {
              display: flex;
@@ -681,10 +763,11 @@ input{
              background: #F2F2F2;                
              border-radius: 5px;
              height: 60px;
+             
              padding-left: 24px;
              padding-right: 24px;
              margin-top: 18px;
-
+             position: relative;
              .title {
                  font-family: 'Lato';
                  font-style: normal;
@@ -696,8 +779,12 @@ input{
              input {
                 border: none !important;
                 background-color: #F2F2F2 !important;
-                padding-left: 12px;
+                opacity: 0.6;
                 outline: 0;
+                font-size: 24px;
+                margin-left: 100px;
+                position: absolute;
+                width: 179px;
                 @media screen and (max-width:1200px){
                     width: 100%;
                 }
@@ -743,5 +830,15 @@ input{
         }
         
 
+    }
+}
+.check {
+    cursor: pointer;
+    position: absolute;
+   right: 27.35px;
+}
+.location-modal{
+    h6.update{
+        width: unset;
     }
 }

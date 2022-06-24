@@ -4,24 +4,25 @@ const Sidebar = () => {
 
     return (
         <div className='sidebar'>
-            <div className='logo'>
-                <NavLink to="/home">
-                    <img src={logo} alt="img"></img>
-                </NavLink>
-            </div>
+            
             <div className='menu'>
                     <ul>
                         <li>
+                            <NavLink to="/home">
+                                <img src={logo} alt="img"></img>
+                            </NavLink>
+                        </li>
+                        <li>
                             <div className='bhhAF'>
                                 
-                                <NavLink to="/admin/dashboard" activeClassName="active" 
+                                <NavLink to="/admin/dashboard" 
                                         style={({ isActive }) =>
                                         isActive
                                             ? {
                                                 color: '#FBFDFE',
-                                                padding:'10px 10px',
+                                                padding:'30px 30px',
                                                 backgroundColor: '#F4730E',
-                                                borderRadius:'12px'
+                                                borderRadius:'20px'
                                             }
                                             : { }
                                         }
@@ -34,14 +35,14 @@ const Sidebar = () => {
                         </li>
                         <li>
                             <div className='bhhAF'>
-                                <NavLink to="/admin/vehicle" activeClassName="active" 
+                                <NavLink to="/admin/vehicle" 
                                         style={({ isActive }) =>
                                         isActive
                                             ? {
                                                 color: '#FBFDFE',
-                                                padding:'10px 10px',
+                                                padding:'30px 30px',
                                                 backgroundColor: '#F4730E',
-                                                borderRadius:'12px'
+                                                borderRadius:'20px'
                                             }
                                             : { }
                                         }
@@ -53,14 +54,14 @@ const Sidebar = () => {
                         </li>
                         <li>
                             <div className='bhhAF'>
-                                <NavLink to="/admin/booking" activeClassName="active" 
+                                <NavLink to="/admin/booking" 
                                         style={({ isActive }) =>
                                         isActive
                                             ? {
                                                 color: '#FBFDFE',
-                                                padding:'10px 10px',
+                                                padding:'30px 30px',
                                                 backgroundColor: '#F4730E',
-                                                borderRadius:'12px'
+                                                borderRadius:'20px'
                                             }
                                             : { }
                                         }
@@ -72,14 +73,14 @@ const Sidebar = () => {
                         </li>
                         <li>
                             <div className='bhhAF'>
-                                <NavLink to="/admin/driver" activeClassName="active" 
+                                <NavLink to="/admin/driver" 
                                             style={({ isActive }) =>
                                             isActive
                                                 ? {
                                                     color: '#FBFDFE',
-                                                    padding:'10px 10px',
-                                                    backgroundColor: '#F4730E',
-                                                    borderRadius:'12px'
+                                                padding:'30px 30px',
+                                                backgroundColor: '#F4730E',
+                                                borderRadius:'20px'
                                                 }
                                                 : { }
                                             }
@@ -91,14 +92,14 @@ const Sidebar = () => {
                         </li>
                         <li>
                             <div className='bhhAF'>
-                                <NavLink to="/admin/book_ride" activeClassName="active" 
+                                <NavLink to="/admin/book_ride" 
                                         style={({ isActive }) =>
                                         isActive
                                             ? {
                                                 color: '#FBFDFE',
-                                                padding:'10px 10px',
+                                                padding:'30px 30px',
                                                 backgroundColor: '#F4730E',
-                                                borderRadius:'12px'
+                                                borderRadius:'20px'
                                             }
                                             : { }
                                         }

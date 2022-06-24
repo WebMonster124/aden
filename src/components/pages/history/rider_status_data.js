@@ -5,7 +5,7 @@ const rider_status = [
         unread:true
     },
     {
-        name:'Ride Requested Accespted',
+        name:'Ride Requested Accepted',
         content:'Your booking request for a ride has been accepted by the admin',
         unread:true
     },
@@ -15,13 +15,13 @@ const rider_status = [
         unread:false
     },
     {
-        name:'Ride Request',
-        content:'Your booking request has been send to the admin',
+        name:'Picked you up',
+        content:'Cab driver has been picked you up from your pickup location',
         unread:false
     },
     {
-        name:'Ride Request',
-        content:'Your booking request has been send to the admin',
+        name:'Dropped off',
+        content:'Cab driver has been safely dropped you to your destination location',
         unread:false
     },
 ];

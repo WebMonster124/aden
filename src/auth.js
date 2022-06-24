@@ -6,7 +6,16 @@ export const ORGANIZATION_ID = 1
 
 export const login = data => {
     localStorage.setItem(AUTH_TOKEN_KEY, data.accessToken);
-    localStorage.setItem(AUTH_USER_KEY, JSON.stringify(data.data));
+    localStorage.setItem(AUTH_USER_KEY, JSON.stringify(
+        {
+            name:data.username,
+            email:data.email,
+            roles:data.roles,
+            address:data.address,
+            postcode:data.postcode,
+            country:data.country
+        }
+    ));
 }
 
 export const logout = (e) => {
@@ -15,7 +24,6 @@ export const logout = (e) => {
         flushUserSession();
         window.location = '/';
     }
-    e.preventDefault();
 }
 
 export const flushUserSession = () => {

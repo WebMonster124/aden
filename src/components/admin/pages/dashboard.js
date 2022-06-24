@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {
     Row,
     Col,
+    Form,
 } from 'react-bootstrap';
 import './dashboard.scss';
 import Select from 'react-select'
@@ -148,29 +149,6 @@ const Dashboard = () => {
             }}
             enableGridY={false}
             enableLabel={false}
-            legends={[
-                {
-                    dataFrom: 'keys',
-                    direction: 'column',
-                    justify: false,
-                    translateX: 334,
-                    translateY: 0,
-                    itemsSpacing: 2,
-                    itemWidth: 109,
-                    itemHeight: 20,
-                    itemDirection: 'left-to-right',
-                    itemOpacity: 0.85,
-                    symbolSize: 0,
-                    effects: [
-                        {
-                            on: 'hover',
-                            style: {
-                                itemOpacity: 1
-                            }
-                        }
-                    ]
-                }
-            ]}
             role="application"
             ariaLabel="Nivo bar chart demo"
             barAriaLabel={function(e){return e.id+": "+e.formattedValue+" in country: "+e.indexValue}}
@@ -183,6 +161,7 @@ const Dashboard = () => {
             setBooking(res.data)
             console.log(res.data)
         })
+        
     },[])
     return (
         <div className='dashboard'>
@@ -195,14 +174,14 @@ const Dashboard = () => {
                             <h5 className='date'>12:15 PM at 5th May 2022</h5>
                         </div>
                         <div className='dropdown'>
-                            <div className='nav-item'>
+                            <div className='nav-item bell'>
                                 <div className='svg-container'>
                                     <Link to="/admin/notification">
                                         <i className='fa fa-bell'></i>
                                     </Link>
                                 </div>
                             </div>
-                            <div className='nav-item'>
+                            <div className='nav-item user'>
                                 <div className='user-container'>
                                     <i className='fa fa-user'></i>
                                 </div>
@@ -223,7 +202,7 @@ const Dashboard = () => {
                                                 </Select>
                                             </div>
                                         </div>
-                                        <div className='card-body__content'>
+                                        <div className='card-body__content chart'>
                                             <MyResponsiveBump data={data}/>
                                         </div>
                                     </div>
@@ -234,7 +213,7 @@ const Dashboard = () => {
                                     <div className='card-body'>
                                         <div className='card-body__header'>
                                             <div className='caption'>
-                                                    <h5 style={{textTransform:'capitalize'}}>Driver</h5>
+                                                    <h5 style={{textTransform:'capitalize'}}>Drivers</h5>
                                             </div>
                                             <div className='search'>
                                                 <input type="text" value={searchKey} onChange={handleSearchChange} placeholder="search.."/>
@@ -260,17 +239,23 @@ const Dashboard = () => {
                         <Row style={{marginTop:'50px'}}>
                             <Col xs={12}>
                                 <div className='card'>
-                                    <div className='card-body'>
+                                    <div className='dashboard-card-body'>
                                     <div className='card-body__header'>
                                             <div className='caption'>
-                                                <h5 style={{textTransform:'capitalize'}}>booking</h5>
+                                                <h5 style={{textTransform:'capitalize'}}>bookings</h5>
                                             </div>
                                         </div>
                                         <div className='card-body__content'>
-                                            <table>
+                                            <table className='table-dashboard'>
                                                 <tr>
+                                                    <th> <Form.Check.Input
+                                                                    type={"checkbox"}
+                                                                    checked={false}
+                                                                    disabled
+                                                                 />
+                                                    </th>
                                                     <th>Trip Number</th>
-                                                    <th>Pickups</th>
+                                                    <th>Pickup</th>
                                                     <th>Drop Off</th>
                                                     <th>Passenger Name</th>
                                                     <th>Passenger Number</th>
@@ -282,12 +267,23 @@ const Dashboard = () => {
                                                 booking.map((val, key) => {
                                                 return (
                                                     <tr key={key}>
+                                                        <td>
+                                                                     <Form.Check
+                                                                    type={"checkbox"}
+                                                                    checked={val.active}
+                                                                    onChange={(e) => {
+                                                                        let temp_array = Array.from(bookings);
+                                                                        e.target.checked?temp_array[key].active = true:temp_array[key].active = false;
+                                                                        setBookings(temp_array);
+                                                                    }}
+                                                                />
+                                                        </td>
                                                         <td>#{val.id}</td>
                                                         <td>{val.pickup_location}</td>
                                                         <td>{val.dropoff_location}</td>
-                                                        <td>{val.users[0].FIRST_NAME} {val.users[0].LAST_NAME}</td>
-                                                        <td>{val.users[0].CONTACT_PHONE}</td>
-                                                        <td>{val.passengers}</td>
+                                                        <td>{val.passenger_infos[0].first_name} {val.passenger_infos[0].last_name}</td>
+                                                        <td>{val.passenger_infos[0].id}</td>
+                                                        <td>{val.passenger}</td>
                                                         <td>{val.pickup_date}</td>
                                                         <td>{val.vehicles[0].name}</td>
                                                     </tr>

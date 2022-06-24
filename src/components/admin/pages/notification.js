@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {
     Row,
     Col,
@@ -7,17 +7,43 @@ import {
 
 import './dashboard.scss';
 import './notification.scss';
-import Notifications from './notification_data.js'
 import { Link } from 'react-router-dom';
 import  Sidebar  from './sidebar'
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios';
+import  {new_notification}  from '../../../redux/actions/NotificationstateActions';
 const Notification = () => {
-    const [notification, setNotification] = useState(Notifications);
-    const close_click= (val) =>{
-        let tempArr = Array.from(notification);
-        tempArr.splice(tempArr.indexOf(val), 1);
-        setNotification(tempArr);
-    
+    const [notifications, setNotifications] = useState([]);
+    const dispatch = useDispatch()
+    const message = useSelector(state => state.notificationState.newMessage);
+    const pusher = new Pusher("be671fa12decfbbb2d96", {
+        cluster: "ap3"
+      });
+      const channel = pusher.subscribe("channel");
+      channel.bind("event", (newMessage) => {
+        //setMessages([...messages, newMessage]);
+        dispatch(new_notification(true))
+      }); 
+    const close_click= (val,id) =>{
+        axios.post(`${process.env.REACT_APP_API_BASE_URL}/notification/update`,{is_read:1,id:id})
+        .then((res)=>{
+            let tempArr = Array.from(notifications);
+            tempArr.splice(tempArr.indexOf(val), 1);
+            if (tempArr.length == 0) dispatch(new_notification(false))
+            setNotifications(tempArr);
+        })
+        
     }
+    useEffect(()=>{
+        
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/notification/get`)
+        .then((res)=>{
+            dispatch(new_notification(res.data));
+            setNotifications(res.data)
+            console.log(res.data)
+        })
+    },[])
+   
     return (
         <div className='dashboard'>
             <Sidebar/>
@@ -33,6 +59,8 @@ const Notification = () => {
                                 <div className='svg-container'>
                                     <Link to="/admin/notification">
                                         <i className='fa fa-bell'></i>
+                                        {message  ?
+                                                 <span className='indicator'></span>:''}
                                     </Link>
                                 </div>
                             </div>
@@ -52,24 +80,24 @@ const Notification = () => {
                             </Col>                         
                         </Row>
                         {
-                            notification.map((val, key) => {
-                            return (
-                                <div className='notification-item' key={key} onClick={()=>close_click(val)}>
-                                    <div className='notification-item__content'>
-                                        <h5 className='noti-title'>
-                                            {val.title}
-                                        </h5>
-                                        <h5 className='noti-content'>
-                                            {val.content}
-                                        </h5>
+                                notifications.map((val, key) => {
+                                return (
+                                    <div className='notification-item' key={key}>
+                                        <div className='notification-item__content'>
+                                            <h5 className='noti-title'>
+                                              {val.notification_types[0]?val.notification_types[0].notification_type:''}
+                                            </h5>
+                                            <h5 className='noti-content'>
+                                                {val.data}
+                                            </h5>
+                                        </div>
+                                        <div className='notification-item__close'>
+                                            <CloseButton onClick={()=>close_click(val,val.id)}/>
+                                        </div>
                                     </div>
-                                    <div className='notification-item__close'>
-                                        <CloseButton/>
-                                    </div>
-                                </div>
-                            )
-                            })
-                        } 
+                                )
+                                })
+                            } 
                     </div>
                 </div>
             </div>

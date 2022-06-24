@@ -30,6 +30,26 @@ const data = [
           "x": 'July',
           "y": 3
         },
+        {
+          "x": 'August',
+          "y": 1
+        },
+        {
+          "x": 'September',
+          "y": 5
+        },
+        {
+          "x": 'Octorber',
+          "y": 4
+        },
+        {
+          "x": 'November',
+          "y": 2
+        },
+        {
+          "x": 'December',
+          "y": 3
+        },
       ]
     },
     {
@@ -62,6 +82,26 @@ const data = [
         {
           "x": 'July',
           "y": 8
+        },
+        {
+          "x": 'August',
+          "y": 1
+        },
+        {
+          "x": 'September',
+          "y": 5
+        },
+        {
+          "x": 'Octorber',
+          "y": 4
+        },
+        {
+          "x": 'November',
+          "y": 2
+        },
+        {
+          "x": 'December',
+          "y": 3
         },
       ]
     }

@@ -50,10 +50,9 @@ const MyGoogleMap =(()=> {
         setLng(value.lng)
     }
     useEffect(()=>{
-        console.log('##############',mapApi)
     },[mapApi])
     const apiHasLoaded = (map, maps) => {
-        console.log('@@@@@@@@@@@@@@@@@@',maps  )
+   
         setMapapitLoaded(true)
         setMapApi(maps)
         setMapInstance(map)
